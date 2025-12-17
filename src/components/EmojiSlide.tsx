@@ -24,27 +24,35 @@ export const emojis = [
   Worried,
 ];
 
-const boxVariants = {
-  entry: { x: -500, opacity: 0 },
-  center: { x: 0, opacity: 1 },
-  exit: { x: 500, opacity: 0 },
-};
-
 const EmojiSlide = () => {
   const [visible, setVisible] = useState(0);
+  const [back, setBack] = useState(false);
   const EmojiComponent = emojis[visible];
 
-  if (!EmojiComponent) {
-    return <div className='text-red-500'>EmojiComponent is undefined</div>;
-  }
+  const boxVariants = {
+    entry: (back: boolean) => ({ x: back ? -500 : 500, opacity: 0, scale: 0.5 }),
+    center: { x: 0, opacity: 1, scale: 1 },
+    exit: (back: boolean) => ({ x: back ? 500 : -500, opacity: 0, scale: 0.5 }),
+  };
+
+  const handlePrev = () => {
+    setBack(true);
+    setVisible((v) => (v > 0 ? v - 1 : v));
+  };
+
+  const handleNext = () => {
+    setBack(false);
+    setVisible((v) => (v < emojis.length - 1 ? v + 1 : v));
+  };
 
   return (
     <div>
       <div>
-        <AnimatePresence>
+        <AnimatePresence custom={back}>
           <motion.div
             key={visible}
             variants={boxVariants}
+            custom={back}
             initial='entry'
             animate='center'
             exit='exit'
@@ -54,13 +62,10 @@ const EmojiSlide = () => {
         </AnimatePresence>
       </div>
       <div className='flex justify-center gap-5 p-7'>
-        <button onClick={() => setVisible((v) => (v > 0 ? v - 1 : v))} className='text-white'>
+        <button onClick={handlePrev} className='text-white'>
           prev
         </button>
-        <button
-          onClick={() => setVisible((v) => (v < emojis.length - 1 ? v + 1 : v))}
-          className='text-white'
-        >
+        <button onClick={handleNext} className='text-white'>
           next
         </button>
       </div>
