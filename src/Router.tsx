@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import Hompage from './pages/Hompage';
 import ExamplePage from './pages/ExamplePage';
+import EmojiPage from './pages/EmojiPage';
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         path: 'example',
         element: <ExamplePage />,
+      },
+      {
+        path: 'emoji',
+        element: <EmojiPage />,
       },
     ],
   },
