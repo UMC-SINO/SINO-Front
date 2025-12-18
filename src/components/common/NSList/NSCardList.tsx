@@ -43,7 +43,7 @@ export const NSCardList = ({ cards, title, badges = [] }: NSCardListProps) => {
                 onClick={() => handleBadgeClick(badge)}
                 className={`px-2 py-0.5 text-xs rounded-full ${
                   activeFilter === badge.label
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-[#FF6F4B] text-white'
                     : 'bg-gray-600 text-gray-300'
                 }`}
               >
@@ -54,7 +54,7 @@ export const NSCardList = ({ cards, title, badges = [] }: NSCardListProps) => {
         )}
       </div>
 
-      <div className='grid grid-cols-4 grid-rows-4 w-[424px] h-[424px] box-border border rounded-lg border-white p-2 gap-2'>
+      <div className='grid grid-cols-4 grid-rows-4 w-[432px] h-[432px] box-border border rounded-lg border-white p-4 gap-4'>
         {filteredCards.slice(0, 16).map((card, idx) => (
           <NSCard
             key={idx}
