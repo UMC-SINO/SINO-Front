@@ -1,22 +1,32 @@
+// src / components / WriteReasonModal.tsx;
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import Button from '@/components/common/Button';
 
 type Props = {
   open: boolean;
+  initialValue?: string;
   onBack: () => void;
   onNext: (text: string) => void;
   onClose?: () => void;
   className?: string;
 };
 
-export default function WriteReasonModal({ open, onBack, onNext, onClose, className }: Props) {
-  const [value, setValue] = useState('');
+export default function WriteReasonModal({
+  open,
+  initialValue = '',
+  onBack,
+  onNext,
+  onClose,
+  className,
+}: Props) {
+  const [value, setValue] = useState(initialValue);
 
+  // ✅ 열릴 때 initialValue로 세팅 (Back/재진입 시 유지)
   useEffect(() => {
     if (!open) return;
-    setValue('');
-  }, [open]);
+    setValue(initialValue);
+  }, [open, initialValue]);
 
   if (!open) return null;
 
@@ -25,7 +35,12 @@ export default function WriteReasonModal({ open, onBack, onNext, onClose, classN
   return (
     <div className='fixed inset-0 z-[999] flex items-center justify-center'>
       {/* Backdrop */}
-      <div className='absolute inset-0 bg-black/55 backdrop-blur-[8px]' />
+      <button
+        type='button'
+        aria-label='Close modal'
+        onClick={() => onClose?.()}
+        className='absolute inset-0 bg-black/55 backdrop-blur-[8px]'
+      />
 
       {/* Modal Card */}
       <div
