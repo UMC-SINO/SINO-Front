@@ -6,6 +6,14 @@ const EmojiPage = () => {
   const { state } = useLocation();
   const { year = 2025, month = 12 } = state || {};
 
+  const handleBack = () => {
+    return console.log('이전 페이지로 이동!');
+  };
+
+  const handleContinue = () => {
+    return console.log('다음 페이지로 이동!');
+  };
+
   return (
     <div className='flex flex-col gap-10 items-center justify-center bg-black'>
       {/* 임의 헤더 */}
@@ -23,14 +31,14 @@ const EmojiPage = () => {
         <EmojiSlide />
       </div>
       <div className='flex gap-7 pt-5 items-center justify-center'>
-        <Button type='button' className='w-[200px] bg-gray-200'>
+        <Button type='button' className='w-[200px] bg-gray-200' onClick={handleBack}>
           Back
         </Button>
-        <Button type='button' className='w-[200px]'>
+        <Button type='button' className='w-[200px]' onClick={handleContinue}>
           Continue
         </Button>
       </div>
-      <footer className='pt-16 pb-10 flex justify-center'></footer>
+      <footer className='pt-20 pb-15 flex justify-center'></footer>
     </div>
   );
 };
