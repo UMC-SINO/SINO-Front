@@ -2,6 +2,10 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import Hompage from './pages/Hompage';
 import ExamplePage from './pages/ExamplePage';
+import SignupPage from './pages/signin/SignupPage';
+import LoginPage from './pages/signin/LgoinPage';
+import OnBoadingPage from './pages/OnBoardingPage';
+import ReportView from './pages/ReportView';
 import EmojiPage from './pages/EmojiPage';
 import RetrospectWrite from './pages/RetrospectWrite/RestrospectWrite';
 import SignupPage from './pages/SignupPage';
@@ -29,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: 'onboarding',
         element: <OnBoadingPage />,
+      },
+      {
+        path: 'report-view',
+        element: <ReportView />,
       },
       {
         path: 'example',
