@@ -6,6 +6,8 @@ import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LgoinPage';
 import OnBoadingPage from './pages/OnBoardingPage';
 
+import DateSelectPage from './pages/DateSelectPage';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -30,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: 'example',
         element: <ExamplePage />,
+      },
+      {
+        path: '/dateSelect',
+        element: <DateSelectPage />,
       },
     ],
   },
