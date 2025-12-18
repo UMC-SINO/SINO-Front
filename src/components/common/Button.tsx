@@ -14,7 +14,7 @@ const Button = ({ children, type, className, disabled = false, onClick }: Button
     <button
       type={type}
       className={clsx(
-        'rounded-[18px] flex items-center justify-center whitespace-nowrap w-45 py-1.5 text-xl font-semibold transition-all',
+        'rounded-full flex items-center justify-center whitespace-nowrap w-45 py-2 text-xl font-semibold transition-all',
         disabled
           ? 'bg-[#E1E0E0] cursor-not-allowed'
           : 'bg-[#FF6F4B] hover:brightness-85 cursor-pointer',
