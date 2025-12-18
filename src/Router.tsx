@@ -3,6 +3,8 @@ import App from './App';
 import Hompage from './pages/Hompage';
 import ExamplePage from './pages/ExamplePage';
 
+import DateSelectPage from './pages/DateSelectPage';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -15,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: 'example',
         element: <ExamplePage />,
+      },
+      {
+        path: '/daySelect',
+        element: <DateSelectPage />,
       },
     ],
   },
