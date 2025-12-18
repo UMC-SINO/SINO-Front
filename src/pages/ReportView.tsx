@@ -75,7 +75,6 @@ const ReportView = () => {
           );
         })}
 
-        {/* RIGHT ARROW */}
         <button
           onClick={moveNext}
           className='absolute right-0 z-20 p-3 rounded-full bg-inherit hover:bg-white/10 transition cursor-pointer'
