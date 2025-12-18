@@ -19,7 +19,7 @@ const router = createBrowserRouter([
         element: <ExamplePage />,
       },
       {
-        path: '/daySelect',
+        path: '/dateSelect',
         element: <DateSelectPage />,
       },
     ],
