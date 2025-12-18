@@ -3,7 +3,7 @@ import NavBar from './components/layouts/NavBar';
 
 function App() {
   return (
-    <div className='bg-bgColor mb-100'>
+    <div className='bg-bgColor'>
       <NavBar />
       <Outlet />
     </div>
