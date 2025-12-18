@@ -19,12 +19,6 @@ export default function DateSelectPage() {
   return (
     // ✅ 화면 전체를 꽉 채우는 랚퍼 + absolute 기준점
     <div className='relative min-h-screen w-full bg-[#232323]'>
-      {/* ✅ 로고: 부모(relative)를 기준으로 고정 */}
-      <div className='absolute left-6 top-5 flex items-center gap-2'>
-        <img src='/sino-logo.svg' alt='SINO Logo' className='h-6 w-auto' />
-        <span className='text-xs text-white/80'>SINO</span>
-      </div>
-
       {/* ✅ 가운데 정렬 컨테이너 (세로/가로) */}
       <div className='min-h-screen w-full flex items-center justify-center px-6'>
         <div className='flex flex-col items-center'>
