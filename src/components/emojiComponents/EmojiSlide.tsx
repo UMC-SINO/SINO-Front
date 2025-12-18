@@ -13,12 +13,16 @@ import Check from '../../assets/emojis/Check.svg?react';
 import { useState } from 'react';
 import type React from 'react';
 import EmojiSelectBar from './EmojiSelectBar';
-import { Check } from 'lucide-react';
+import { Check as CheckIcon } from 'lucide-react';
 
 type EmojiProps = {
   id: string;
   label: string;
   Comp: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+};
+
+type EmojiSlideProps = {
+  onSavedChange?: (savedIds: string[]) => void;
 };
 
 export const emojis: EmojiProps[] = [
@@ -34,7 +38,7 @@ export const emojis: EmojiProps[] = [
   { id: 'Worried', label: 'Worried', Comp: Worried },
 ];
 
-const EmojiSlide = () => {
+const EmojiSlide = ({ onSavedChange }: EmojiSlideProps) => {
   const [visible, setVisible] = useState(0);
   const [saved, setSaved] = useState(false);
   const [savedIds, setSavedIds] = useState<string[]>([]);
@@ -55,12 +59,18 @@ const EmojiSlide = () => {
     setVisible(next);
   };
 
-  const toggleSave = () => {
+  const handleSaveClicked = () => {
     setSavedIds((prev) => {
       const exists = prev.includes(center.id);
-      if (exists) return prev.filter((k) => k !== center.id);
-      if (prev.length >= 5) return prev;
-      return [...prev, center.id];
+
+      let next = prev;
+
+      if (exists) next = prev.filter((id) => id !== center.id);
+      else if (prev.length < 5) next = [...prev, center.id];
+      else next = prev;
+
+      onSavedChange?.(next);
+      return next;
     });
   };
 
@@ -127,12 +137,19 @@ const EmojiSlide = () => {
       <div className='flex justify-center items-center gap-5 p-15'>
         <EmojiSelectBar value={visible} max={emojis.length - 1} onChange={handleSelectBarChange} />
         <label className='flex items-center gap-2 cursor-pointer select-none'>
-          <input
-            type='checkbox'
-            checked={isCenterSaved}
-            onChange={toggleSave}
-            className='h-5 w-5 appearance-none rounded border border-white/70 bg-transparent grid place-items-center'
-          />
+          <span className='relative inline-flex h-5 w-5 items-center justify-center'>
+            <input
+              type='checkbox'
+              checked={isCenterSaved}
+              onChange={handleSaveClicked}
+              className='absolute inset-0 h-5 w-5 appearance-none rounded border border-white/70 bg-transparent cursor-pointer'
+            />
+
+            {isCenterSaved && (
+              <CheckIcon size={14} strokeWidth={3} className='text-white pointer-events-none' />
+            )}
+          </span>
+
           <span className='text-white text-sm font-pretendard'>save</span>
         </label>
       </div>
