@@ -6,14 +6,15 @@ import { ChevronDown } from 'lucide-react';
 interface DropdownProps {
   items: string[];
   className?: string;
-
+  // eslint-disable-next-line no-unused-vars
+  onChange?: (value: string) => void;
   // eslint-disable-next-line no-unused-vars
   onSelect?: (value: string) => void;
 }
 
 type Slot = string | null;
 
-const Dropdown = ({ items, className, onSelect }: DropdownProps) => {
+const Dropdown = ({ items, className, onChange, onSelect }: DropdownProps) => {
   const [open, setOpen] = useState(false);
   const [startIndex, setStartIndex] = useState(0);
 
@@ -69,6 +70,7 @@ const Dropdown = ({ items, className, onSelect }: DropdownProps) => {
                         key={item}
                         onClick={() => {
                           setStartIndex(realIndex);
+                          onChange?.(item);
                           onSelect?.(item);
                           setOpen(false);
                         }}
