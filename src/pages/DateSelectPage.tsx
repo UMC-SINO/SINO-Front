@@ -26,7 +26,7 @@ export default function DateSelectPage() {
           <div className='flex items-start gap-10'>
             {/* Year */}
             <div className='flex flex-col items-center gap-2'>
-              <div className='text-[13px] font-semibold text-white/90'>
+              <div className='text-lg font-semibold text-white/90'>
                 Choose the <span className='text-[#FF6F4B]'>Year</span>
               </div>
 
@@ -39,7 +39,7 @@ export default function DateSelectPage() {
 
             {/* Month */}
             <div className='flex flex-col items-center gap-2'>
-              <div className='text-[13px] font-semibold text-[#FF6F4B]'>Month</div>
+              <div className='text-lg font-semibold text-[#FF6F4B]'>Month</div>
               <Dropdown
                 items={monthItems}
                 className='w-[320px] [&>button]:py-4 [&>button]:text-xl [&>button]:rounded-full [&>button>div]:p-1.5'
