@@ -27,13 +27,19 @@ export const emojis = [
 const EmojiSlide = () => {
   const [visible, setVisible] = useState(0);
   const [back, setBack] = useState(false);
-  const EmojiComponent = emojis[visible];
 
-  const boxVariants = {
+  const CneterVariants = {
     entry: (back: boolean) => ({ x: back ? -500 : 500, opacity: 0, scale: 0.5 }),
     center: { x: 0, opacity: 1, scale: 1 },
     exit: (back: boolean) => ({ x: back ? 500 : -500, opacity: 0, scale: 0.5 }),
   };
+
+  const leftIdx = visible - 1;
+  const rightIdx = visible + 1;
+
+  const Left = leftIdx >= 0 ? emojis[leftIdx] : null;
+  const Center = emojis[visible];
+  const Right = rightIdx < emojis.length ? emojis[rightIdx] : null;
 
   const handlePrev = () => {
     setBack(true);
@@ -48,18 +54,32 @@ const EmojiSlide = () => {
   return (
     <div>
       <div>
+        {Left && (
+          <motion.div>
+            <Left />
+          </motion.div>
+        )}
+      </div>
+      <div>
         <AnimatePresence custom={back}>
           <motion.div
             key={visible}
-            variants={boxVariants}
+            variants={CneterVariants}
             custom={back}
             initial='entry'
             animate='center'
             exit='exit'
           >
-            <EmojiComponent />
+            <Center />
           </motion.div>
         </AnimatePresence>
+      </div>
+      <div>
+        {Right && (
+          <motion.div>
+            <Right />
+          </motion.div>
+        )}
       </div>
       <div className='flex justify-center gap-5 p-7'>
         <button onClick={handlePrev} className='text-white'>
