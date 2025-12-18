@@ -1,14 +1,19 @@
 import Dropdown from '@/components/common/Dropdown';
 import Button from '@/components/common/Button';
+import { useState } from 'react';
 
 const yearItems = ['Text', '2024', '2025', 'Unknown'];
 const monthItems = ['Text', '11', '12', 'Unknown'];
 
 export default function DateSelectPage() {
-  const isContinueEnabled = true;
+  const [selectedYear, setSelectedYear] = useState('Text');
+  const [selectedMonth, setSelectedMonth] = useState('Text');
+
+  const isContinueEnabled = selectedYear !== 'Text' && selectedMonth !== 'Text';
 
   const handleContinue = () => {
-    console.log('Continue');
+    console.log('선택:', { year: selectedYear, month: selectedMonth });
+    // TODO: navigate(`/next?year=${selectedYear}&month=${selectedMonth}`);
   };
 
   return (
@@ -34,6 +39,7 @@ export default function DateSelectPage() {
               <Dropdown
                 items={yearItems}
                 className='w-[320px] [&>button]:py-4 [&>button]:text-xl [&>button]:rounded-full [&>button>div]:p-1.5'
+                onSelect={(value) => setSelectedYear(value)}
               />
             </div>
 
@@ -41,8 +47,9 @@ export default function DateSelectPage() {
             <div className='flex flex-col items-center gap-2'>
               <div className='text-[13px] font-semibold text-[#FF6F4B]'>Month</div>
               <Dropdown
-                items={yearItems}
+                items={monthItems}
                 className='w-[320px] [&>button]:py-4 [&>button]:text-xl [&>button]:rounded-full [&>button>div]:p-1.5'
+                onSelect={(value) => setSelectedMonth(value)}
               />
             </div>
           </div>
