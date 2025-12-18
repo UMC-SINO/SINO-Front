@@ -55,7 +55,6 @@ const ReportView = () => {
           return (
             <motion.div
               key={item.title}
-              onClick={() => setActiveIndex(index)}
               animate={{
                 x: offset * 250,
                 scale: offset === 0 ? 1 : 0.8,
