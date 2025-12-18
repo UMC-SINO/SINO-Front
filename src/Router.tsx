@@ -9,7 +9,6 @@ import ReportView from './pages/ReportView';
 import EmojiPage from './pages/EmojiPage';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LgoinPage';
-import SplashPage from './pages/SplashPage';
 import RetrospectWrite from './pages/RetrospectWrite/RestrospectWrite';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LgoinPage';
@@ -48,10 +47,6 @@ const router = createBrowserRouter([
       {
         path: 'emoji',
         element: <EmojiPage />,
-      },
-      {
-        path: 'splash',
-        element: <SplashPage />,
       },
       {
         path: 'retro',
