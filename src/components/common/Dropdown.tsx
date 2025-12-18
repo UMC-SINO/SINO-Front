@@ -66,7 +66,7 @@ const Dropdown = ({ items, className }: DropdownProps) => {
                         key={item}
                         onClick={() => setStartIndex(realIndex)}
                         className={clsx(
-                          'py-2 text-lg cursor-pointer transition-colors',
+                          'py-2 text-lg cursor-pointer transition-colors duration-200 ease-out',
                           isSelected
                             ? 'text-black font-semibold'
                             : 'text-black/50 hover:text-black',
