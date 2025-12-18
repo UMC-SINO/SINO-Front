@@ -6,13 +6,15 @@ import { ChevronDown } from 'lucide-react';
 interface DropdownProps {
   items: string[];
   className?: string;
+
+  onSelect?: (value: string) => void;
 }
 
 type Slot = string | null;
 
-const Dropdown = ({ items, className }: DropdownProps) => {
+const Dropdown = ({ items, className, onSelect }: DropdownProps) => {
   const [open, setOpen] = useState(false);
-  const [startIndex, setStartIndex] = useState(4);
+  const [startIndex, setStartIndex] = useState(0);
 
   const getVisibleSlots = (items: string[], index: number): Slot[] => {
     return [items[index - 1] ?? null, items[index] ?? null, items[index + 1] ?? null];
@@ -64,7 +66,11 @@ const Dropdown = ({ items, className }: DropdownProps) => {
                     return (
                       <li
                         key={item}
-                        onClick={() => setStartIndex(realIndex)}
+                        onClick={() => {
+                          setStartIndex(realIndex);
+                          onSelect?.(item);
+                          setOpen(false);
+                        }}
                         className={clsx(
                           'py-2 text-lg cursor-pointer transition-colors',
                           isSelected
