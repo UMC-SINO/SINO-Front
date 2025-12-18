@@ -5,6 +5,8 @@ import ExamplePage from './pages/ExamplePage';
 import RetrospectWrite from './pages/RetrospectWrite/RestrospectWrite';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LgoinPage';
+import OnBoadingPage from './pages/OnBoardingPage';
+import DateSelectPage from './pages/DateSelectPage';
 
 const router = createBrowserRouter([
   {
@@ -24,12 +26,20 @@ const router = createBrowserRouter([
         element: <LoginPage />,
       },
       {
+        path: 'onboarding',
+        element: <OnBoadingPage />,
+      },
+      {
         path: 'example',
         element: <ExamplePage />,
       },
       {
         path: 'retro',
         element: <RetrospectWrite />,
+      },
+      {
+        path: '/dateSelect',
+        element: <DateSelectPage />,
       },
     ],
   },
