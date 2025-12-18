@@ -1,4 +1,5 @@
 import Button from '@/components/common/Button';
+import DotIndicator from '@/components/emojiComponents/DotIndicator';
 import EmojiSlide from '@/components/emojiComponents/EmojiSlide';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -48,6 +49,7 @@ const EmojiPage = () => {
           Continue
         </Button>
       </div>
+      <DotIndicator savedIds={savedIds} total={5} />
       <footer className='pt-20 pb-15 flex justify-center'></footer>
     </div>
   );
