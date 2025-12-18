@@ -1,3 +1,4 @@
+// src / components / TurnToSignalModal.tsx;
 import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import Button from '@/components/common/Button';
@@ -10,12 +11,10 @@ type Props = {
   onChange: () => void;
   onClose?: () => void; // (선택) 배경 클릭/ESC 닫기
   className?: string;
-
-  /** SVG 아이콘 자리: 나중에 <NoiseFaceSvg /> 같은 걸 넘기면 됨 */
-  icon?: React.ReactNode;
+  icon: React.ReactNode;
 };
 
-export default function FeelingModal({
+export default function TurnToSignalModal({
   open,
   title = 'This is the current feeling of Noise',
   description = 'Have your feelings changed?',
@@ -72,12 +71,7 @@ export default function FeelingModal({
 
         {/* Icon */}
         <div className='flex justify-center'>
-          <div className='h-[96px] w-[96px] flex items-center justify-center'>
-            {icon ?? (
-              // 임시 placeholder (SVG 들어오면 교체)
-              <div className='h-[88px] w-[88px] rounded-full bg-[#F5C84B]' />
-            )}
-          </div>
+          <div className='h-[96px] w-[96px] flex items-center justify-center'>{icon}</div>
         </div>
 
         {/* Text */}
