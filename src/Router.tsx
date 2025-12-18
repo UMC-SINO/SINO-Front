@@ -4,6 +4,7 @@ import Hompage from './pages/Hompage';
 import ExamplePage from './pages/ExamplePage';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LgoinPage';
+import OnBoadingPage from './pages/OnBoardingPage';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element: <LoginPage />,
+      },
+      {
+        path: 'onboarding',
+        element: <OnBoadingPage />,
       },
       {
         path: 'example',
