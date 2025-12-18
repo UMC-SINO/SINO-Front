@@ -1,44 +1,45 @@
-type ChangeItem = {
+type EmotionChangeItem = {
   from: string;
   to: string;
 };
 
 type Props = {
   count: number;
-  items: ChangeItem[];
+  items: EmotionChangeItem[];
 };
 
 const EmotionChangeSummary = ({ count, items }: Props) => {
   return (
-    <div>
-      <p className='text-base mb-8'>
-        you change noise to signal{' '}
-        <span className='text-[#FF6F4B] font-semibold text-base'>{count}</span> times
+    <div className='flex flex-col gap-8'>
+      <p className='text-sm text-white'>
+        you change noise to signal <span className='text-[#FF6F4B] font-semibold'>{count}</span>{' '}
+        times
       </p>
 
-      <ul className='flex flex-col gap-6'>
+      <div className='flex flex-col gap-6'>
         {items.map((item, idx) => (
-          <li key={idx} className='flex items-start gap-4'>
-            <span className='mt-2 w-2.5 h-2.5 rounded-full bg-[#FF6F4B]' />
+          <div key={idx} className='flex gap-4'>
+            <div className='w-2 h-2 rounded-full bg-[#FF6F4B] mt-3 shrink-0' />
 
-            <div>
-              <div className='flex items-center gap-3 text-base font-medium'>
-                {/* 이모지 */}
-                <span className='w-4 h-4 rounded-full bg-white/30 inline-block' />
+            {/* TODO : 이모지 svg 사용*/}
+            <div className='flex flex-col gap-1'>
+              <div className='flex items-center gap-3 text-white text-lg font-medium'>
+                <span className='text-2xl'>
+                  {item.from === 'Boredom' ? '😐' : item.from === 'Sad' ? '😢' : '🥺'}
+                </span>
                 <span>{item.from}</span>
-
-                <span className='text-white/60 mx-1'>→</span>
-
-                {/* 이모지 */}
-                <span className='w-4 h-4 rounded-full bg-white/30 inline-block' />
+                <span className='mx-1'>→</span>
+                <span className='text-2xl'>
+                  {item.to === 'Happy' ? '🥰' : item.to === 'Smile' ? '😉' : '😐'}
+                </span>
                 <span>{item.to}</span>
               </div>
 
-              <p className='text-sm text-white/50 mt-1'>because it makes me feel satisfied</p>
+              <p className='text-sm text-[#969392]'>because it makes me feel satisfied</p>
             </div>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
