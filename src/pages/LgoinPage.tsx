@@ -2,6 +2,7 @@ import Button from '@/components/common/Button';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signinSchema, type SigninFormData } from '@/schema/auth';
+import NameInput from '@/components/signin/NameInput';
 
 const LoginPage = () => {
   const {
@@ -36,23 +37,7 @@ const LoginPage = () => {
         onSubmit={handleSubmit(onSubmit)}
         className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center space-y-8'
       >
-        <div className='w-full flex flex-col items-center gap-3'>
-          <label className='text-xl tracking-wide'>Name</label>
-
-          <div className='relative'>
-            <input
-              {...register('name')}
-              type='text'
-              placeholder='Enter your Username'
-              autoComplete='off'
-              className='w-120 py-1.5 text-center font-semibold rounded-full bg-[#E1E0E0] text-xl text-gray-800 outline-none'
-            />
-          </div>
-
-          {errors.name && (
-            <p className='absolute text-sm text-[#FF8381] mt-28'>{errors.name.message}</p>
-          )}
-        </div>
+        <NameInput mode='login' register={register} error={errors.name} />
 
         <Button
           type='submit'

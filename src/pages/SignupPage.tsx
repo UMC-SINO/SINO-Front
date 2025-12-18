@@ -3,6 +3,7 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signinSchema, type SigninFormData } from '@/schema/auth';
 import { useState } from 'react';
+import NameInput from '@/components/signin/NameInput';
 
 const SignupPage = () => {
   const [hasCheckedName, setHasCheckedName] = useState(false);
@@ -38,34 +39,13 @@ const SignupPage = () => {
         onSubmit={handleSubmit(onSubmit)}
         className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center space-y-8'
       >
-        <div className='w-full flex flex-col items-center gap-3'>
-          <label className='text-xl tracking-wide'>Name</label>
-
-          <div className='relative'>
-            <input
-              {...register('name')}
-              type='text'
-              placeholder='Enter your Username'
-              autoComplete='off'
-              className='w-120 py-1.5 text-center font-semibold rounded-full bg-[#E1E0E0] text-xl text-gray-800 outline-none'
-            />
-
-            <button
-              type='button'
-              onClick={handleCheckName}
-              className='absolute left-full ml-3 top-1/2 -translate-y-1/2 text-xl text-bgColor font-semibold bg-[#FF6F4B] hover:brightness-85 cursor-pointer py-1.5 rounded-full w-25'
-            >
-              Check
-            </button>
-          </div>
-
-          {hasCheckedName &&
-            (errors.name ? (
-              <p className='absolute text-sm text-[#FF8381] mt-28'>{errors.name.message}</p>
-            ) : (
-              <p className='absolute text-sm text-[#72DC70] mt-30'>사용 가능한 닉네임입니다.</p>
-            ))}
-        </div>
+        <NameInput
+          mode='signup'
+          register={register}
+          onCheckName={handleCheckName}
+          error={errors.name}
+          hasCheckedName={hasCheckedName}
+        />
 
         <Button
           type='submit'
