@@ -1,9 +1,17 @@
+import { EmotionChips } from '@/components/common/Emotionchips';
+import { MemoCard } from '@/components/common/MemoCard';
+import { PhotoGrid } from '@/components/common/PhotoGrid';
+import { useRetrospectDraft } from '@/hooks/useRetroSpectDraft';
+import { RetrospectHeader } from '@/pages/RetrospectWrite/RetrospectHeader';
+import { ActionButtons } from './ActionButton';
+import { useNavigate } from 'react-router-dom';
 import { useRetrospectDraft } from '@/hooks/useRetrospectDraft';
 import { RetrospectHeader } from './RetrospectHeader';
 import { PhotoGrid } from '@/components/common/PhotoGrid';
 import { EmotionChips } from '@/components/common/Emotionchips';
 import { MemoCard } from '@/components/common/MemoCard';
 import { ActionButtons } from './ActionButton';
+
 
 export const RetrospectWrite = () => {
   const PREV_DATA = {
@@ -12,6 +20,7 @@ export const RetrospectWrite = () => {
   };
 
   const draft = useRetrospectDraft(PREV_DATA.dateString);
+  const navigate = useNavigate();
 
   // 지금은 첫 작성 진입
   // 나중에 "수정" 버튼으로 들어오면 'save'로 변경
@@ -24,8 +33,10 @@ export const RetrospectWrite = () => {
 
   const handlePrimary = () => {
     if (writeAction === 'continue') {
+      navigate('/confirm');
       console.log('continue → 다음 단계');
       // 다음 페이지로 이동 (추후 구현)
+
     } else {
       console.log('save → 수정 저장');
       draft.saveDraft();
