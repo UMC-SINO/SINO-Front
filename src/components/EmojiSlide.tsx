@@ -53,33 +53,35 @@ const EmojiSlide = () => {
 
   return (
     <div>
-      <div>
-        {Left && (
-          <motion.div>
-            <Left />
-          </motion.div>
-        )}
-      </div>
-      <div>
-        <AnimatePresence custom={back}>
-          <motion.div
-            key={visible}
-            variants={CneterVariants}
-            custom={back}
-            initial='entry'
-            animate='center'
-            exit='exit'
-          >
-            <Center />
-          </motion.div>
-        </AnimatePresence>
-      </div>
-      <div>
-        {Right && (
-          <motion.div>
-            <Right />
-          </motion.div>
-        )}
+      <div className='flex items-center justify-center'>
+        <div>
+          {Left && (
+            <motion.div>
+              <Left />
+            </motion.div>
+          )}
+        </div>
+        <div>
+          <AnimatePresence custom={back}>
+            <motion.div
+              key={visible}
+              variants={CneterVariants}
+              custom={back}
+              initial='entry'
+              animate='center'
+              exit='exit'
+            >
+              <Center />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <div>
+          {Right && (
+            <motion.div>
+              <Right />
+            </motion.div>
+          )}
+        </div>
       </div>
       <div className='flex justify-center gap-5 p-7'>
         <button onClick={handlePrev} className='text-white'>
