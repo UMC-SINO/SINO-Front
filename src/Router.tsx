@@ -7,6 +7,7 @@ import LoginPage from './pages/LgoinPage';
 import RetrospectWrite from './pages/RetrospectWrite/RestrospectWrite';
 import AnalysisPage from './pages/AnalysisPage';
 import ConfrimPage from './pages/ConfirmPage';
+import OnBoadingPage from './pages/OnBoardingPage';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element: <LoginPage />,
+      },
+      {
+        path: 'onboarding',
+        element: <OnBoadingPage />,
       },
       {
         path: 'example',
