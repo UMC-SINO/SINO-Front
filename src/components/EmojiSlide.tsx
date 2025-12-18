@@ -28,7 +28,7 @@ const EmojiSlide = () => {
   const [visible, setVisible] = useState(0);
   const [back, setBack] = useState(false);
 
-  const CneterVariants = {
+  const CenterVariants = {
     entry: (back: boolean) => ({ x: back ? -500 : 500, opacity: 0, scale: 0.5 }),
     center: { x: 0, opacity: 1, scale: 1 },
     exit: (back: boolean) => ({ x: back ? 500 : -500, opacity: 0, scale: 0.5 }),
@@ -80,7 +80,7 @@ const EmojiSlide = () => {
             {/* <AnimatePresence custom={back}>
             <motion.div
               key={visible}
-              variants={CneterVariants}
+              variants={CenterVariants}
               custom={back}
               initial='entry'
               animate='center'
