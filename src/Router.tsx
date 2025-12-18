@@ -2,10 +2,10 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import Hompage from './pages/Hompage';
 import ExamplePage from './pages/ExamplePage';
+import RetrospectWrite from './pages/RetrospectWrite/RestrospectWrite';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LgoinPage';
 import OnBoadingPage from './pages/OnBoardingPage';
-
 import DateSelectPage from './pages/DateSelectPage';
 
 const router = createBrowserRouter([
@@ -32,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: 'example',
         element: <ExamplePage />,
+      },
+      {
+        path: 'retro',
+        element: <RetrospectWrite />,
       },
       {
         path: '/dateSelect',
