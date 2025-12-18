@@ -3,6 +3,8 @@ import App from './App';
 import Hompage from './pages/Hompage';
 import ExamplePage from './pages/ExamplePage';
 import EmojiPage from './pages/EmojiPage';
+import SignupPage from './pages/SignupPage';
+import LoginPage from './pages/LgoinPage';
 
 const router = createBrowserRouter([
   {
@@ -12,6 +14,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Hompage />,
+      },
+      {
+        path: 'signup',
+        element: <SignupPage />,
+      },
+      {
+        path: 'login',
+        element: <LoginPage />,
       },
       {
         path: 'example',
