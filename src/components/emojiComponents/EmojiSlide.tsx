@@ -1,16 +1,17 @@
 import { LayoutGroup, motion } from 'framer-motion';
-import Happy from '../assets/emojis/Happy.svg?react';
-import Afraid from '../assets/emojis/Afraid.svg?react';
-import Angry from '../assets/emojis/Angry.svg?react';
-import Boredom from '../assets/emojis/Boredom.svg?react';
-import Joyful from '../assets/emojis/Joyful.svg?react';
-import Sad from '../assets/emojis/Sad.svg?react';
-import Shameful from '../assets/emojis/Shameful.svg?react';
-import Smile from '../assets/emojis/Smile.svg?react';
-import Unrest from '../assets/emojis/Unrest.svg?react';
-import Worried from '../assets/emojis/Worried.svg?react';
+import Happy from '../../assets/emojis/Happy.svg?react';
+import Afraid from '../../assets/emojis/Afraid.svg?react';
+import Angry from '../../assets/emojis/Angry.svg?react';
+import Boredom from '../../assets/emojis/Boredom.svg?react';
+import Joyful from '../../assets/emojis/Joyful.svg?react';
+import Sad from '../../assets/emojis/Sad.svg?react';
+import Shameful from '../../assets/emojis/Shameful.svg?react';
+import Smile from '../../assets/emojis/Smile.svg?react';
+import Unrest from '../../assets/emojis/Unrest.svg?react';
+import Worried from '../../assets/emojis/Worried.svg?react';
 import { useState } from 'react';
 import type React from 'react';
+import EmojiSelectBar from './EmojiSelectBar';
 
 type EmojiProps = {
   key: string;
@@ -33,13 +34,6 @@ export const emojis: EmojiProps[] = [
 
 const EmojiSlide = () => {
   const [visible, setVisible] = useState(0);
-  const [back, setBack] = useState(false);
-
-  // const CenterVariants = {
-  //   entry: (back: boolean) => ({ x: back ? -500 : 500, opacity: 0, scale: 0.5 }),
-  //   center: { x: 0, opacity: 1, scale: 1 },
-  //   exit: (back: boolean) => ({ x: back ? 500 : -500, opacity: 0, scale: 0.5 }),
-  // };
 
   const roleStyle = (role: 'left' | 'center' | 'right') => {
     if (role === 'center') return { scale: 1, opacity: 1 };
@@ -49,14 +43,8 @@ const EmojiSlide = () => {
   const leftIdx = visible - 1;
   const rightIdx = visible + 1;
 
-  const handlePrev = () => {
-    setBack(true);
-    setVisible((v) => (v > 0 ? v - 1 : v));
-  };
-
-  const handleNext = () => {
-    setBack(false);
-    setVisible((v) => (v < emojis.length - 1 ? v + 1 : v));
+  const handleSelectBarChange = (next: number) => {
+    setVisible(next);
   };
 
   return (
@@ -90,7 +78,6 @@ const EmojiSlide = () => {
               return (
                 <motion.div
                   key={`emoji-${visible}`}
-                  custom={back}
                   layout
                   layoutId={`emoji-${visible}`}
                   animate={roleStyle('center')}
@@ -126,13 +113,8 @@ const EmojiSlide = () => {
           </div>
         </div>
       </LayoutGroup>
-      <div className='flex justify-center gap-5 p-7'>
-        <button onClick={handlePrev} className='text-white'>
-          prev
-        </button>
-        <button onClick={handleNext} className='text-white'>
-          next
-        </button>
+      <div className='flex justify-center items-center gap-5 p-7'>
+        <EmojiSelectBar value={visible} max={emojis.length - 1} onChange={handleSelectBarChange} />
       </div>
     </div>
   );
