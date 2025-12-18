@@ -10,8 +10,8 @@ const ActionBar = () => {
   };
 
   return (
-    <div className='min-h-screen flex items-center justify-center bg-[#111111]'>
-      <div className='bg-[#1a1a1a] px-10 py-6 rounded-2xl flex gap-6'>
+    <footer className='fixed bottom-0 left-0 right-0 z-50 bg-[#1a1a1a] border-t border-[#1a1a1a]'>
+      <div className='max-w-[1000px] mx-auto px-6 py-5 flex justify-center gap-6'>
         <Button
           type='button'
           className='px-8 text-[#FF6F4B] border border-[#FF6F4B] bg-transparent'
@@ -24,7 +24,7 @@ const ActionBar = () => {
           Create the report
         </Button>
       </div>
-    </div>
+    </footer>
   );
 };
 
