@@ -6,6 +6,7 @@ import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LgoinPage';
 import RetrospectWrite from './pages/RetrospectWrite/RestrospectWrite';
 import AnalysisPage from './pages/AnalysisPage';
+import ConfrimPage from './pages/ConfirmPage';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: 'retro',
         element: <RetrospectWrite />,
+      },
+      {
+        path: 'confirm',
+        element: <ConfrimPage />,
       },
       {
         path: 'analysis',
