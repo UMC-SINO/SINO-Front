@@ -37,7 +37,7 @@ const EmojiPage = () => {
         <EmojiSlide onSavedChange={setSavedIds} />
       </div>
       <div className='flex gap-7 pt-5 items-center justify-center'>
-        <Button type='button' className='w-[200px] bg-[#E1E0E0]' onClick={handleBack}>
+        <Button type='button' className='w-[200px] bg-gray-200' onClick={handleBack}>
           Back
         </Button>
         <Button
