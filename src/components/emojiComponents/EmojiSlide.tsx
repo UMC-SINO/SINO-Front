@@ -139,7 +139,7 @@ const EmojiSlide = ({ onSavedChange }: EmojiSlideProps) => {
           </div>
         </div>
       </LayoutGroup>
-      <div className='flex justify-center items-center gap-5 p-15'>
+      <div className='flex justify-center items-center gap-5 pt-15'>
         <EmojiSelectBar value={visible} max={emojis.length - 1} onChange={handleSelectBarChange} />
         <label className='flex items-center gap-3 cursor-pointer select-none'>
           <span className='relative inline-flex h-5 w-5 items-center justify-center'>
