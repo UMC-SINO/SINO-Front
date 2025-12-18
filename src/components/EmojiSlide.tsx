@@ -1,4 +1,4 @@
-import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
+import { LayoutGroup, motion } from 'framer-motion';
 import Happy from '../assets/emojis/center/Happy.svg?react';
 import Afraid from '../assets/emojis/center/Afraid.svg?react';
 import Angry from '../assets/emojis/center/Angry.svg?react';
@@ -28,11 +28,11 @@ const EmojiSlide = () => {
   const [visible, setVisible] = useState(0);
   const [back, setBack] = useState(false);
 
-  const CenterVariants = {
-    entry: (back: boolean) => ({ x: back ? -500 : 500, opacity: 0, scale: 0.5 }),
-    center: { x: 0, opacity: 1, scale: 1 },
-    exit: (back: boolean) => ({ x: back ? 500 : -500, opacity: 0, scale: 0.5 }),
-  };
+  // const CenterVariants = {
+  //   entry: (back: boolean) => ({ x: back ? -500 : 500, opacity: 0, scale: 0.5 }),
+  //   center: { x: 0, opacity: 1, scale: 1 },
+  //   exit: (back: boolean) => ({ x: back ? 500 : -500, opacity: 0, scale: 0.5 }),
+  // };
 
   const roleStyle = (role: 'left' | 'center' | 'right') => {
     if (role === 'center') return { scale: 1, opacity: 1 };
@@ -94,6 +94,7 @@ const EmojiSlide = () => {
               return (
                 <motion.div
                   key={`emoji-${visible}`}
+                  custom={back}
                   layout
                   layoutId={`emoji-${visible}`}
                   animate={roleStyle('center')}
