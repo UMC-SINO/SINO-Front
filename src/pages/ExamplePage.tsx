@@ -1,3 +1,4 @@
+import EmotionAnalysisList from '@/components/analysis/EmotionAnalysisList';
 import Button from '@/components/common/Button';
 import Dropdown from '@/components/common/Dropdown';
 
@@ -15,6 +16,7 @@ const ExamplePage = () => {
         <Dropdown items={yearItems} className='w-105' />
         <Dropdown items={monthItems} />
       </div>
+      <EmotionAnalysisList />
     </div>
   );
 };
