@@ -5,6 +5,7 @@ import ExamplePage from './pages/ExamplePage';
 import EmojiPage from './pages/EmojiPage';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LgoinPage';
+import SplashPage from './pages/SplashPage';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: 'emoji',
         element: <EmojiPage />,
+      },
+      {
+        path: 'splash',
+        element: <SplashPage />,
       },
     ],
   },
