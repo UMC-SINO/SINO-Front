@@ -15,6 +15,7 @@ type Props = {
   selectedIds: string[];
   maxSelect?: number; // 기본 5
   onBack: () => void;
+  // eslint-disable-next-line no-unused-vars
   onToggle: (id: string) => void;
   onSignal: () => void;
   onClose?: () => void;
@@ -51,7 +52,7 @@ export default function EmotionSelectModal({
 
   return (
     <div
-      className='fixed inset-0 z-[999] flex items-center justify-center'
+      className='fixed inset-0 z-50 flex items-center justify-center'
       role='dialog'
       aria-modal='true'
     >
@@ -66,7 +67,7 @@ export default function EmotionSelectModal({
       {/* Card */}
       <div
         className={clsx(
-          'relative w-[760px] max-w-[92vw] rounded-[24px] bg-[#2B2B2B] px-12 py-10 shadow-2xl',
+          'relative w-190 max-w-[92vw] rounded-3xl bg-[#2B2B2B] px-12 py-10 shadow-2xl',
           className,
         )}
       >
@@ -99,13 +100,13 @@ export default function EmotionSelectModal({
                   }}
                   aria-label={opt.label ?? opt.id}
                   className={clsx(
-                    'h-[44px] w-[44px] flex items-center justify-center rounded-full transition',
+                    'h-11 w-11 flex items-center justify-center rounded-full transition',
                     selected ? 'ring-2 ring-[#FF6F4B] bg-white/5' : 'hover:bg-white/5',
                     disabled && 'opacity-40 cursor-not-allowed',
                   )}
                 >
                   {/* 아이콘은 SVG/이모지 뭐든 가능 */}
-                  <div className='h-[32px] w-[32px] [&>svg]:w-full [&>svg]:h-full'>{opt.icon}</div>
+                  <div className='h-8 w-8 [&>svg]:w-full [&>svg]:h-full'>{opt.icon}</div>
                 </button>
               );
             })}
@@ -129,7 +130,7 @@ export default function EmotionSelectModal({
           <button
             type='button'
             onClick={onBack}
-            className='w-[160px] h-[52px] rounded-full bg-[#E1E0E0] text-black font-semibold text-lg hover:brightness-95'
+            className='w-40 h-13 rounded-full bg-[#E1E0E0] text-black font-semibold text-lg hover:brightness-95'
           >
             Back
           </button>
@@ -140,7 +141,7 @@ export default function EmotionSelectModal({
             disabled={!canSignal}
             onClick={onSignal}
             className={clsx(
-              'w-[160px] h-[52px] rounded-full font-semibold text-lg',
+              'w-40 h-13 rounded-full font-semibold text-lg',
               canSignal
                 ? 'bg-[#FF6F4B] hover:brightness-90 text-black'
                 : 'bg-[#6B6B6B] text-white/80 cursor-not-allowed',

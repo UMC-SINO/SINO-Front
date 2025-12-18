@@ -23,7 +23,7 @@ const EmojiSelectBar = ({ value, max, onChange, disabled }: EmojiSelectBarProps)
         value={value}
         onChange={handleChange}
         disabled={disabled}
-        className='slider w-[240px]'
+        className='slider w-60'
       />
     </div>
   );

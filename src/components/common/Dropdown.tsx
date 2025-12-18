@@ -6,7 +6,6 @@ import { ChevronDown } from 'lucide-react';
 interface DropdownProps {
   items: string[];
   className?: string;
-
   // eslint-disable-next-line no-unused-vars
   onSelect?: (value: string) => void;
 }
@@ -48,7 +47,7 @@ const Dropdown = ({ items, className, onSelect }: DropdownProps) => {
               transition={{ duration: 0.3, ease: 'easeOut' }}
               className='absolute w-full mt-2 bg-[#E1E0E0] rounded-[20px] overflow-hidden'
             >
-              <div className='relative h-[140px] overflow-hidden flex items-center'>
+              <div className='relative h-35 overflow-hidden flex items-center'>
                 <div className='absolute left-2 right-2 h-10 bg-white rounded-xl top-1/2 -translate-y-1/2 pointer-events-none' />
 
                 <ul className='w-full flex flex-col text-center relative z-10'>

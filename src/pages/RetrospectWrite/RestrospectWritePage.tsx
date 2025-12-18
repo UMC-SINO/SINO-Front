@@ -1,12 +1,12 @@
 import { EmotionChips } from '@/components/common/Emotionchips';
 import { MemoCard } from '@/components/common/MemoCard';
 import { PhotoGrid } from '@/components/common/PhotoGrid';
-import { useRetrospectDraft } from '@/hooks/useRetroSpectDraft';
+import { useRetrospectDraft } from '@/hooks/useRetrospectDraft';
 import { RetrospectHeader } from '@/pages/RetrospectWrite/RetrospectHeader';
 import { ActionButtons } from './ActionButton';
 import { useNavigate } from 'react-router-dom';
 
-export const RetrospectWrite = () => {
+export const RetrospectWritePage = () => {
   const PREV_DATA = {
     dateString: '2025/12',
     emotionList: ['🥰', '😀', '😰', '😉', '🥺'], // 가상 데이터, 수정 예정
@@ -37,7 +37,7 @@ export const RetrospectWrite = () => {
 
   return (
     <div className='min-h-screen bg-[#111111] text-white flex items-center justify-center p-6'>
-      <div className='w-full max-w-[920px]'>
+      <div className='w-full max-x-2xl'>
         <div className='mb-8'>
           <RetrospectHeader dateString={draft.dateString} />
         </div>
@@ -69,4 +69,4 @@ export const RetrospectWrite = () => {
   );
 };
 
-export default RetrospectWrite;
+export default RetrospectWritePage;

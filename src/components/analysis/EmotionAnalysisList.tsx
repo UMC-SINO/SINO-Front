@@ -1,7 +1,7 @@
-import { ANALYSIS_DATA } from '@/constants/analysisData';
+import { ANALYSIS_DATA } from '@/data/analysisData';
 import { GraphItem } from './GraphItem';
 
-const EmotionAnalysisList: React.FC = () => {
+const EmotionAnalysisList = () => {
   return (
     <div className='w-[335px] h-[233px] p-5 bg-bl shadow-lg'>
       <div className='h--173px mb-8'>

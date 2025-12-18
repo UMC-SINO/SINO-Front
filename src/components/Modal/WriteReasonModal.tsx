@@ -7,6 +7,7 @@ type Props = {
   open: boolean;
   initialValue?: string;
   onBack: () => void;
+  // eslint-disable-next-line no-unused-vars
   onNext: (text: string) => void;
   onClose?: () => void;
   className?: string;
@@ -33,20 +34,20 @@ export default function WriteReasonModal({
   const canNext = value.trim().length > 0;
 
   return (
-    <div className='fixed inset-0 z-[999] flex items-center justify-center'>
+    <div className='fixed inset-0 z-50 flex items-center justify-center'>
       {/* Backdrop */}
       <button
         type='button'
         aria-label='Close modal'
         onClick={() => onClose?.()}
-        className='absolute inset-0 bg-black/55 backdrop-blur-[8px]'
+        className='absolute inset-0 bg-black/55 backdrop-blur-sm'
       />
 
       {/* Modal Card */}
       <div
         className={clsx(
-          'relative w-[820px] max-w-[92vw] rounded-[26px]',
-          'bg-gradient-to-b from-[#2B2B2B] to-[#252525]',
+          'relative w-205 max-w-[92vw] rounded-[26px]',
+          'bg-linear-to-b from-[#2B2B2B] to-[#252525]',
           'px-16 py-14 shadow-[0_30px_80px_rgba(0,0,0,0.55)]',
           className,
         )}
@@ -67,7 +68,7 @@ export default function WriteReasonModal({
             onChange={(e) => setValue(e.target.value)}
             placeholder='텍스트 입력전'
             className={clsx(
-              'w-[560px] max-w-[88vw] h-[140px]',
+              'w-140 max-w-[88vw] h-35',
               'rounded-[18px] bg-white',
               'px-5 py-4 text-[14px] text-black',
               'placeholder:text-black/35 resize-none outline-none',
@@ -82,7 +83,7 @@ export default function WriteReasonModal({
           <button
             type='button'
             onClick={onBack}
-            className='w-[170px] h-[54px] rounded-full bg-[#E1E0E0] text-black font-semibold text-lg'
+            className='w-42.5 h-13.5 rounded-full bg-[#E1E0E0] text-black font-semibold text-lg'
           >
             Back
           </button>
@@ -91,7 +92,7 @@ export default function WriteReasonModal({
             type='button'
             disabled={!canNext}
             onClick={() => onNext(value)}
-            className={clsx('w-[170px] h-[54px] rounded-full text-lg')}
+            className='w-42.5 h-13.5 rounded-full text-lg'
           >
             Next
           </Button>

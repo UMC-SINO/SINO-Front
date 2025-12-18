@@ -1,4 +1,4 @@
-import { emojis } from '@/constants/emoji';
+import { emojis } from '@/data/emoji';
 
 interface GraphItemProps {
   id: string;

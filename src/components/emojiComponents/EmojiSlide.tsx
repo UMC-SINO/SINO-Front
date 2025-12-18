@@ -1,50 +1,21 @@
 import { LayoutGroup, motion } from 'framer-motion';
-import Happy from '../../assets/emojis/Happy.svg?react';
-import Afraid from '../../assets/emojis/Afraid.svg?react';
-import Angry from '../../assets/emojis/Angry.svg?react';
-import Boredom from '../../assets/emojis/Boredom.svg?react';
-import Joyful from '../../assets/emojis/Joyful.svg?react';
-import Sad from '../../assets/emojis/Sad.svg?react';
-import Shameful from '../../assets/emojis/Shameful.svg?react';
-import Smile from '../../assets/emojis/Smile.svg?react';
-import Unrest from '../../assets/emojis/Unrest.svg?react';
-import Worried from '../../assets/emojis/Worried.svg?react';
 import Check from '../../assets/emojis/Check.svg?react';
 import { useState } from 'react';
-import type React from 'react';
 import EmojiSelectBar from './EmojiSelectBar';
 import { Check as CheckIcon } from 'lucide-react';
-
-type EmojiProps = {
-  id: string;
-  label: string;
-  Comp: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-};
+import { emojis } from '@/data/emoji';
 
 type EmojiSlideProps = {
   // eslint-disable-next-line no-unused-vars
   onSavedChange?: (savedIds: string[]) => void;
 };
 
-export const emojis: EmojiProps[] = [
-  { id: 'Happy', label: 'Happy', Comp: Happy },
-  { id: 'Afraid', label: 'Afraid', Comp: Afraid },
-  { id: 'Angry', label: 'Angry', Comp: Angry },
-  { id: 'Boredom', label: 'Boredom', Comp: Boredom },
-  { id: 'Joyful', label: 'Joyful', Comp: Joyful },
-  { id: 'Sad', label: 'Sad', Comp: Sad },
-  { id: 'Shameful', label: 'Shameful', Comp: Shameful },
-  { id: 'Smile', label: 'Smile', Comp: Smile },
-  { id: 'Unrest', label: 'Unrest', Comp: Unrest },
-  { id: 'Worried', label: 'Worried', Comp: Worried },
-];
-
 const EmojiSlide = ({ onSavedChange }: EmojiSlideProps) => {
   const [visible, setVisible] = useState(0);
   const [savedIds, setSavedIds] = useState<string[]>([]);
 
   const center = emojis[visible];
-  const isCenterSaved = savedIds.includes(center.id);
+  const isCenterSaved = savedIds.includes(center.key);
   const CenterComp = emojis[visible].Comp;
 
   const roleStyle = (role: 'left' | 'center' | 'right') => {
@@ -61,12 +32,12 @@ const EmojiSlide = ({ onSavedChange }: EmojiSlideProps) => {
 
   const handleSaveClicked = () => {
     setSavedIds((prev) => {
-      const exists = prev.includes(center.id);
+      const exists = prev.includes(center.key);
 
       let next = prev;
 
-      if (exists) next = prev.filter((id) => id !== center.id);
-      else if (prev.length < 5) next = [...prev, center.id];
+      if (exists) next = prev.filter((id) => id !== center.key);
+      else if (prev.length < 5) next = [...prev, center.key];
       else next = prev;
 
       onSavedChange?.(next);
@@ -95,7 +66,7 @@ const EmojiSlide = ({ onSavedChange }: EmojiSlideProps) => {
                 );
               })()
             ) : (
-              <div className='w-[150px] h-full opacity-0' />
+              <div className='w-37.5 h-full opacity-0' />
             )}
           </div>
           <div className='w-full h-full items-center justify-center'>
@@ -134,7 +105,7 @@ const EmojiSlide = ({ onSavedChange }: EmojiSlideProps) => {
                 );
               })()
             ) : (
-              <div className='w-[150px] h-full opacity-0' />
+              <div className='w-37.5 h-full opacity-0' />
             )}
           </div>
         </div>
@@ -154,7 +125,7 @@ const EmojiSlide = ({ onSavedChange }: EmojiSlideProps) => {
               <CheckIcon
                 size={14}
                 strokeWidth={3}
-                className='relative top-[4px] text-white pointer-events-none'
+                className='relative top-1 text-white pointer-events-none'
               />
             )}
           </span>

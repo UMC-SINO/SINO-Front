@@ -41,7 +41,7 @@ export default function TurnToSignalModal({
 
   return (
     <div
-      className='fixed inset-0 z-[999] flex items-center justify-center'
+      className='fixed inset-0 z-50 flex items-center justify-center'
       aria-modal='true'
       role='dialog'
     >
@@ -56,7 +56,7 @@ export default function TurnToSignalModal({
       {/* Modal Card */}
       <div
         className={clsx(
-          'relative w-[720px] max-w-[92vw] rounded-[24px] bg-[#2B2B2B] px-10 py-9 shadow-2xl',
+          'relative w-180 max-w-[92vw] rounded-3xl bg-[#2B2B2B] px-10 py-9 shadow-2xl',
           className,
         )}
       >
@@ -74,7 +74,7 @@ export default function TurnToSignalModal({
 
         {/* Icon */}
         <div className='flex justify-center'>
-          <div className='h-[96px] w-[96px] flex items-center justify-center'>{icon}</div>
+          <div className='h-24 w-24 flex items-center justify-center'>{icon}</div>
         </div>
 
         {/* Text */}
@@ -89,18 +89,13 @@ export default function TurnToSignalModal({
           <Button // 요기 버튼 컴포넌트 variant="secondary" 개념 추가할지 나중에 고민!
             type='button'
             onClick={onBack}
-            className='
-                w-[160px] h-[52px]
-                !bg-[#E1E0E0]
-                !text-black
-                rounded-full
-                hover:!brightness-95'
+            className='w-40 h-13 bg-[#E1E0E0]! text-black! rounded-full hover:brightness-95!'
           >
             Back
           </Button>
 
           {/* Change (주황) */}
-          <Button type='button' onClick={onChange} className='w-[160px] h-[52px] rounded-full'>
+          <Button type='button' onClick={onChange} className='w-40 h-13 rounded-full'>
             Change
           </Button>
         </div>

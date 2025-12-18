@@ -35,7 +35,7 @@ export default function DeleteConfirmModal({
 
   return (
     <div
-      className='fixed inset-0 z-[999] flex items-center justify-center'
+      className='fixed inset-0 z-50 flex items-center justify-center'
       role='dialog'
       aria-modal='true'
     >
@@ -50,8 +50,8 @@ export default function DeleteConfirmModal({
       {/* Card */}
       <div
         className={clsx(
-          'relative w-[520px] max-w-[92vw]',
-          'rounded-[32px] bg-[#2B2B2B]',
+          'relative w-130 max-w-[92vw]',
+          'rounded-4xl bg-[#2B2B2B]',
           'px-12 py-10 shadow-[0_30px_80px_rgba(0,0,0,0.55)]',
           className,
         )}
@@ -73,7 +73,7 @@ export default function DeleteConfirmModal({
             type='button'
             onClick={onBack}
             className={clsx(
-              'h-[44px] w-[120px] rounded-full',
+              'h-11 w-30 rounded-full',
               'border border-[#FF6F4B] text-[#FF6F4B]',
               'font-semibold',
               'hover:brightness-110 active:brightness-95',
@@ -86,7 +86,7 @@ export default function DeleteConfirmModal({
           <Button
             type='button'
             onClick={onDelete}
-            className={clsx('h-[44px] w-[120px] rounded-full font-semibold')}
+            className={clsx('h-11 w-30 rounded-full font-semibold')}
           >
             Delete
           </Button>

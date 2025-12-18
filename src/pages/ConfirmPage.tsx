@@ -22,7 +22,7 @@ const ConfirmPage = () => {
           />
         </div>
 
-        <div className='flex-1 max-w-[480px] flex flex-col items-start justify-start'>
+        <div className='flex-1 max-w-120 flex flex-col items-start justify-start'>
           <h1
             className='text-2xl text-white leading-loose text-center mx-auto'
             style={{ width: '335px' }}

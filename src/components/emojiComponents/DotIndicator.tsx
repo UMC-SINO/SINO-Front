@@ -1,6 +1,5 @@
 import clsx from 'clsx';
-import { emojis } from '@/components/emojiComponents/EmojiSlide';
-
+import { emojis } from '@/data/emoji';
 type DotIndicatorProps = {
   savedIds: string[];
   total?: number;
@@ -11,7 +10,7 @@ const DotIndicator = ({ savedIds, total = 5 }: DotIndicatorProps) => {
     <div className='flex items-center justify-center gap-4 pt-6'>
       {Array.from({ length: total }).map((_, i) => {
         const id = savedIds[i];
-        const emoji = emojis.find((e) => e.id === id);
+        const emoji = emojis.find((e) => e.key === id);
 
         return (
           <div

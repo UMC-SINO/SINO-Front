@@ -34,7 +34,7 @@ export default function SuccessChangeToSignalModal({
 
   return (
     <div
-      className='fixed inset-0 z-[999] flex items-center justify-center'
+      className='fixed inset-0 z-50 flex items-center justify-center'
       role='dialog'
       aria-modal='true'
     >
@@ -49,8 +49,8 @@ export default function SuccessChangeToSignalModal({
       {/* Card */}
       <div
         className={clsx(
-          'relative w-[720px] max-w-[92vw]',
-          'rounded-[32px] bg-[#2B2B2B]',
+          'relative w-180 max-w-[92vw]',
+          'rounded-4xl bg-[#2B2B2B]',
           'px-12 py-12 shadow-[0_30px_80px_rgba(0,0,0,0.55)]',
           className,
         )}
@@ -58,7 +58,7 @@ export default function SuccessChangeToSignalModal({
       >
         {/* Icon */}
         <div className='flex justify-center'>
-          <div className='h-[84px] w-[84px] flex items-center justify-center'>
+          <div className='h-21 w-21 flex items-center justify-center'>
             {icon ?? (
               // ✅ 기본 체크 아이콘(SVG)
               <svg viewBox='0 0 24 24' className='h-full w-full' fill='none'>
@@ -82,11 +82,7 @@ export default function SuccessChangeToSignalModal({
 
         {/* Action */}
         <div className='mt-8 flex justify-center'>
-          <Button
-            type='button'
-            onClick={onOk}
-            className='h-[44px] w-[120px] rounded-full font-semibold'
-          >
+          <Button type='button' onClick={onOk} className='h-11 w-30 rounded-full font-semibold'>
             Okey
           </Button>
         </div>

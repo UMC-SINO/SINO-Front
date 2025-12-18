@@ -1,7 +1,7 @@
 import EmotionAnalysisList from '@/components/analysis/EmotionAnalysisList';
 
 import { NSCardList } from '@/components/common/NSList/NSCardList';
-import { NOISE_CARDS, SIGNAL_CARDS } from '@/constants/nscard';
+import { NOISE_CARDS, SIGNAL_CARDS } from '@/data/nscard';
 
 const ExamplePage = () => {
   const signalBadges = [{ label: 'Year' }, { label: 'Month' }, { label: 'Bookmark' }];

@@ -23,7 +23,7 @@ const AnalysisPage = () => {
           />
         </div>
 
-        <div className='flex-1 max-w-[480px] flex flex-col items-start justify-start'>
+        <div className='flex-1 max-w-120 flex flex-col items-start justify-start'>
           <h1 className='text-3xl text-white mb-2 ml-4'>
             Your Analyzed
             <br />

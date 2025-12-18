@@ -1,16 +1,17 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
-import Hompage from './pages/Hompage';
+import HomePage from './pages/Hompage';
 import ExamplePage from './pages/ExamplePage';
 import SignupPage from './pages/signin/SignupPage';
-import LoginPage from './pages/signin/LgoinPage';
-import OnBoadingPage from './pages/OnBoardingPage';
+import LoginPage from './pages/signin/LoginPage';
+import OnBoardingPage from './pages/OnBoardingPage';
 import ReportView from './pages/ReportView';
 import EmojiPage from './pages/EmojiPage';
-import RetrospectWrite from './pages/RetrospectWrite/RestrospectWrite';
+import RetrospectWrite from './pages/RetrospectWrite/RestrospectWritePage';
 import AnalysisPage from './pages/AnalysisPage';
-import ConfrimPage from './pages/ConfirmPage';
+import ConfirmPage from './pages/ConfirmPage';
 import DateSelectPage from './pages/DateSelectPage';
+import SplashPage from './pages/SplashPage';
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Hompage />,
+        element: <HomePage />,
       },
       {
         path: 'signup',
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'onboarding',
-        element: <OnBoadingPage />,
+        element: <OnBoardingPage />,
       },
       {
         path: 'report-view',
@@ -47,7 +48,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'confirm',
-        element: <ConfrimPage />,
+        element: <ConfirmPage />,
       },
       {
         path: 'analysis',
@@ -58,12 +59,12 @@ const router = createBrowserRouter([
         element: <EmojiPage />,
       },
       {
-        path: 'retro',
-        element: <RetrospectWrite />,
+        path: 'dateSelect',
+        element: <DateSelectPage />,
       },
       {
-        path: '/dateSelect',
-        element: <DateSelectPage />,
+        path: 'splash',
+        element: <SplashPage />,
       },
     ],
   },

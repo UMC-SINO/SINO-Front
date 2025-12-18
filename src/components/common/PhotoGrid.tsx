@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useRef, type ChangeEvent } from 'react';
 import { Camera, Minus, Check } from 'lucide-react';
+import clsx from 'clsx';
 
 type PhotoItem = {
   id: string;
@@ -50,16 +51,16 @@ export const PhotoGrid = ({
 
   return (
     <div>
-      <div className='text-xs text-white/50 mb-2'>Picture</div>
+      <div className='text-sm text-white mb-2'>Picture</div>
 
-      <div className='grid grid-cols-2 grid-rows-2 gap-3 w-full h-[220px]'>
+      <div className='grid grid-cols-2 grid-rows-2 gap-3 w-full h-70'>
         {photos.map((photo, index) => (
           <div
             key={photo.id}
-            className={[
+            className={clsx(
               'relative rounded-2xl overflow-hidden bg-[#1a1a1a] group',
               getPhotoPosClass(index),
-            ].join(' ')}
+            )}
           >
             <img src={photo.url} alt='' className='w-full h-full object-cover' />
 
@@ -68,14 +69,13 @@ export const PhotoGrid = ({
               type='button'
               disabled={readOnly}
               onClick={() => !readOnly && onPickPhoto?.(photo.id)}
-              className={[
-                'absolute top-2 right-2 px-3 py-1 rounded-full text-[11px] font-semibold flex items-center gap-1',
-                'opacity-0 group-hover:opacity-100 transition-opacity',
+              className={clsx(
+                'absolute top-2 right-2 px-3 py-1 rounded-full text-[11px] font-semibold flex items-center gap-1 transition-opacity opacity-0 group-hover:opacity-100',
                 photo.isPick
                   ? 'bg-orange-500 text-white'
                   : 'bg-white/20 text-white hover:bg-white hover:text-orange-500',
-                readOnly ? 'hidden' : '',
-              ].join(' ')}
+                readOnly && 'hidden',
+              )}
             >
               {photo.isPick && <Check size={12} />}
               Pick
@@ -86,13 +86,7 @@ export const PhotoGrid = ({
               <button
                 type='button'
                 onClick={() => onRemovePhoto?.(photo.id)}
-                className='
-                  absolute top-2 left-2
-                  bg-black/40 hover:bg-black/60 text-white
-                  rounded-full p-1.5
-                  opacity-0 group-hover:opacity-100
-                  transition-opacity
-                '
+                className='absolute top-2 left-2 bg-black/40 hover:bg-black/60 text-white rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-opacity'
               >
                 <Minus size={14} />
               </button>
@@ -104,12 +98,12 @@ export const PhotoGrid = ({
           <button
             type='button'
             onClick={() => fileInputRef.current?.click()}
-            className={[
+            className={clsx(
               'rounded-2xl border border-dashed border-white/30',
               'flex flex-col items-center justify-center',
               'text-white/60 hover:text-white/80 transition',
               getAddPosClass(),
-            ].join(' ')}
+            )}
           >
             <Camera size={18} />
             <span className='text-xs mt-1'>사진 추가</span>

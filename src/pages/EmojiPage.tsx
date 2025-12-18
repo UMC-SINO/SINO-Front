@@ -23,7 +23,6 @@ const EmojiPage = () => {
 
   return (
     <div className='flex flex-col gap-10 items-center justify-center bg-black'>
-      <header className='pt-16 pb-10 flex justify-center'></header>
       <div className='text-left text-white font-pretendard text-[28px] font-bold leading-tight'>
         How are you <br />
         feeling{' '}
@@ -37,15 +36,10 @@ const EmojiPage = () => {
         <EmojiSlide onSavedChange={setSavedIds} />
       </div>
       <div className='flex gap-7 pt-5 items-center justify-center'>
-        <Button type='button' className='w-[200px] bg-gray-200' onClick={handleBack}>
+        <Button type='button' className='w-50 bg-[#E1E0E0]' onClick={handleBack}>
           Back
         </Button>
-        <Button
-          type='button'
-          className='w-[200px]'
-          onClick={handleContinue}
-          disabled={!canContinue}
-        >
+        <Button type='button' className='w-50' onClick={handleContinue} disabled={!canContinue}>
           Continue
         </Button>
       </div>
