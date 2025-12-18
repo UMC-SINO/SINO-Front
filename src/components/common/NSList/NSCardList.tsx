@@ -10,11 +10,11 @@ interface NSCardListProps {
 }
 
 export const NSCardList = ({ cards, title, badges = [] }: NSCardListProps) => {
-  const [activeFilter, setActiveFilter] = useState<string | null>(null);
-
   const handleBadgeClick = (badge: Badge) => {
     setActiveFilter((prev) => (prev === badge.label ? null : badge.label));
   };
+
+  const [activeFilter, setActiveFilter] = useState<string | null>('Year');
 
   const filteredCards = cards.filter((card) => {
     if (!activeFilter) return true;
