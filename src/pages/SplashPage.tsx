@@ -36,7 +36,7 @@ const SplashPage = () => {
           </div>
         </div>
         <div className='flex items-center justify-between'>
-          <Button type='button' className='w-[250px] bg-[#E1E0E0] text-[#7C7979]'>
+          <Button type='button' className='w-[250px] !bg-[#E1E0E0] text-[#7C7979]'>
             Back
           </Button>
           <Button
