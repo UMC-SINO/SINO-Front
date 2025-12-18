@@ -22,6 +22,7 @@ type EmojiProps = {
 };
 
 type EmojiSlideProps = {
+  // eslint-disable-next-line no-unused-vars
   onSavedChange?: (savedIds: string[]) => void;
 };
 
@@ -40,7 +41,6 @@ export const emojis: EmojiProps[] = [
 
 const EmojiSlide = ({ onSavedChange }: EmojiSlideProps) => {
   const [visible, setVisible] = useState(0);
-  const [saved, setSaved] = useState(false);
   const [savedIds, setSavedIds] = useState<string[]>([]);
 
   const center = emojis[visible];
@@ -106,7 +106,12 @@ const EmojiSlide = ({ onSavedChange }: EmojiSlideProps) => {
               animate={roleStyle('center')}
               transition={{ type: 'spring', stiffness: 400, damping: 30 }}
             >
-              <CenterComp className='w-full h-full' />
+              <div className='relative inline-flex'>
+                <CenterComp className='w-full h-full' />
+                {isCenterSaved && (
+                  <Check className='absolute -top-10 -right-10 w-30 h-30 pointer-events-none' />
+                )}
+              </div>
               <p className='flex flex-col mt-6 items-center text-center text-white font-pretendard'>
                 {center.label}
               </p>
@@ -136,21 +141,25 @@ const EmojiSlide = ({ onSavedChange }: EmojiSlideProps) => {
       </LayoutGroup>
       <div className='flex justify-center items-center gap-5 p-15'>
         <EmojiSelectBar value={visible} max={emojis.length - 1} onChange={handleSelectBarChange} />
-        <label className='flex items-center gap-2 cursor-pointer select-none'>
+        <label className='flex items-center gap-3 cursor-pointer select-none'>
           <span className='relative inline-flex h-5 w-5 items-center justify-center'>
             <input
               type='checkbox'
               checked={isCenterSaved}
               onChange={handleSaveClicked}
-              className='absolute inset-0 h-5 w-5 appearance-none rounded border border-white/70 bg-transparent cursor-pointer'
+              className='absolute inset-0 top-1 h-5 w-5 appearance-none rounded border border-white/70 bg-transparent cursor-pointer'
             />
 
             {isCenterSaved && (
-              <CheckIcon size={14} strokeWidth={3} className='text-white pointer-events-none' />
+              <CheckIcon
+                size={14}
+                strokeWidth={3}
+                className='relative top-[4px] text-white pointer-events-none'
+              />
             )}
           </span>
 
-          <span className='text-white text-sm font-pretendard'>save</span>
+          <span className='pt-1 text-white text-sm font-pretendard'>save</span>
         </label>
       </div>
     </div>

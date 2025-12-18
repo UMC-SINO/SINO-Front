@@ -1,3 +1,4 @@
+import Button from '@/components/common/Button';
 import EmojiSlide from '@/components/emojiComponents/EmojiSlide';
 import { useLocation } from 'react-router-dom';
 
@@ -21,7 +22,10 @@ const EmojiPage = () => {
       <div className='flex flex-col items-center justify-center'>
         <EmojiSlide />
       </div>
-      {/* back, continue 버튼 자리 */}
+      <div className='flex flex-col items-center justify-center '>
+        <Button />
+        <Button />
+      </div>
       <footer className='pt-16 pb-10 flex justify-center'></footer>
     </div>
   );
