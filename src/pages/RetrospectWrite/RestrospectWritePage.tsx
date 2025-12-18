@@ -2,8 +2,8 @@ import { EmotionChips } from '@/components/common/Emotionchips';
 import { MemoCard } from '@/components/common/MemoCard';
 import { PhotoGrid } from '@/components/common/PhotoGrid';
 import { useRetrospectDraft } from '@/hooks/useRetrospectDraft';
-import { RetrospectHeader } from '@/pages/RetrospectWrite/RetrospectHeader';
-import { ActionButtons } from './ActionButton';
+import { RetrospectHeader } from '@/components/ui/RetrospectHeader';
+import { ActionButtons } from '@/components/ui/ActionButton';
 import { useNavigate } from 'react-router-dom';
 
 export const RetrospectWritePage = () => {
