@@ -87,6 +87,32 @@ a {
   box-sizing: border-box;
 }
 
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  outline: none;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+}
+.slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+
 /* Hide scrollbar */
 .hide-scrollbar {
   scrollbar-width: none;
