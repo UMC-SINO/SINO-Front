@@ -83,10 +83,15 @@ export default function TurnToSignalModal({
         {/* Actions */}
         <div className='mt-8 flex justify-center gap-6'>
           {/* Back (회색) */}
-          <Button
+          <Button // 요기 버튼 컴포넌트 variant="secondary" 개념 추가할지 나중에 고민!
             type='button'
             onClick={onBack}
-            className='w-[160px] h-[52px] rounded-full bg-[#E1E0E0] text-black hover:brightness-95'
+            className='
+                w-[160px] h-[52px]
+                !bg-[#E1E0E0]
+                !text-black
+                rounded-full
+                hover:!brightness-95'
           >
             Back
           </Button>
