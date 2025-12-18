@@ -1,3 +1,4 @@
+// src / components / EmotionSelectModal.tsx;
 import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import Button from '@/components/common/Button';
@@ -104,9 +105,7 @@ export default function EmotionSelectModal({
                   )}
                 >
                   {/* 아이콘은 SVG/이모지 뭐든 가능 */}
-                  <div className='h-[34px] w-[34px] flex items-center justify-center'>
-                    {opt.icon}
-                  </div>
+                  <div className='h-[32px] w-[32px] [&>svg]:w-full [&>svg]:h-full'>{opt.icon}</div>
                 </button>
               );
             })}
