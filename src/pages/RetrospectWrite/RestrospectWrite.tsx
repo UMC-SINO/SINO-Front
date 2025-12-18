@@ -5,13 +5,6 @@ import { useRetrospectDraft } from '@/hooks/useRetroSpectDraft';
 import { RetrospectHeader } from '@/pages/RetrospectWrite/RetrospectHeader';
 import { ActionButtons } from './ActionButton';
 import { useNavigate } from 'react-router-dom';
-import { useRetrospectDraft } from '@/hooks/useRetrospectDraft';
-import { RetrospectHeader } from './RetrospectHeader';
-import { PhotoGrid } from '@/components/common/PhotoGrid';
-import { EmotionChips } from '@/components/common/Emotionchips';
-import { MemoCard } from '@/components/common/MemoCard';
-import { ActionButtons } from './ActionButton';
-
 
 export const RetrospectWrite = () => {
   const PREV_DATA = {
@@ -36,7 +29,6 @@ export const RetrospectWrite = () => {
       navigate('/confirm');
       console.log('continue → 다음 단계');
       // 다음 페이지로 이동 (추후 구현)
-
     } else {
       console.log('save → 수정 저장');
       draft.saveDraft();

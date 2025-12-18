@@ -113,36 +113,37 @@ a {
   border: 2px solid rgba(255, 255, 255, 0.9);
   cursor: pointer;
 
-/* Hide scrollbar */
-.hide-scrollbar {
-  scrollbar-width: none;
-  /* Firefox */
-  -ms-overflow-style: none;
-  /* IE, Edge */
-}
+  /* Hide scrollbar */
+  .hide-scrollbar {
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE, Edge */
+  }
 
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
-  /* Chrome, Safari, Opera */
-}
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
+  }
 
-@theme {
-  --color-bgColor: #202020;
-}
+  @theme {
+    --color-bgColor: #202020;
+  }
 
-/* Hide scrollbar */
-.hide-scrollbar {
-  scrollbar-width: none;
-  /* Firefox */
-  -ms-overflow-style: none;
-  /* IE, Edge */
-}
+  /* Hide scrollbar */
+  .hide-scrollbar {
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE, Edge */
+  }
 
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
-  /* Chrome, Safari, Opera */
-}
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
+  }
 
-@theme {
-  --color-bgColor: #202020;
+  @theme {
+    --color-bgColor: #202020;
+  }
 }
