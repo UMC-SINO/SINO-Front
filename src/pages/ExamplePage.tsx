@@ -1,19 +1,20 @@
 import type { EmotionOption } from '@/components/EmotionSelectModal';
 import EmotionSelectModal from '@/components/EmotionSelectModal';
-import FeelingModal from '@/components/TurnToSignalModal';
 import WriteReasonModal from '@/components/WriteReasonModal';
-import { useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
-import Happy from '@/assets/emojis/Happy.svg';
-import Sad from '@/assets/emojis/Sad.svg';
-import Angry from '@/assets/emojis/Angry.svg';
-import Afraid from '@/assets/emojis/Afraid.svg';
-import Boredom from '@/assets/emojis/Boredom.svg';
-import Joyful from '@/assets/emojis/Joyful.svg';
-import Shameful from '@/assets/emojis/Shameful.svg';
-import Smile from '@/assets/emojis/Smile.svg';
-import Unrest from '@/assets/emojis/Unrest.svg';
-import Worried from '@/assets/emojis/Worried.svg';
+import Happy from '@/assets/emojis/Happy.svg?react';
+import Sad from '@/assets/emojis/Sad.svg?react';
+import Angry from '@/assets/emojis/Angry.svg?react';
+import Afraid from '@/assets/emojis/Afraid.svg?react';
+import Boredom from '@/assets/emojis/Boredom.svg?react';
+import Joyful from '@/assets/emojis/Joyful.svg?react';
+import Shameful from '@/assets/emojis/Shameful.svg?react';
+import Smile from '@/assets/emojis/Smile.svg?react';
+import Unrest from '@/assets/emojis/Unrest.svg?react';
+import Worried from '@/assets/emojis/Worried.svg?react';
+
+import TurnToSignalModal from '@/components/TurnToSignalModal';
 
 type Step = 'view' | 'selectEmotion' | 'turnSignal' | 'closed';
 
@@ -39,6 +40,18 @@ export default function NoiseReportFlow() {
     [],
   );
 
+  // ✅ id → icon 매핑
+  const iconById = useMemo(() => {
+    return options.reduce<Record<string, React.ReactNode>>((acc, cur) => {
+      acc[cur.id] = cur.icon;
+      return acc;
+    }, {});
+  }, [options]);
+
+  // ✅ 대표 이모지: 첫 번째 선택값(없으면 기본)
+  const primaryEmotionId = selectedEmotions[0] ?? 'happy';
+  const primaryIcon = iconById[primaryEmotionId] ?? <Happy />;
+
   const toggleEmotion = (id: string) => {
     setSelectedEmotions((prev) =>
       prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
@@ -49,11 +62,12 @@ export default function NoiseReportFlow() {
 
   return (
     <>
-      <FeelingModal
+      <TurnToSignalModal
         open={step === 'view'}
         onBack={closeAll}
         onChange={() => setStep('selectEmotion')}
         onClose={closeAll}
+        icon={primaryIcon} // ✅ 선택한 대표 이모지를 첫 모달에 보여줌
       />
 
       <EmotionSelectModal
@@ -69,7 +83,7 @@ export default function NoiseReportFlow() {
 
       <WriteReasonModal
         open={step === 'turnSignal'}
-        initialValue={signalText}
+        initialValue={signalText} // ✅ Back/재오픈에도 유지
         onBack={() => setStep('selectEmotion')}
         onNext={(text) => {
           // ✅ 여기서 값 저장
