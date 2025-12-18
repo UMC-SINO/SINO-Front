@@ -4,6 +4,8 @@ import Hompage from './pages/Hompage';
 import ExamplePage from './pages/ExamplePage';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LgoinPage';
+import RetrospectWrite from './pages/RetrospectWrite/RestrospectWrite';
+import ConfirmPage from './pages/ConfirmPage';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,14 @@ const router = createBrowserRouter([
       {
         path: 'example',
         element: <ExamplePage />,
+      },
+      {
+        path: 'retro',
+        element: <RetrospectWrite />,
+      },
+      {
+        path: 'confirm',
+        element: <ConfirmPage />,
       },
     ],
   },
