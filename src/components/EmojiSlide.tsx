@@ -10,6 +10,7 @@ import Smile from '../assets/emojis/Smile.svg?react';
 import Unrest from '../assets/emojis/Unrest.svg?react';
 import Worried from '../assets/emojis/Worried.svg?react';
 import { useState } from 'react';
+import type React from 'react';
 
 type EmojiProps = {
   key: string;
