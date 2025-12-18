@@ -6,6 +6,12 @@ import SignupPage from './pages/signin/SignupPage';
 import LoginPage from './pages/signin/LgoinPage';
 import OnBoadingPage from './pages/OnBoardingPage';
 import ReportView from './pages/ReportView';
+import EmojiPage from './pages/EmojiPage';
+import RetrospectWrite from './pages/RetrospectWrite/RestrospectWrite';
+import SignupPage from './pages/SignupPage';
+import LoginPage from './pages/LgoinPage';
+import OnBoadingPage from './pages/OnBoardingPage';
+import DateSelectPage from './pages/DateSelectPage';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +41,18 @@ const router = createBrowserRouter([
       {
         path: 'example',
         element: <ExamplePage />,
+      },
+      {
+        path: 'emoji',
+        element: <EmojiPage />,
+      },
+      {
+        path: 'retro',
+        element: <RetrospectWrite />,
+      },
+      {
+        path: '/dateSelect',
+        element: <DateSelectPage />,
       },
     ],
   },
