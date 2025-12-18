@@ -2,7 +2,7 @@ import EmotionAnalysisList from '@/components/analysis/EmotionAnalysisList';
 import Button from '@/components/common/Button';
 import { MemoCard } from '@/components/common/MemoCard';
 
-const ConfirmPage = () => {
+const AnalysisPage = () => {
   const DUMMY_DATA = {
     dateString: '2025/12',
     title: '이번 달 회고 제목',
@@ -47,4 +47,4 @@ const ConfirmPage = () => {
   );
 };
 
-export default ConfirmPage;
+export default AnalysisPage;
