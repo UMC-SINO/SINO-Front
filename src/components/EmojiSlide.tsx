@@ -1,27 +1,33 @@
 import { LayoutGroup, motion } from 'framer-motion';
-import Happy from '../assets/emojis/center/Happy.svg?react';
-import Afraid from '../assets/emojis/center/Afraid.svg?react';
-import Angry from '../assets/emojis/center/Angry.svg?react';
-import Boredom from '../assets/emojis/center/Boredom.svg?react';
-import Joyful from '../assets/emojis/center/Joyful.svg?react';
-import Sad from '../assets/emojis/center/Sad.svg?react';
-import Shameful from '../assets/emojis/center/Shameful.svg?react';
-import Smile from '../assets/emojis/center/Smile.svg?react';
-import Unrest from '../assets/emojis/center/Unrest.svg?react';
-import Worried from '../assets/emojis/center/Worried.svg?react';
+import Happy from '../assets/emojis/Happy.svg?react';
+import Afraid from '../assets/emojis/Afraid.svg?react';
+import Angry from '../assets/emojis/Angry.svg?react';
+import Boredom from '../assets/emojis/Boredom.svg?react';
+import Joyful from '../assets/emojis/Joyful.svg?react';
+import Sad from '../assets/emojis/Sad.svg?react';
+import Shameful from '../assets/emojis/Shameful.svg?react';
+import Smile from '../assets/emojis/Smile.svg?react';
+import Unrest from '../assets/emojis/Unrest.svg?react';
+import Worried from '../assets/emojis/Worried.svg?react';
 import { useState } from 'react';
 
-export const emojis = [
-  Happy,
-  Afraid,
-  Angry,
-  Boredom,
-  Joyful,
-  Sad,
-  Shameful,
-  Smile,
-  Unrest,
-  Worried,
+type EmojiProps = {
+  key: string;
+  label: string;
+  Comp: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+};
+
+export const emojis: EmojiProps[] = [
+  { key: 'Happy', label: 'Happy', Comp: Happy },
+  { key: 'Afraid', label: 'Afraid', Comp: Afraid },
+  { key: 'Angry', label: 'Angry', Comp: Angry },
+  { key: 'Boredom', label: 'Boredom', Comp: Boredom },
+  { key: 'Joyful', label: 'Joyful', Comp: Joyful },
+  { key: 'Sad', label: 'Sad', Comp: Sad },
+  { key: 'Shameful', label: 'Shameful', Comp: Shameful },
+  { key: 'Smile', label: 'Smile', Comp: Smile },
+  { key: 'Unrest', label: 'Unrest', Comp: Unrest },
+  { key: 'Worried', label: 'Worried', Comp: Worried },
 ];
 
 const EmojiSlide = () => {
@@ -59,7 +65,7 @@ const EmojiSlide = () => {
           <div className='w-full h-full items-center justify-center'>
             {leftIdx >= 0 ? (
               (() => {
-                const Comp = emojis[leftIdx];
+                const LeftComp = emojis[leftIdx].Comp;
                 return (
                   <motion.div
                     key={`emoji-${leftIdx}`}
@@ -68,7 +74,7 @@ const EmojiSlide = () => {
                     animate={roleStyle('left')}
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   >
-                    <Comp className='w-full h-full' />
+                    <LeftComp className='w-full h-full' />
                   </motion.div>
                 );
               })()
@@ -77,20 +83,9 @@ const EmojiSlide = () => {
             )}
           </div>
           <div className='w-full h-full items-center justify-center'>
-            {/* <AnimatePresence custom={back}>
-            <motion.div
-              key={visible}
-              variants={CenterVariants}
-              custom={back}
-              initial='entry'
-              animate='center'
-              exit='exit'
-            >
-              <Center />
-            </motion.div>
-          </AnimatePresence> */}
             {(() => {
-              const Comp = emojis[visible];
+              const center = emojis[visible];
+              const CenterComp = emojis[visible].Comp;
               return (
                 <motion.div
                   key={`emoji-${visible}`}
@@ -100,7 +95,10 @@ const EmojiSlide = () => {
                   animate={roleStyle('center')}
                   transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                 >
-                  <Comp className='w-full h-full' />
+                  <CenterComp className='w-full h-full' />
+                  <p className='flex flex-col mt-6 items-center text-center text-white font-pretendard'>
+                    {center.label}
+                  </p>
                 </motion.div>
               );
             })()}
@@ -108,7 +106,7 @@ const EmojiSlide = () => {
           <div className='w-full h-full items-center justify-center'>
             {rightIdx < emojis.length ? (
               (() => {
-                const Comp = emojis[rightIdx];
+                const RightComp = emojis[rightIdx].Comp;
                 return (
                   <motion.div
                     key={`emoji-${rightIdx}`}
@@ -117,7 +115,7 @@ const EmojiSlide = () => {
                     animate={roleStyle('right')}
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   >
-                    <Comp className='w-full h-full' />
+                    <RightComp className='w-full h-full' />
                   </motion.div>
                 );
               })()
