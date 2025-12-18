@@ -7,6 +7,7 @@ interface DropdownProps {
   items: string[];
   className?: string;
 
+  // eslint-disable-next-line no-unused-vars
   onSelect?: (value: string) => void;
 }
 
