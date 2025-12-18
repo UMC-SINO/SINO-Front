@@ -1,4 +1,5 @@
 import Button from '@/components/common/Button';
+import DotIndicator from '@/components/emojiComponents/DotIndicator';
 import EmojiSlide from '@/components/emojiComponents/EmojiSlide';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -22,7 +23,6 @@ const EmojiPage = () => {
 
   return (
     <div className='flex flex-col gap-10 items-center justify-center bg-black'>
-      {/* 임의 헤더 */}
       <header className='pt-16 pb-10 flex justify-center'></header>
       <div className='text-left text-white font-pretendard text-[28px] font-bold leading-tight'>
         How are you <br />
@@ -49,6 +49,7 @@ const EmojiPage = () => {
           Continue
         </Button>
       </div>
+      <DotIndicator savedIds={savedIds} total={5} />
       <footer className='pt-20 pb-15 flex justify-center'></footer>
     </div>
   );
