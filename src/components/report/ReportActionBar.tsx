@@ -13,17 +13,21 @@ const ReportActionBar = () => {
   };
 
   return (
-    <footer className='fixed bottom-0 left-0 right-4 z-30 bg-[#1a1a1a] border-t border-[#1a1a1a]'>
+    <footer className='fixed bottom-0 left-0 right-4 z-30 bg-bgColor border]'>
       <div className='max-w-250 mx-auto px-6 py-5 flex justify-center gap-6'>
         <Button
           type='button'
-          className='px-8 text-[#FF6F4B] border border-[#FF6F4B] bg-transparent'
+          className='text-[#FF6F4B] bg-bgColor border-2 border-[#FF6F4B] rounded-full w-[228px]'
           onClick={handleAddSignal}
         >
           Add signal
         </Button>
 
-        <Button type='button' className='px-8 text-black' onClick={handleCreateReport}>
+        <Button
+          type='button'
+          className='text-bgColor bg-[#FF6F4B] border-2 border-[#FF6F4B] rounded-full w-[228px] py-2'
+          onClick={handleCreateReport}
+        >
           Create the report
         </Button>
       </div>
