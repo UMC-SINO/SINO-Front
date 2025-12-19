@@ -5,22 +5,20 @@ import clsx from 'clsx';
 import { MemoCard } from '../common/MemoCard';
 import { useState } from 'react';
 import Button from '../common/Button';
+import { useSetAtom } from 'jotai';
+import { isTurnToSignalModalAtom } from '@/atoms';
 
 interface NSCardDetailModalProps {
-  isOpen: boolean;
+  open: boolean;
   card: NSCardType;
   onClose: () => void;
-  onTurnSignal: () => void;
 }
 
-export default function NSCardDetailModal({
-  isOpen,
-  card,
-  onClose,
-  onTurnSignal,
-}: NSCardDetailModalProps) {
-  if (!isOpen) return null;
+const NSCardDetailModal = ({ open, card, onClose }: NSCardDetailModalProps) => {
   const [bookmarked, setBookmarked] = useState(card.bookmarked);
+  const setTurnOpen = useSetAtom(isTurnToSignalModalAtom);
+
+  if (!open) return null;
 
   return (
     <div
@@ -28,10 +26,9 @@ export default function NSCardDetailModal({
       onClick={onClose}
     >
       <div
-        className='
-        relative w-[830px] h-2/3 min-h-[562px] bg-bgColor rounded-4xl px-28 py-10
-        border border-white/10 backdrop-blur-sm shadow-2xl ring-2 ring-white/10
-        text-base flex-none'
+        className='relative w-[830px] h-2/3 min-h-[562px] bg-bgColor rounded-4xl px-28 py-10
+                   border border-white/10 backdrop-blur-sm shadow-2xl ring-2 ring-white/10
+                   text-base flex-none'
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -41,7 +38,6 @@ export default function NSCardDetailModal({
           <X size={32} />
         </button>
 
-        {/* 헤더 */}
         <header className='flex items-center gap-2 mb-4 justify-between'>
           <div className='flex items-center gap-2'>
             <button
@@ -59,16 +55,16 @@ export default function NSCardDetailModal({
                 )}
               />
             </button>
+
             <h2 className='text-3xl text-gray-100 font-medium tracking-tight'>
               {card.isSignal ? 'My Signal' : 'My Noise'}
             </h2>
           </div>
+
           <Button
             type='button'
             className='text-bgColor bg-[#FF6F4B] border rounded-full w-[154px] py-0.5! text-lg! font-medium!'
-            onClick={() => {
-              onTurnSignal?.();
-            }}
+            onClick={() => setTurnOpen(true)}
           >
             Turn to Signal
           </Button>
@@ -90,6 +86,7 @@ export default function NSCardDetailModal({
                 <span className='text-gray-100 font-medium text-sm'>No Image</span>
               </div>
             )}
+
             <span className='text-sm font-medium text-gray-400 ml-1'>Emotion</span>
             <div className='w-[292px] scale-[0.8] origin-top-left ml-1'>
               <div className='mt-2'>
@@ -105,4 +102,6 @@ export default function NSCardDetailModal({
       </div>
     </div>
   );
-}
+};
+
+export default NSCardDetailModal;

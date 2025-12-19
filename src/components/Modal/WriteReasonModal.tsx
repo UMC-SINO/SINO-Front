@@ -1,33 +1,39 @@
-// src / components / WriteReasonModal.tsx;
+// src/components/Modal/WriteReasonModal.tsx
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import Button from '@/components/common/Button';
+import { useSetAtom } from 'jotai';
+import { isWriteReasonModalAtom, isEmotionSeletModalAtom, isSuccessModalAtom } from '@/atoms';
 
 type Props = {
   open: boolean;
-  initialValue?: string;
-  onBack: () => void;
-  // eslint-disable-next-line no-unused-vars
-  onNext: (text: string) => void;
-  onClose?: () => void;
   className?: string;
 };
 
-export default function WriteReasonModal({
-  open,
-  initialValue = '',
-  onBack,
-  onNext,
-  onClose,
-  className,
-}: Props) {
-  const [value, setValue] = useState(initialValue);
+export default function WriteReasonModal({ open, className }: Props) {
+  const [value, setValue] = useState('');
 
-  // ✅ 열릴 때 initialValue로 세팅 (Back/재진입 시 유지)
+  const setWriteOpen = useSetAtom(isWriteReasonModalAtom);
+  const setEmotionOpen = useSetAtom(isEmotionSeletModalAtom);
+  const setSuccessOpen = useSetAtom(isSuccessModalAtom);
+
+  const close = () => setWriteOpen(false);
+
+  // 열릴 때 초기화
   useEffect(() => {
     if (!open) return;
-    setValue(initialValue);
-  }, [open, initialValue]);
+    setValue('');
+  }, [open]);
+
+  // ESC 닫기
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') close();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [open]);
 
   if (!open) return null;
 
@@ -39,7 +45,7 @@ export default function WriteReasonModal({
       <button
         type='button'
         aria-label='Close modal'
-        onClick={() => onClose?.()}
+        onClick={close}
         className='absolute inset-0 bg-black/55 backdrop-blur-sm'
       />
 
@@ -53,7 +59,6 @@ export default function WriteReasonModal({
         )}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Title */}
         <div className='text-center'>
           <h2 className='text-white text-[24px] font-medium tracking-[-0.02em]'>
             It’s time to turn the <span className='text-[#FFB7A5]'>Signal</span>
@@ -61,7 +66,6 @@ export default function WriteReasonModal({
           <p className='mt-5 text-white/45 text-[14px]'>ex. Have your feelings changed?</p>
         </div>
 
-        {/* Input */}
         <div className='mt-10 flex justify-center'>
           <textarea
             value={value}
@@ -78,11 +82,13 @@ export default function WriteReasonModal({
           />
         </div>
 
-        {/* Actions */}
         <div className='mt-10 flex justify-center gap-8'>
           <button
             type='button'
-            onClick={onBack}
+            onClick={() => {
+              setWriteOpen(false);
+              setEmotionOpen(true); // ✅ back -> EmotionSelect
+            }}
             className='w-42.5 h-13.5 rounded-full bg-[#E1E0E0] text-black font-semibold text-lg'
           >
             Back
@@ -91,7 +97,11 @@ export default function WriteReasonModal({
           <Button
             type='button'
             disabled={!canNext}
-            onClick={() => onNext(value)}
+            onClick={() => {
+              // TODO: 여기서 value 저장/전송 필요하면 나중에 atom or api 연결
+              setWriteOpen(false);
+              setSuccessOpen(true); // ✅ next -> Success
+            }}
             className='w-42.5 h-13.5 rounded-full text-lg'
           >
             Next
