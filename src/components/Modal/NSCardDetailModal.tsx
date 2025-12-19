@@ -62,13 +62,15 @@ const NSCardDetailModal = ({ open, card, onClose }: NSCardDetailModalProps) => {
             </h2>
           </div>
 
-          <Button
-            type='button'
-            className='text-bgColor bg-[#FF6F4B] border rounded-full scale-[0.8]  origin-right'
-            onClick={() => setTurnOpen(true)}
-          >
-            Turn to Signal
-          </Button>
+          {!card.isSignal && (
+            <Button
+              type='button'
+              className='text-bgColor bg-[#FF6F4B] border rounded-full scale-[0.8]  origin-right'
+              onClick={() => setTurnOpen(true)}
+            >
+              Turn to Signal
+            </Button>
+          )}
         </header>
 
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>

@@ -29,7 +29,7 @@ const HomePage = () => {
             <Button
               type='button'
               className='text-bgColor bg-[#FF6F4B] border border-[#FF6F4B] rounded-full w-[228px] py-2'
-              onClick={() => navigate('/splash')}
+              onClick={() => navigate('/')}
             >
               Create the report
             </Button>
