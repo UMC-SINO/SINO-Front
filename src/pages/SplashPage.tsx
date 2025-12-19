@@ -23,10 +23,11 @@ const MonthItems = [
 ];
 
 const SplashPage = () => {
-  const [year, setYear] = useState<string | null>('Text');
-  const [month, setMonth] = useState<string | null>('Text');
+  const [year, setYear] = useState('Text');
+  const [month, setMonth] = useState('Text');
 
-  const canGoNext = Boolean(year && month);
+  const isValid = (v: string) => v !== 'Text' && v !== '';
+  const canGoNext = isValid(year) && isValid(month);
 
   return (
     <div className='relative min-h-screen w-full overflow-hidden bg-[#0F0F10]'>
