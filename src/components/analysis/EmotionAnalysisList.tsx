@@ -3,11 +3,12 @@ import { GraphItem } from './GraphItem';
 
 interface EmotionAnalysisListProps {
   isLabel?: boolean;
+  className?: string;
 }
 
-const EmotionAnalysisList = ({ isLabel = true }: EmotionAnalysisListProps) => {
+const EmotionAnalysisList = ({ isLabel = true, className = '' }: EmotionAnalysisListProps) => {
   return (
-    <div className='w-full h-full '>
+    <div className={`w-full h-full ${className}`}>
       <div className='mb-8'>
         {ANALYSIS_DATA.map((data) => (
           <GraphItem key={data.id} id={data.id} aiScore={data.aiScore} userScore={data.userScore} />

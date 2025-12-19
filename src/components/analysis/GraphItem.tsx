@@ -25,7 +25,7 @@ export const GraphItem = ({ id, aiScore, userScore }: GraphItemProps) => {
         <div
           className='absolute top-0 left-0 h-full bg-[#F5A9A9] rounded-r-lg transition-all duration-1000'
           style={{
-            width: `${(userScore / 100) * 160}px`,
+            width: `${userScore}%`,
             zIndex: userScore < aiScore ? 2 : 1,
           }}
         />
@@ -33,7 +33,7 @@ export const GraphItem = ({ id, aiScore, userScore }: GraphItemProps) => {
         <div
           className='absolute top-0 left-0 h-full bg-[#FF5F5F] rounded-r-lg transition-all duration-1000'
           style={{
-            width: `${(aiScore / 100) * 160}px`,
+            width: `${aiScore}%`,
             zIndex: aiScore < userScore ? 2 : 1,
           }}
         />
