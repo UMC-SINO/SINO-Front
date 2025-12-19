@@ -20,11 +20,11 @@ export const NSCard = ({ card, onEdit, onDelete }: NSCardProps) => {
 
       <div className='absolute top-1 right-1 flex gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity'>
         {onDelete && (
-          <button onClick={onDelete} title='Delete' className='p-0.5 rounded'>
+          <button onClick={onDelete} title='Delete' className='p-0.5 rounded cursor-pointer'>
             <Trash2 size={14} className='text-gray-300' />
           </button>
         )}
-        <button onClick={onEdit} title='Edit' className='p-0.5 rounded'>
+        <button onClick={onEdit} title='Edit' className='p-0.5 rounded cursor-pointer'>
           <Pencil size={14} className='text-gray-300' />
         </button>
       </div>
