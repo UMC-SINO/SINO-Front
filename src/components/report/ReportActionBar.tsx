@@ -1,12 +1,15 @@
 import Button from '@/components/common/Button';
+import { useNavigate } from 'react-router-dom';
 
 const ReportActionBar = () => {
+  const navigate = useNavigate();
+
   const handleAddSignal = () => {
-    console.log('Add signal 버튼 클릭 → signal 추가');
+    navigate('/retro');
   };
 
   const handleCreateReport = () => {
-    console.log('Create the report 버튼 클릭 → 리포트 생성');
+    navigate('/splash');
   };
 
   return (
