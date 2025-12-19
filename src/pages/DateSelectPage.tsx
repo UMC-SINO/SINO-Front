@@ -51,7 +51,7 @@ export default function DateSelectPage() {
                 items={yearItems}
                 className={clsx(
                   // 1) 기본 레이아웃
-                  'w-120 [&>button]:text-xl [&>button]:rounded-full [&>button>div]:p-1.5',
+                  'w-140 [&>button]:text-xl [&>button]:rounded-full [&>button>div]:p-1.5',
 
                   // 2) 선택된 값에 따른 텍스트 색상
                   selectedYear === 'Text' ? '[&>button]:text-[#969392]' : '[&>button]:text-black',
@@ -68,7 +68,7 @@ export default function DateSelectPage() {
                 items={monthItems}
                 className={clsx(
                   // 1) 기본 레이아웃
-                  'w-120 [&>button]:text-xl [&>button]:rounded-full [&>button>div]:p-1.5',
+                  'w-100 [&>button]:text-xl [&>button]:rounded-full [&>button>div]:p-1.5',
 
                   // 2) 선택된 값에 따른 텍스트 색상
                   selectedYear === 'Text' ? '[&>button]:text-[#969392]' : '[&>button]:text-black',
@@ -84,7 +84,7 @@ export default function DateSelectPage() {
               type='button'
               disabled={!isContinueEnabled}
               onClick={handleContinue}
-              className='py-2 rounded-full'
+              className='py-2 mt-15 rounded-full'
             >
               Continue
             </Button>
