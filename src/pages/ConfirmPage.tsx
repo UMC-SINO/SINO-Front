@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { RetrospectMainBlock } from '@/components/retro/RetroWrite';
 import Button from '@/components/common/Button';
 import EmotionAnalysisList from '@/components/analysis/EmotionAnalysisList';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { RetrospectMainBlock } from '@/components/retro/RetrospectMainBlock';
 
 export const RetrospectFlowPage = () => {
   const [step, setStep] = useState<'write' | 'confirm' | 'analysis'>('write');
@@ -58,6 +58,7 @@ export const RetrospectFlowPage = () => {
         )}
       </div>
 
+      {/** 버튼 모음집 ~ */}
       <div className='flex justify-center gap-8 mt-20'>
         {step === 'write' && (
           <>
