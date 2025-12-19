@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import type { NSCardType } from '@/types/NSCard';
 import { NSCard } from './NSCard';
-import { SlidersHorizontal } from 'lucide-react';
+import { SlidersHorizontal, Star } from 'lucide-react';
 import NSCardDetailModal from '../Modal/NSCardDetailModal';
+import TurnToSignalModal from '../Modal/TurnToSignalModal';
+import { emojis } from '@/data/emoji';
 
 interface NSCardListProps {
   cards: NSCardType[];
@@ -13,6 +15,8 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string | null>('Year');
   const [selectedCard, setSelectedCard] = useState<NSCardType | null>(null);
+  const [isTurnModalOpen, setIsTurnModalOpen] = useState(false);
+  const EmojiComp = emojis[0].Comp;
 
   const handleBadgeClick = (filter: string) => {
     setActiveFilter((prev) => (prev === filter ? null : filter));
@@ -87,6 +91,17 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
             setSelectedCard(null);
           }}
           card={selectedCard}
+          onTurnSignal={() => setIsTurnModalOpen(true)}
+        />
+      )}
+
+      {isTurnModalOpen && (
+        <TurnToSignalModal
+          open={isTurnModalOpen}
+          onClose={() => setIsTurnModalOpen(false)}
+          onBack={() => setIsTurnModalOpen(false)}
+          onChange={() => {}}
+          icon={<EmojiComp className='w-full h-full' />} //
         />
       )}
     </div>

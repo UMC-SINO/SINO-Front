@@ -10,9 +10,15 @@ interface NSCardDetailModalProps {
   isOpen: boolean;
   card: NSCardType;
   onClose: () => void;
+  onTurnSignal: () => void;
 }
 
-export default function NSCardDetailModal({ isOpen, card, onClose }: NSCardDetailModalProps) {
+export default function NSCardDetailModal({
+  isOpen,
+  card,
+  onClose,
+  onTurnSignal,
+}: NSCardDetailModalProps) {
   if (!isOpen) return null;
   const [bookmarked, setBookmarked] = useState(card.bookmarked);
 
@@ -60,15 +66,16 @@ export default function NSCardDetailModal({ isOpen, card, onClose }: NSCardDetai
           <Button
             type='button'
             className='text-bgColor bg-[#FF6F4B] border rounded-full w-[154px] py-0.5! text-lg! font-medium!'
+            onClick={() => {
+              onTurnSignal?.();
+            }}
           >
             Turn to Signal
           </Button>
         </header>
 
-        {/* 컨텐츠 */}
         <div className='grid grid-cols-1 md:grid-cols-2 gap-12'>
           <section className='flex flex-col gap-2'>
-            {/* Picture */}
             <span className='text-sm font-medium text-gray-400 mb-2'>Picture</span>
             {card.image ? (
               <div className='w-[292px] h-[216px]'>
