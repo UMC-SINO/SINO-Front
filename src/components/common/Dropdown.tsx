@@ -24,7 +24,9 @@ function ScrollPanel({
 }: {
   items: string[];
   startIndex: number;
+  // eslint-disable-next-line no-unused-vars
   setStartIndex: (idx: number) => void;
+  // eslint-disable-next-line no-unused-vars
   onSelect?: (value: string) => void;
   close: () => void;
 }) {
