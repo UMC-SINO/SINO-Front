@@ -74,7 +74,7 @@ export default function SuccessChangeToSignalModal({
 
         <div className='mt-8 flex justify-center'>
           <Button type='button' onClick={onClose} className='h-13 w-30 rounded-full font-semibold'>
-            Okey
+            Okay
           </Button>
         </div>
       </div>
