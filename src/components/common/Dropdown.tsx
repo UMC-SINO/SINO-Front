@@ -1,4 +1,5 @@
 // 드롭다운 펼쳐지면 리스트 영역이 세로 스크롤 가능
+// 피그마랑 색상 맞췄어요
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import clsx from 'clsx';
@@ -50,19 +51,19 @@ function ScrollPanel({
       animate={{ height: 'auto', opacity: 1 }}
       exit={{ height: 0, opacity: 0 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
-      className='absolute w-full mt-2 bg-[#E1E0E0] rounded-[20px] overflow-hidden'
+      className='absolute w-full mt-2 bg-[#FAFAFA] rounded-[20px] overflow-hidden'
     >
       {/* 진행바 */}
       <motion.div
+        className='thin-scrollbar'
         style={{ scaleX: scrollYProgress, transformOrigin: '0% 50%' }}
-        className='h-1 bg-white/80'
       />
 
-      <div className='relative h-40 overflow-hidden'>
+      <div className='relative h-33 overflow-hidden'>
         {/* 실제 스크롤 컨테이너 */}
         <ul
           ref={scrollRef}
-          className='relative z-10 w-full max-h-40 overflow-y-auto text-center py-2'
+          className='relative z-10 w-full max-h-40 overflow-y-auto text-center py-2 bg-[#AFADAC]'
         >
           {items.map((item, idx) => {
             const isSelected = idx === startIndex;
@@ -84,7 +85,7 @@ function ScrollPanel({
 
                   // 호버 시: 텍스트 진해지고 + 배경이 살짝 하얗게(피그마 느낌)
                   'hover:text-black hover:font-semibold',
-                  'hover:bg-white/70 hover:backdrop-blur-[1px]',
+                  'hover:bg-[#E1E0E0] hover:backdrop-blur-[1px]',
 
                   // pill 느낌: 좌우 여백 + 라운드
                   'mx-2 rounded-full',
