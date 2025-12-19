@@ -64,14 +64,14 @@ const RetrospectFlowPage = () => {
           <>
             <Button
               type='button'
-              className='px-6 py-2 rounded-full text-lg font-bold bg-gray-300 text-[#7C7979]'
+              className='px-6 py-2  w-[228px] rounded-full text-lg font-bold bg-gray-300 text-[#7C7979]'
               onClick={handleBack}
             >
               Back
             </Button>
             <Button
               type='button'
-              className='px-6 py-2 rounded-full text-lg font-bold'
+              className='px-6 py-2  w-[228px] rounded-full text-lg font-bold'
               onClick={handleSave}
             >
               Save
@@ -81,7 +81,7 @@ const RetrospectFlowPage = () => {
         {step === 'confirm' && (
           <Button
             type='button'
-            className='w-50 py-2 rounded-full text-lg font-bold'
+            className=' w-[228px] py-2 rounded-full text-lg font-bold'
             onClick={handleAnalyze}
           >
             Analyze
@@ -90,7 +90,7 @@ const RetrospectFlowPage = () => {
         {step === 'analysis' && (
           <Button
             type='button'
-            className='w-50 py-2 rounded-full text-lg font-bold'
+            className='w-[228px] py-2 rounded-full text-lg font-bold'
             onClick={handleIsSignal}
           >
             Is this Signal
