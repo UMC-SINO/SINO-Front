@@ -9,7 +9,7 @@ interface NSCardProps {
 
 export const NSCard = ({ card, onEdit, onDelete }: NSCardProps) => {
   return (
-    <div className='relative group w-full h-full rounded-lg overflow-hidden bg-black border border-white cursor-pointer'>
+    <div className='relative group w-full h-full rounded-lg overflow-hidden bg-black border border-white'>
       {card.image ? (
         <img src={card.image} alt={card.title} className='w-full h-full object-cover' />
       ) : (
