@@ -13,6 +13,8 @@ type EmojiSlideProps = {
 const EmojiSlide = ({ onSavedChange }: EmojiSlideProps) => {
   const [visible, setVisible] = useState(0);
   const [savedIds, setSavedIds] = useState<string[]>([]);
+  const [saveError, setSaveError] = useState<string | null>(null);
+  const [shakeKey, setShakeKey] = useState(0);
 
   const center = emojis[visible];
   const isCenterSaved = savedIds.includes(center.key);
@@ -36,9 +38,17 @@ const EmojiSlide = ({ onSavedChange }: EmojiSlideProps) => {
 
       let next = prev;
 
-      if (exists) next = prev.filter((id) => id !== center.key);
-      else if (prev.length < 5) next = [...prev, center.key];
-      else next = prev;
+      if (exists) {
+        next = prev.filter((id) => id !== center.key);
+        setSaveError(null);
+      } else if (prev.length < 5) {
+        next = [...prev, center.key];
+        setSaveError(null);
+      } else {
+        setSaveError('최대 5개까지 선택할 수 있어요!');
+        setShakeKey((k) => k + 1);
+        return prev;
+      }
 
       onSavedChange?.(next);
       return next;
