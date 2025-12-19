@@ -1,6 +1,16 @@
-import { Afraid, Boredom, Happy, Joyful, Sad, Shameful, Unrest, Worried } from '@/assets';
+import {
+  Afraid,
+  Angry,
+  Boredom,
+  Happy,
+  Joyful,
+  Sad,
+  Shameful,
+  Smile,
+  Unrest,
+  Worried,
+} from '@/assets';
 import type { Emoji } from '@/types/emoji';
-import { Angry, Smile } from 'lucide-react';
 
 export const emojis: Emoji[] = [
   { key: 'Happy', label: 'Happy', Comp: Happy },
