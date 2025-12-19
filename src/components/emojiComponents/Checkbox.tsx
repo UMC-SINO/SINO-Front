@@ -23,7 +23,6 @@ const Checkbox = ({
   checked,
   onChange,
   label = 'save',
-  className,
   error = null,
   shakeKey = 0,
 }: CheckboxProps) => {
@@ -44,13 +43,9 @@ const Checkbox = ({
             type='checkbox'
             checked={checked}
             onChange={onChange}
-            className={clsx(
-              'absolute inset-0 top-1 h-5 w-5 appearance-none rounded bg-transparent cursor-pointer border',
-              {
-                'border-red-400': hasError,
-                'border-white/70': !hasError,
-              },
-            )}
+            className={
+              'absolute inset-0 top-1 h-5 w-5 appearance-none rounded bg-transparent text-white/70 cursor-pointer border'
+            }
           />
 
           {checked && (
@@ -65,9 +60,10 @@ const Checkbox = ({
       </label>
 
       <span
-        className={`text-xs whitespace-nowrap transition-opacity ${
-          hasError ? 'opacity-100 text-red-400' : 'opacity-0'
-        }`}
+        className={clsx(
+          'absolute left-full ml-5 top-1/2 top-4.5 -translate-y-1/2 text-xs whitespace-nowrap transition-opacity',
+          hasError ? 'opacity-100 text-red-400' : 'opacity-0',
+        )}
       >
         {error ?? ' '}
       </span>
