@@ -7,6 +7,10 @@ import { RetrospectMainBlock } from '@/components/retro/RetrospectMainBlock';
 
 const RetrospectFlowPage = () => {
   const [step, setStep] = useState<'write' | 'confirm' | 'analysis'>('write');
+
+  // 임시 테스트용
+  const tempResult: 'Signal' | 'Noise' = 'Noise';
+
   const navigate = useNavigate();
 
   const handleBack = () => navigate(-1);
@@ -33,7 +37,7 @@ const RetrospectFlowPage = () => {
                   <RetrospectMainBlock editable={false} />
                 </div>
 
-                <div className='flex flex-col justify-center items-start h-full ml-4'>
+                <div className='flex flex-col justify-center items-start h-full ml-8'>
                   {step === 'confirm' ? (
                     <h1
                       className='text-2xl text-white leading-loose text-center'
@@ -62,19 +66,19 @@ const RetrospectFlowPage = () => {
       </div>
 
       {/** 버튼 모음집 ~ */}
-      <div className='flex justify-center gap-8 mt-20 text-black'>
+      <div className='flex justify-center gap-8 mt-10 text-black'>
         {step === 'write' && (
           <>
             <Button
               type='button'
-              className='px-6 py-2  w-[228px] rounded-full text-lg font-bold bg-gray-300 text-[#7C7979] mt-7'
+              className='px-6 py-2  w-[228px] rounded-full text-lg font-medium bg-gray-300 text-[#7C7979] mt-7'
               onClick={handleBack}
             >
               Back
             </Button>
             <Button
               type='button'
-              className='px-6 py-2  w-[228px] rounded-full text-lg font-bold mt-7'
+              className='px-6 py-2  w-[228px] rounded-full text-lg font-medium mt-7'
               onClick={handleSave}
             >
               Save
@@ -84,7 +88,7 @@ const RetrospectFlowPage = () => {
         {step === 'confirm' && (
           <Button
             type='button'
-            className=' w-[228px] py-2 rounded-full text-lg font-bold mt-7'
+            className=' w-[228px] py-2 rounded-full text-lg font-medium mt-7'
             onClick={handleAnalyze}
           >
             Analyze
@@ -97,10 +101,12 @@ const RetrospectFlowPage = () => {
             </p>
             <Button
               type='button'
-              className='w-[228px] py-2 rounded-full text-lg font-bold'
+              className={`w-[228px] py-2 rounded-full text-lg cursor-def ${
+                tempResult === 'Signal' ? 'bg-[#FF6F4B]' : 'bg-[#FFB7A5]'
+              }`}
               onClick={handleIsSignal}
             >
-              Is this Signal
+              {`It is ${tempResult}`}
             </Button>
           </div>
         )}
