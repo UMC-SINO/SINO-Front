@@ -17,7 +17,7 @@ const ReportCard = ({ title, content }: Props) => {
 
   return (
     <div className='flex flex-col gap-8'>
-      <div className='bg-white rounded-2xl p-8 min-h-[850px] text-black'>
+      <div className='bg-white rounded-2xl p-8 min-h-180 text-black'>
         <h3 className='font-semibold mb-3 text-base'>{title}</h3>
         <p className='text-sm text-gray-500'>{content}</p>
       </div>

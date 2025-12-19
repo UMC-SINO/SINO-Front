@@ -12,6 +12,7 @@ import ConfirmPage from './pages/ConfirmPage';
 import DateSelectPage from './pages/DateSelectPage';
 import SplashPage from './pages/SplashPage';
 import ErrorPage from './pages/ErrorPage';
+import RetrospectReportPage from './pages/RetrospectReportPage';
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: 'splash',
         element: <SplashPage />,
+      },
+      {
+        path: 'retro-report',
+        element: <RetrospectReportPage />,
       },
     ],
   },
