@@ -4,6 +4,7 @@ import type { NSCardType } from '@/types/NSCard';
 import clsx from 'clsx';
 import { MemoCard } from '../common/MemoCard';
 import { useState } from 'react';
+import Button from '../common/Button';
 
 interface NSCardDetailModalProps {
   isOpen: boolean;
@@ -35,23 +36,33 @@ export default function NSCardDetailModal({ isOpen, card, onClose }: NSCardDetai
         </button>
 
         {/* 헤더 */}
-        <header className='flex items-center gap-2 mb-4'>
-          <button
+        <header className='flex items-center gap-2 mb-4 justify-between'>
+          <div className='flex items-center gap-2'>
+            <button
+              type='button'
+              onClick={() => setBookmarked((prev) => !prev)}
+              aria-label='Toggle bookmark'
+              className='transition-transform active:scale-95 cursor-pointer'
+            >
+              <Star
+                size={28}
+                fill={bookmarked ? 'currentColor' : 'none'}
+                strokeWidth={bookmarked ? 0 : 2}
+                className={clsx(
+                  bookmarked ? 'text-[#FF6F4B]' : 'text-gray-500 hover:text-gray-300',
+                )}
+              />
+            </button>
+            <h2 className='text-3xl text-gray-100 font-medium tracking-tight'>
+              {card.isSignal ? 'My Signal' : 'My Noise'}
+            </h2>
+          </div>
+          <Button
             type='button'
-            onClick={() => setBookmarked((prev) => !prev)}
-            aria-label='Toggle bookmark'
-            className='transition-transform active:scale-95 cursor-pointer'
+            className='text-bgColor bg-[#FF6F4B] border rounded-full w-[154px] py-0.5! text-lg! font-medium!'
           >
-            <Star
-              size={33}
-              fill={bookmarked ? 'currentColor' : 'none'}
-              strokeWidth={bookmarked ? 0 : 2}
-              className={clsx(bookmarked ? 'text-[#FF6F4B]' : 'text-gray-500 hover:text-gray-300')}
-            />
-          </button>
-          <h2 className='text-3xl text-gray-100 font-medium tracking-tight'>
-            {card.isSignal ? 'My Signal' : 'My Noise'}
-          </h2>
+            Turn to Signal
+          </Button>
         </header>
 
         {/* 컨텐츠 */}
