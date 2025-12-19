@@ -67,7 +67,7 @@ const EmojiSlide = ({ onSavedChange }: EmojiSlideProps) => {
               className='absolute'
             >
               <div className='relative flex flex-col items-center'>
-                <Comp className='w-32 h-32' />
+                <Comp className='w-40 h-40' />
 
                 {isCenter && savedIds.includes(emoji.key) && (
                   <Check className='absolute -top-8 -right-8 w-24 h-24' />
