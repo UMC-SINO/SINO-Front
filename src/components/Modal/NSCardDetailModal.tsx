@@ -26,9 +26,10 @@ const NSCardDetailModal = ({ open, card, onClose }: NSCardDetailModalProps) => {
       onClick={onClose}
     >
       <div
-        className='relative w-[830px] h-2/3 min-h-[562px] bg-bgColor rounded-4xl px-28 py-10
-                   border border-white/10 backdrop-blur-sm shadow-2xl ring-2 ring-white/10
-                   text-base flex-none'
+        className='relative w-[830px] min-h-[562px] bg-[#1E1E1E] rounded-4xl px-28 py-10
+       shadow-[0_0_80px_-10px_rgba(255,255,255,0.2),0_40px_60px_-20px_rgba(0,0,0,0.7)]
+       border border-white/10 
+       backdrop-blur-sm text-base flex-none'
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -63,39 +64,42 @@ const NSCardDetailModal = ({ open, card, onClose }: NSCardDetailModalProps) => {
 
           <Button
             type='button'
-            className='text-bgColor bg-[#FF6F4B] border rounded-full w-[154px] py-0.5! text-lg! font-medium!'
+            className='text-bgColor bg-[#FF6F4B] border rounded-full scale-[0.8]  origin-right'
             onClick={() => setTurnOpen(true)}
           >
             Turn to Signal
           </Button>
         </header>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-12 items-stretch'>
+          <section className='flex flex-col justify-between h-full'>
+            <div>
+              <span className='text-sm font-medium text-gray-400 mb-2'>Picture</span>
+              {card.image ? (
+                <div className='w-[292px] h-[216px]'>
+                  <img
+                    src={card.image}
+                    alt={card.title}
+                    className='w-full h-full object-cover rounded-2xl'
+                  />
+                </div>
+              ) : (
+                <div className='w-[292px] h-[216px] bg-[#AFADAC] rounded-2xl flex items-center justify-center'>
+                  <span className='text-gray-200 font-medium text-sm'>No Image</span>
+                </div>
+              )}
+            </div>
 
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-12'>
-          <section className='flex flex-col gap-2'>
-            <span className='text-sm font-medium text-gray-400 mb-2'>Picture</span>
-            {card.image ? (
-              <div className='w-[292px] h-[216px]'>
-                <img
-                  src={card.image}
-                  alt={card.title}
-                  className='w-full h-full object-cover rounded-2xl'
-                />
-              </div>
-            ) : (
-              <div className='w-[292px] h-[216px] bg-[#AFADAC] rounded-2xl flex items-center justify-center'>
-                <span className='text-gray-100 font-medium text-sm'>No Image</span>
-              </div>
-            )}
-
-            <span className='text-sm font-medium text-gray-400 ml-1'>Emotion</span>
-            <div className='w-[292px] scale-[0.8] origin-top-left ml-1'>
-              <div className='mt-2'>
-                <EmotionAnalysisList isLabel={false} />
+            <div className='flex flex-col justify-end mt-4 h-full'>
+              <span className='text-sm font-medium text-gray-400 ml-1 mb-2'>Emotion</span>
+              <div className='w-[292px] scale-[0.9] origin-top-left ml-1 h-full'>
+                <EmotionAnalysisList isLabel={false} className='h-full' />
               </div>
             </div>
           </section>
 
-          <section className='gap-2 font-medium h-[402px]'>
+          <section className='flex flex-col h-full pb-8'>
+            {' '}
+            {/* pb-4로 밑 마진 */}
             <MemoCard dateString={card.date} title={card.title} content={card.context} />
           </section>
         </div>

@@ -3,5 +3,5 @@ export const ANALYSIS_DATA = [
   { id: 'Joyful', aiScore: 75, userScore: 65 },
   { id: 'Smile', aiScore: 60, userScore: 50 },
   { id: 'Worried', aiScore: 45, userScore: 30 },
-  { id: 'Sad', aiScore: 25, userScore: 10 },
+  { id: 'Shameful', aiScore: 25, userScore: 10 },
 ];

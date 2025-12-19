@@ -21,20 +21,24 @@ export const GraphItem = ({ id, aiScore, userScore }: GraphItemProps) => {
         <span className='text-xl font-medium'>{label}</span>
       </div>
 
-      <div className='relative flex-1 h-full rounded-r-lg overflow-hidden'>
+      <div className='relative flex-1 h-full overflow-hidden'>
         <div
-          className='absolute top-0 left-0 h-full bg-[#F5A9A9] rounded-r-lg transition-all duration-1000'
+          className='absolute top-0 left-0 h-full bg-[#F5A9A9] transition-all duration-1000'
           style={{
             width: `${userScore}%`,
             zIndex: userScore < aiScore ? 2 : 1,
+            borderTopRightRadius: userScore < aiScore ? '0' : '0.34em',
+            borderBottomRightRadius: userScore < aiScore ? '0' : '0.4rem',
           }}
         />
 
         <div
-          className='absolute top-0 left-0 h-full bg-[#FF5F5F] rounded-r-lg transition-all duration-1000'
+          className='absolute top-0 left-0 h-full bg-[#FF5F5F] transition-all duration-1000'
           style={{
             width: `${aiScore}%`,
             zIndex: aiScore < userScore ? 2 : 1,
+            borderTopRightRadius: aiScore < userScore ? '0' : '0.4rem',
+            borderBottomRightRadius: aiScore < userScore ? '0' : '0.4rem',
           }}
         />
       </div>
