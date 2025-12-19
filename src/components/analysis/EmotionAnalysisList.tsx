@@ -7,7 +7,7 @@ interface EmotionAnalysisListProps {
 
 const EmotionAnalysisList = ({ isLabel = true }: EmotionAnalysisListProps) => {
   return (
-    <div className='w-85 h-60'>
+    <div className='w-full h-full '>
       <div className='mb-8'>
         {ANALYSIS_DATA.map((data) => (
           <GraphItem key={data.id} id={data.id} aiScore={data.aiScore} userScore={data.userScore} />

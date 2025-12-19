@@ -23,7 +23,7 @@ export default function NSCardDetailModal({ isOpen, card, onClose }: NSCardDetai
     >
       <div
         className='
-        relative w-[830px] h-[562px] bg-bgColor rounded-4xl px-28 py-10
+        relative w-[830px] h-2/3 min-h-[562px] bg-bgColor rounded-4xl px-28 py-10
         border border-white/10 backdrop-blur-sm shadow-2xl ring-2 ring-white/10
         text-base flex-none'
         onClick={(e) => e.stopPropagation()}
@@ -67,7 +67,8 @@ export default function NSCardDetailModal({ isOpen, card, onClose }: NSCardDetai
 
         {/* 컨텐츠 */}
         <div className='grid grid-cols-1 md:grid-cols-2 gap-12'>
-          <section className='flex flex-col'>
+          <section className='flex flex-col gap-2'>
+            {/* Picture */}
             <span className='text-sm font-medium text-gray-400 mb-2'>Picture</span>
             {card.image ? (
               <div className='w-[292px] h-[216px]'>
@@ -82,8 +83,8 @@ export default function NSCardDetailModal({ isOpen, card, onClose }: NSCardDetai
                 <span className='text-gray-100 font-medium text-sm'>No Image</span>
               </div>
             )}
-            <div className='mt-4'>
-              <span className='text-sm font-medium text-gray-400'>Emotion</span>
+            <span className='text-sm font-medium text-gray-400 ml-1'>Emotion</span>
+            <div className='w-[292px] scale-[0.8] origin-top-left ml-1'>
               <div className='mt-2'>
                 <EmotionAnalysisList isLabel={false} />
               </div>
