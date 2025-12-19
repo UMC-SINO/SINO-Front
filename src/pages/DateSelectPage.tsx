@@ -3,8 +3,24 @@ import Button from '@/components/common/Button';
 import { useState } from 'react';
 import clsx from 'clsx';
 
-const yearItems = ['Text', '2024', '2025', 'Unknown'];
-const monthItems = ['Text', '11', '12', 'Unknown'];
+const yearItems = ['Text', '2023', '2024', '2025', 'Unknown', ''];
+const monthItems = [
+  'Text',
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  '10',
+  '11',
+  '12',
+  'Unknown',
+  '',
+];
 
 export default function DateSelectPage() {
   const [selectedYear, setSelectedYear] = useState('Text');
