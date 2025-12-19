@@ -12,6 +12,7 @@ import AnalysisPage from './pages/AnalysisPage';
 import ConfirmPage from './pages/ConfirmPage';
 import DateSelectPage from './pages/DateSelectPage';
 import SplashPage from './pages/SplashPage';
+import CardListPage from './pages/CardListPage';
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: 'splash',
         element: <SplashPage />,
+      },
+      {
+        path: 'cardList',
+        element: <CardListPage />,
       },
     ],
   },
