@@ -53,7 +53,6 @@ export default function DateSelectPage() {
             <Dropdown
               items={yearItems}
               className={clsx(
-                // 1) 기본 레이아웃
                 'w-120 [&>button]:text-xl [&>button]:rounded-full [&>button>div]:p-1.5',
               )}
               onSelect={(value) => setSelectedYear(value)}

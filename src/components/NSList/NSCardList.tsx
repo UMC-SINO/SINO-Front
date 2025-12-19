@@ -1,31 +1,31 @@
 import { useState } from 'react';
 import type { NSCardType } from '@/types/NSCard';
 import { NSCard } from './NSCard';
-import type { Badge } from '@/types/Badge';
+import { SlidersHorizontal } from 'lucide-react';
 
 interface NSCardListProps {
   cards: NSCardType[];
   title: string;
-  badges?: Badge[];
 }
 
-export const NSCardList = ({ cards, title, badges = [] }: NSCardListProps) => {
-  const handleBadgeClick = (badge: Badge) => {
-    setActiveFilter((prev) => (prev === badge.label ? null : badge.label));
-  };
-
+export const NSCardList = ({ cards, title }: NSCardListProps) => {
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string | null>('Year');
+
+  const handleBadgeClick = (filter: string) => {
+    setActiveFilter((prev) => (prev === filter ? null : filter));
+  };
 
   const filteredCards = cards.filter((card) => {
     if (!activeFilter) return true;
 
     switch (activeFilter) {
       case 'Year':
-        return card.date.startsWith('2025'); // 올해
+        return card.date.startsWith('2025');
       case 'Month':
-        return card.date.slice(5, 7) === '12'; // 지금달
+        return card.date.slice(5, 7) === '12';
       case 'Bookmark':
-        return card.bookmarked; // 북마크 했을 경우
+        return card.bookmarked;
       default:
         return true;
     }
@@ -33,28 +33,40 @@ export const NSCardList = ({ cards, title, badges = [] }: NSCardListProps) => {
 
   return (
     <div className='flex flex-col'>
-      <div className='flex items-center justify-between mb-4'>
-        <h1 className='text-white text-2xl font-semibold'>{title}</h1>
-        {badges.length > 0 && (
-          <div className='flex gap-1'>
-            {badges.map((badge, idx) => (
-              <button
-                key={idx}
-                onClick={() => handleBadgeClick(badge)}
-                className={`px-2 py-0.5 text-xs rounded-full ${
-                  activeFilter === badge.label
-                    ? 'bg-[#FF6F4B] text-white'
-                    : 'bg-gray-600 text-gray-300'
-                }`}
-              >
-                {badge.label}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
+      <div className='flex items-center justify-between mb-2'>
+        <h1 className='text-white text-3xl font-medium'>{title}</h1>
 
-      <div className='grid grid-cols-4 grid-rows-4 w-108 h-108 box-border border rounded-lg border-white p-4 gap-4'>
+        <div className='flex items-center gap-2'>
+          {isFilterOpen && (
+            <div className='flex gap-2'>
+              {['Year', 'Month', 'Bookmark'].map((filter) => (
+                <button
+                  key={filter}
+                  onClick={() => handleBadgeClick(filter)}
+                  className={`
+              px-3 py-1 rounded-full text-sm border transition cursor-pointer
+              ${
+                activeFilter === filter
+                  ? 'bg-white text-black border-white'
+                  : 'text-white border-white/30 hover:bg-white/10'
+              }
+            `}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
+          )}
+          <button
+            onClick={() => setIsFilterOpen((prev) => !prev)}
+            className='text-white cursor-pointer'
+          >
+            <SlidersHorizontal />
+          </button>
+        </div>
+      </div>
+      {/* 카드 리스트 */}
+      <div className='grid grid-cols-4 grid-rows-4 w-108 h-108 border rounded-lg border-white p-4 gap-4'>
         {filteredCards.slice(0, 16).map((card, idx) => (
           <NSCard
             key={idx}

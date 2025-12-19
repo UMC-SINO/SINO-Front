@@ -1,6 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
-import HomePage from './pages/Hompage';
 import ExamplePage from './pages/ExamplePage';
 import SignupPage from './pages/signin/SignupPage';
 import LoginPage from './pages/signin/LoginPage';
@@ -12,6 +11,8 @@ import ConfirmPage from './pages/ConfirmPage';
 import DateSelectPage from './pages/DateSelectPage';
 import SplashPage from './pages/SplashPage';
 import ErrorPage from './pages/ErrorPage';
+import RetrospectReportPage from './pages/RetrospectReportPage';
+import HomePage from './pages/HomePage';
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: 'splash',
         element: <SplashPage />,
+      },
+      {
+        path: 'retro-report',
+        element: <RetrospectReportPage />,
       },
     ],
   },
