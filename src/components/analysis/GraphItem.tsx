@@ -18,7 +18,7 @@ export const GraphItem = ({ id, aiScore, userScore }: GraphItemProps) => {
         <div className='w-8 h-8'>
           <Comp className='w-full h-full' />
         </div>
-        <span className='text-xl font-medium'>{label}</span>
+        <span className='text-xl font-normal'>{label}</span>
       </div>
 
       <div className='relative flex-1 h-full overflow-hidden'>

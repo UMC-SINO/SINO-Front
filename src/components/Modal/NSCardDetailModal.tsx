@@ -26,7 +26,7 @@ const NSCardDetailModal = ({ open, card, onClose }: NSCardDetailModalProps) => {
       onClick={onClose}
     >
       <div
-        className='relative w-[830px] min-h-[562px] bg-[#1E1E1E] rounded-4xl px-28 py-10
+        className='relative w-min-1/2 min-h-1/3 bg-[#1E1E1E] rounded-4xl px-28 py-10
        shadow-[0_0_80px_-10px_rgba(255,255,255,0.2),0_40px_60px_-20px_rgba(0,0,0,0.7)]
        border border-white/10 
        backdrop-blur-sm text-base flex-none'
@@ -70,10 +70,11 @@ const NSCardDetailModal = ({ open, card, onClose }: NSCardDetailModalProps) => {
             Turn to Signal
           </Button>
         </header>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-12 items-stretch'>
+
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
           <section className='flex flex-col justify-between h-full'>
-            <div>
-              <span className='text-sm font-medium text-gray-400 mb-2'>Picture</span>
+            <div className='flex flex-col'>
+              <span className='text-sm font-medium text-gray-400 mb-2 block'>Picture</span>
               {card.image ? (
                 <div className='w-[292px] h-[216px]'>
                   <img
@@ -89,17 +90,15 @@ const NSCardDetailModal = ({ open, card, onClose }: NSCardDetailModalProps) => {
               )}
             </div>
 
-            <div className='flex flex-col justify-end mt-4 h-full'>
-              <span className='text-sm font-medium text-gray-400 ml-1 mb-2'>Emotion</span>
-              <div className='w-[292px] scale-[0.9] origin-top-left ml-1 h-full'>
+            <div className='flex flex-col mt-auto'>
+              <span className='text-sm font-medium text-gray-400 block mb-2 mt-4'>Emotion</span>
+              <div className='w-[292px] scale-[0.98] origin-left ml-1 h-full'>
                 <EmotionAnalysisList isLabel={false} className='h-full' />
               </div>
             </div>
           </section>
 
           <section className='flex flex-col h-full pb-8'>
-            {' '}
-            {/* pb-4로 밑 마진 */}
             <MemoCard dateString={card.date} title={card.title} content={card.context} />
           </section>
         </div>
