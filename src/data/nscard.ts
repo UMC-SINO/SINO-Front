@@ -1,5 +1,6 @@
 import type { NSCardType } from '@/types/NSCard';
 import duckImage from '@/assets/duck.png';
+import duckImage2 from '@/assets/duck-2.png';
 
 export const SIGNAL_CARDS: NSCardType[] = [
   {
@@ -15,7 +16,7 @@ export const SIGNAL_CARDS: NSCardType[] = [
     context: '외국인 순매도가 단기간 급증하고 있습니다.',
     date: '2025-12-17',
     bookmarked: false,
-    image: duckImage,
+    image: duckImage2,
     isSignal: true,
   },
   {
@@ -37,7 +38,38 @@ export const SIGNAL_CARDS: NSCardType[] = [
     context: '장 초반 대비 거래량이 3배 이상 증가했습니다.',
     date: '2025-12-18',
     bookmarked: true,
+    image: duckImage2,
+    isSignal: true,
+  },
+  {
+    title: '외국인 매도 집중',
+    context: '외국인 순매도가 단기간 급증하고 있습니다.',
+    date: '2025-12-17',
+    bookmarked: false,
     image: duckImage,
+    isSignal: true,
+  },
+  {
+    title: '단기 고점 형성 가능성',
+    context: '기술적 지표상 단기 고점 신호가 감지되었습니다.',
+    date: '2025-12-16',
+    bookmarked: true,
+    isSignal: true,
+    image: duckImage2,
+  },
+  {
+    title: '저항 구간 접근',
+    context: '과거 고점 부근 저항 구간에 도달했습니다.',
+    date: '2025-12-09',
+    bookmarked: false,
+    isSignal: true,
+  },
+  {
+    title: '네이버 거래량 급증 감지',
+    context: '장 초반 대비 거래량이 3배 이상 증가했습니다.',
+    date: '2025-12-18',
+    bookmarked: true,
+    image: duckImage2,
     isSignal: true,
   },
   {
@@ -67,7 +99,7 @@ export const SIGNAL_CARDS: NSCardType[] = [
     context: '장 초반 대비 거래량이 3배 이상 증가했습니다.',
     date: '2025-12-18',
     bookmarked: true,
-    image: duckImage,
+    image: duckImage2,
     isSignal: true,
   },
   {
@@ -84,6 +116,7 @@ export const SIGNAL_CARDS: NSCardType[] = [
     date: '2025-12-16',
     bookmarked: true,
     isSignal: true,
+    image: duckImage2,
   },
   {
     title: '저항 구간 접근',
@@ -91,36 +124,7 @@ export const SIGNAL_CARDS: NSCardType[] = [
     date: '2025-12-09',
     bookmarked: false,
     isSignal: true,
-  },
-  {
-    title: '네이버 거래량 급증 감지',
-    context: '장 초반 대비 거래량이 3배 이상 증가했습니다.',
-    date: '2025-12-18',
-    bookmarked: true,
-    image: duckImage,
-    isSignal: true,
-  },
-  {
-    title: '외국인 매도 집중',
-    context: '외국인 순매도가 단기간 급증하고 있습니다.',
-    date: '2025-12-17',
-    bookmarked: false,
-    image: duckImage,
-    isSignal: true,
-  },
-  {
-    title: '단기 고점 형성 가능성',
-    context: '기술적 지표상 단기 고점 신호가 감지되었습니다.',
-    date: '2025-12-16',
-    bookmarked: true,
-    isSignal: true,
-  },
-  {
-    title: '저항 구간 접근',
-    context: '과거 고점 부근 저항 구간에 도달했습니다.',
-    date: '2025-12-09',
-    bookmarked: false,
-    isSignal: true,
+    image: duckImage2,
   },
 ];
 
@@ -139,6 +143,7 @@ export const NOISE_CARDS: NSCardType[] = [
     date: '2025-12-17',
     bookmarked: true,
     isSignal: false,
+    image: duckImage2,
   },
   {
     title: '호가 변동 잦음',
@@ -153,7 +158,7 @@ export const NOISE_CARDS: NSCardType[] = [
     context: '가격이 좁은 범위 내에서 횡보 중입니다.',
     date: '2025-12-13',
     bookmarked: false,
-    image: duckImage,
+    image: duckImage2,
     isSignal: false,
   },
   {
@@ -170,6 +175,7 @@ export const NOISE_CARDS: NSCardType[] = [
     date: '2025-12-17',
     bookmarked: true,
     isSignal: false,
+    image: duckImage2,
   },
   {
     title: '호가 변동 잦음',
@@ -192,7 +198,7 @@ export const NOISE_CARDS: NSCardType[] = [
     context: '유의미하지 않은 가격 변동이 감지되었습니다.',
     date: '2025-12-18',
     bookmarked: false,
-    image: duckImage,
+    image: duckImage2,
     isSignal: false,
   },
   {
@@ -207,7 +213,7 @@ export const NOISE_CARDS: NSCardType[] = [
     context: '호가 변동이 잦으나 추세 변화는 없습니다.',
     date: '2025-12-16',
     bookmarked: false,
-    image: duckImage,
+    image: duckImage2,
     isSignal: false,
   },
   {
@@ -215,7 +221,7 @@ export const NOISE_CARDS: NSCardType[] = [
     context: '가격이 좁은 범위 내에서 횡보 중입니다.',
     date: '2025-12-13',
     bookmarked: false,
-    image: duckImage,
+    image: duckImage2,
     isSignal: false,
   },
   {
@@ -223,7 +229,7 @@ export const NOISE_CARDS: NSCardType[] = [
     context: '유의미하지 않은 가격 변동이 감지되었습니다.',
     date: '2025-12-18',
     bookmarked: false,
-    image: duckImage,
+    image: duckImage2,
     isSignal: false,
   },
   {

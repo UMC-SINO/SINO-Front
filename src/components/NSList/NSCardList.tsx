@@ -130,7 +130,7 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
       </div>
 
       {/* 카드 리스트 */}
-      <div className='grid grid-cols-4 grid-rows-4 w-108 h-108 border rounded-lg border-white p-4 gap-4'>
+      <div className='grid grid-cols-4 grid-rows-4 w-108 h-108 border rounded-2xl border-white p-4 gap-4'>
         {filteredCards.slice(0, 16).map((card, idx) => (
           <NSCard
             key={idx}
