@@ -108,12 +108,17 @@ const Dropdown = ({ items, className, onSelect }: DropdownProps) => {
 
   const selectedLabel = items[startIndex];
 
+  const isPlaceholder = selectedLabel === 'Text' || selectedLabel === '';
+
   return (
     <div className='flex items-center justify-center'>
       <div className={clsx('relative min-w-40', className)}>
         <button
           onClick={() => setOpen((prev) => !prev)}
-          className='relative w-full bg-[#E1E0E0] text-black py-2 rounded-full text-lg font-semibold cursor-pointer'
+          className={clsx(
+            'relative w-full bg-[#E1E0E0] py-2 rounded-full text-lg font-semibold cursor-pointer',
+            isPlaceholder ? 'text-[#C8C6C6]' : 'text-black',
+          )}
         >
           <span className='block text-center'>{selectedLabel}</span>
           <div className='absolute right-2 top-1/2 -translate-y-1/2 bg-white rounded-full p-1'>
