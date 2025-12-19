@@ -22,8 +22,8 @@ const EmojiPage = () => {
   };
 
   return (
-    <div className='flex flex-col gap-10 items-center justify-center bg-black'>
-      <div className='text-left text-white font-pretendard text-[28px] font-bold leading-tight'>
+    <div className='flex flex-col items-center justify-center gap-10 min-h-screen'>
+      <div className='text-left text-[28px] font-bold leading-tight text-white'>
         How are you <br />
         feeling{' '}
         <span className='text-[#FF8C6F]'>
@@ -32,10 +32,11 @@ const EmojiPage = () => {
         day?
       </div>
 
-      <div className='flex flex-col items-center justify-center'>
+      <div className='mt-4'>
         <EmojiSlide onSavedChange={setSavedIds} />
       </div>
-      <div className='flex gap-7 pt-5 items-center justify-center'>
+
+      <div className='flex gap-7 mt-4'>
         <Button type='button' className='w-50 bg-[#E1E0E0]' onClick={handleBack}>
           Back
         </Button>
@@ -43,8 +44,8 @@ const EmojiPage = () => {
           Continue
         </Button>
       </div>
+
       <DotIndicator savedIds={savedIds} total={5} />
-      <footer className='pt-20 pb-15 flex justify-center'></footer>
     </div>
   );
 };

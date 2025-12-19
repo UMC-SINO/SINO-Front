@@ -61,7 +61,7 @@ const router = createBrowserRouter([
         element: <EmojiPage />,
       },
       {
-        path: 'dateSelect',
+        path: 'date-select',
         element: <DateSelectPage />,
       },
       {

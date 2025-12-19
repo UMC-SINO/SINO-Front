@@ -4,10 +4,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { signinSchema, type SigninFormData } from '@/schema/auth';
 import { useState } from 'react';
 import NameInput from '@/components/signin/NameInput';
+import { useNavigate } from 'react-router-dom';
 
 const SignupPage = () => {
   const [hasCheckedName, setHasCheckedName] = useState(false);
   const [isNameAvailable, setIsNameAvailable] = useState(false);
+
+  const navigate = useNavigate();
 
   const {
     register,
@@ -21,6 +24,7 @@ const SignupPage = () => {
 
   const onSubmit: SubmitHandler<SigninFormData> = (data) => {
     console.log(data);
+    navigate('/login');
   };
 
   const handleCheckName = async () => {
