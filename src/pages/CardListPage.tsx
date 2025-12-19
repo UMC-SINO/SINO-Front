@@ -13,7 +13,7 @@ const CardListPage = () => {
           <NSCardList cards={SIGNAL_CARDS} title='Signal' />
           <Button
             type='button'
-            className='bg-bgColor text-[#FF6F4B] border border-[#FF6F4B] rounded-full w-48 py-2 text-xl font-semibold mt-7'
+            className='bg-bgColor text-[#FF6F4B] border border-[#FF6F4B] rounded-full w-[228px] py-2 text-xl font-semibold mt-7'
             onClick={() => navigate('/retro')}
           >
             Add
@@ -28,7 +28,7 @@ const CardListPage = () => {
             </p>
             <Button
               type='button'
-              className='text-bgColor bg-[#FF6F4B] border border-[#FF6F4B] rounded-full w-48 py-2 text-xl font-semibold'
+              className='text-bgColor bg-[#FF6F4B] border border-[#FF6F4B] rounded-full w-[228px] py-2 text-xl font-semibold'
               onClick={() => console.log('리포트 생성 페이지')}
             >
               Create the report
