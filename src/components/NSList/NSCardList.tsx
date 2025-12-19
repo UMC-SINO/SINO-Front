@@ -86,6 +86,7 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
           onClose={() => {
             setSelectedCard(null);
           }}
+          card={selectedCard}
         />
       )}
     </div>

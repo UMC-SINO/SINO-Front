@@ -21,7 +21,6 @@ export const GraphItem = ({ id, aiScore, userScore }: GraphItemProps) => {
         <span className='text-xl font-medium'>{label}</span>
       </div>
 
-      {/**REVIEW : 더 작은 비율을 가진 그래프가 위로 가도록 ? */}
       <div className='relative flex-1 h-7 rounded-r-lg overflow-hidden'>
         <div
           className='absolute top-0 left-0 h-full bg-[#F5A9A9] rounded-r-lg transition-all duration-1000'

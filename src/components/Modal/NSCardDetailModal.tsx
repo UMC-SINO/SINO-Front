@@ -1,62 +1,86 @@
-import { X } from 'lucide-react';
+import { Star, X } from 'lucide-react';
 import EmotionAnalysisList from '../analysis/EmotionAnalysisList';
-import { WRITE_DATA } from '@/data/writeData';
+import type { NSCardType } from '@/types/NSCard';
+import clsx from 'clsx';
+import { MemoCard } from '../common/MemoCard';
+import { useState } from 'react';
 
 interface NSCardDetailModalProps {
   isOpen: boolean;
+  card: NSCardType;
   onClose: () => void;
 }
 
-export default function NSCardDetailModal({ isOpen, onClose }: NSCardDetailModalProps) {
+export default function NSCardDetailModal({ isOpen, card, onClose }: NSCardDetailModalProps) {
   if (!isOpen) return null;
+  const [bookmarked, setBookmarked] = useState(card.bookmarked);
 
   return (
-    <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4'>
-      <div className='relative w-full max-w-[800px] bg-[#1E1E1E] rounded-4xl p-10 shadow-2xl border border-white/5 text-white'>
+    <div
+      className='fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm'
+      onClick={onClose}
+    >
+      <div
+        className='
+        relative w-[830px] h-[562px] bg-bgColor rounded-4xl px-28 py-10
+        border border-white/10 backdrop-blur-sm
+        text-base flex-none'
+        onClick={(e) => e.stopPropagation()}
+      >
         <button
           onClick={onClose}
-          className='absolute top-8 right-8 text-gray-400 hover:text-white transition-colors'
+          className='absolute top-8 right-8 text-gray-400 hover:text-white transition-colors cursor-pointer'
         >
           <X size={32} />
         </button>
 
         {/* 헤더 */}
-        <header className='flex items-center gap-2 mb-10'>
-          <span className='text-2xl'>⭐</span>
-          <h2 className='text-3xl font-bold tracking-tight'>My Signal</h2>
+        <header className='flex items-center gap-2 mb-4'>
+          <button
+            type='button'
+            onClick={() => setBookmarked((prev) => !prev)}
+            aria-label='Toggle bookmark'
+            className='transition-transform active:scale-95 cursor-pointer'
+          >
+            <Star
+              size={33}
+              fill={bookmarked ? 'currentColor' : 'none'}
+              strokeWidth={bookmarked ? 0 : 2}
+              className={clsx(bookmarked ? 'text-[#FF6F4B]' : 'text-gray-500 hover:text-gray-300')}
+            />
+          </button>
+          <h2 className='text-3xl text-gray-100 font-medium tracking-tight'>
+            {card.isSignal ? 'My Signal' : 'My Noise'}
+          </h2>
         </header>
 
-        {/* 컨텐츠 영역 */}
+        {/* 컨텐츠 */}
         <div className='grid grid-cols-1 md:grid-cols-2 gap-12'>
-          <section className='flex flex-col gap-8'>
-            {WRITE_DATA.photos.length > 0 && (
-              <div className='flex flex-col gap-2'>
-                <span className='text-sm font-medium text-gray-400'>Picture</span>
-                <div className='aspect-4/3 w-full bg-[#3A3A3A] rounded-2xl overflow-hidden'>
-                  <img
-                    src={WRITE_DATA.photos[0]}
-                    alt='Selected'
-                    className='w-full h-full object-cover'
-                  />
-                </div>
+          <section className='flex flex-col'>
+            <span className='text-sm font-medium text-gray-400 mb-2'>Picture</span>
+            {card.image ? (
+              <div className='w-[292px] h-[216px]'>
+                <img
+                  src={card.image}
+                  alt={card.title}
+                  className='w-full h-full object-cover rounded-2xl'
+                />
+              </div>
+            ) : (
+              <div className='w-[292px] h-[216px] bg-[#AFADAC] rounded-2xl flex items-center justify-center'>
+                <span className='text-gray-100 font-medium text-sm'>No Image</span>
               </div>
             )}
-
-            <div className='flex flex-col gap-4'>
+            <div className='mt-4'>
               <span className='text-sm font-medium text-gray-400'>Emotion</span>
-              <EmotionAnalysisList />
+              <div className='mt-2'>
+                <EmotionAnalysisList isLabel={false} />
+              </div>
             </div>
           </section>
 
-          <section className='flex flex-col gap-2'>
-            <span className='text-sm font-medium text-gray-400'>Memo</span>
-            <div className='flex-1 bg-white rounded-2xl p-8 min-h-[400px] text-gray-900 shadow-inner overflow-y-auto'>
-              <p className='text-sm text-gray-400 font-medium mb-1'>{WRITE_DATA.dateString}</p>
-              <h3 className='text-xl font-bold mb-4'>{WRITE_DATA.title}</h3>
-              <p className='text-gray-700 leading-relaxed whitespace-pre-wrap'>
-                {WRITE_DATA.content}
-              </p>
-            </div>
+          <section className='gap-2 font-medium h-[402px]'>
+            <MemoCard dateString={card.date} title={card.title} content={card.context} />
           </section>
         </div>
       </div>
