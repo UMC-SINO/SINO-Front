@@ -14,7 +14,6 @@ import ErrorPage from './pages/ErrorPage';
 import RetrospectReportPage from './pages/RetrospectReportPage';
 import HomePage from './pages/HomePage';
 
-
 const router = createBrowserRouter([
   {
     path: '/',
