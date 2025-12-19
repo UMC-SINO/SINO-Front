@@ -56,16 +56,13 @@ function ScrollPanel({
       className='absolute w-full mt-2 bg-[#FAFAFA] rounded-[20px] overflow-hidden'
     >
       {/* 진행바 */}
-      <motion.div
-        className='thin-scrollbar'
-        style={{ scaleX: scrollYProgress, transformOrigin: '0% 50%' }}
-      />
+      <motion.div style={{ scaleX: scrollYProgress, transformOrigin: '0% 50%' }} />
 
       <div className='relative h-33 overflow-hidden'>
         {/* 실제 스크롤 컨테이너 */}
         <ul
           ref={scrollRef}
-          className='relative z-10 w-full max-h-40 overflow-y-auto text-center py-2 bg-[#AFADAC]'
+          className='relative z-10 w-full max-h-40 overflow-y-auto thin-scrollbar text-center py-2 bg-[#AFADAC]'
         >
           {items.map((item, idx) => {
             const isSelected = idx === startIndex;

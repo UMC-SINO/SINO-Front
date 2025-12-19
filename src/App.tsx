@@ -4,10 +4,11 @@ import NavBar from './components/layouts/NavBar';
 function App() {
   const location = useLocation();
   const isOnboarding = location.pathname === '/onboarding';
+  const isSplash = location.pathname === '/splash';
 
   return (
     <div className='bg-bgColor min-h-screen'>
-      {!isOnboarding && <NavBar />}
+      {!isOnboarding && !isSplash && <NavBar />}
       <Outlet />
     </div>
   );

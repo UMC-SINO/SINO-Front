@@ -3,6 +3,7 @@ import Button from '@/components/common/Button';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Splash1Icon, Splash2Icon } from '@/assets';
+import { useNavigate } from 'react-router-dom';
 
 const YearItems = ['Text', '2021', '2022', '2023', '2024', '2025', ''];
 const MonthItems = [
@@ -31,6 +32,8 @@ const fade = {
 const SplashPage = () => {
   const [year, setYear] = useState('Text');
   const [month, setMonth] = useState('Text');
+
+  const navigate = useNavigate();
 
   const isValid = (v: string) => v !== 'Text' && v !== '';
   const canGoNext = isValid(year) && isValid(month);
@@ -79,11 +82,16 @@ const SplashPage = () => {
           </motion.div>
         </div>
         <div className='flex items-center justify-between'>
-          <Button type='button' className='w-62.5 bg-[#E1E0E0]! text-[#7C7979]'>
+          <Button
+            type='button'
+            onClick={() => navigate(-1)}
+            className='w-62.5 bg-[#E1E0E0]! text-[#7C7979]'
+          >
             Back
           </Button>
           <Button
             type='button'
+            onClick={() => navigate('/retro-report')}
             className='w-62.5 disabled:bg-[#E1E0E0] disabled:text-[#7C7979]'
             disabled={!canGoNext}
           >
