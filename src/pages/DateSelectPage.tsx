@@ -27,7 +27,8 @@ export default function DateSelectPage() {
   const [selectedYear, setSelectedYear] = useState('Text');
   const [selectedMonth, setSelectedMonth] = useState('Text');
 
-  const isContinueEnabled = selectedYear !== 'Text' && selectedMonth !== 'Text';
+  const isValid = (v: string) => v !== 'Text' && v !== '';
+  const isContinueEnabled = isValid(selectedYear) && isValid(selectedMonth);
 
   const navigate = useNavigate();
 
@@ -52,11 +53,7 @@ export default function DateSelectPage() {
             <Dropdown
               items={yearItems}
               className={clsx(
-                // 1) 기본 레이아웃
                 'w-120 [&>button]:text-xl [&>button]:rounded-full [&>button>div]:p-1.5',
-
-                // 2) 선택된 값에 따른 텍스트 색상
-                selectedYear === 'Text' ? '[&>button]:text-[#969392]' : '[&>button]:text-black',
               )}
               onSelect={(value) => setSelectedYear(value)}
             />
@@ -68,10 +65,7 @@ export default function DateSelectPage() {
             <Dropdown
               items={monthItems}
               className={clsx(
-                // 1) 기본 레이아웃
                 'w-50 [&>button]:text-xl [&>button]:rounded-full [&>button>div]:p-1.5',
-                // 2) 선택된 값에 따른 텍스트 색상
-                selectedMonth === 'Text' ? '[&>button]:text-[#969392]' : '[&>button]:text-black',
               )}
               onSelect={(value) => setSelectedMonth(value)}
             />
