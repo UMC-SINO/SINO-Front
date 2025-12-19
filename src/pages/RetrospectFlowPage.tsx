@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { RetrospectMainBlock } from '@/components/retro/RetrospectMainBlock';
 
-export const RetrospectFlowPage = () => {
+const RetrospectFlowPage = () => {
   const [step, setStep] = useState<'write' | 'confirm' | 'analysis'>('write');
   const navigate = useNavigate();
 
@@ -100,3 +100,5 @@ export const RetrospectFlowPage = () => {
     </div>
   );
 };
+
+export default RetrospectFlowPage;

@@ -10,7 +10,7 @@ import EmojiPage from './pages/EmojiPage';
 import DateSelectPage from './pages/DateSelectPage';
 import SplashPage from './pages/SplashPage';
 import ErrorPage from './pages/ErrorPage';
-import { RetrospectFlowPage } from './pages/ConfirmPage';
+import RetrospectFlowPage from './pages/RetrospectFlowPage';
 
 const router = createBrowserRouter([
   {
