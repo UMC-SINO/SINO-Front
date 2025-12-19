@@ -14,11 +14,11 @@ const RetrospectFlowPage = () => {
   const handleAnalyze = () => setStep('analysis');
   const handleIsSignal = () => navigate('/');
   return (
-    <div className='min-h-screen flex flex-1 justify-center  items-center flex-col p-6 text-white'>
+    <div className='min-h-screen flex justify-center items-center flex-col p-6 text-white'>
       <div className=' flex flex-col w-full justify-center items-center gap-8'>
         {step === 'write' ? (
-          <div className='max-w-5xl w-2/5'>
-            <RetrospectMainBlock editable />
+          <div className='w-5/9'>
+            <RetrospectMainBlock editable={true} />
           </div>
         ) : (
           <motion.div
