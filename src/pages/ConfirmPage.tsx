@@ -62,27 +62,37 @@ const ConfirmPage = () => {
 
       {/* 버튼 그룹 */}
       <motion.div
-        className='mt-35 flex flex-col items-center gap-6'
+        className='mt-30 flex flex-col items-center gap-2'
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.8 }}
       >
         {!showAnalysis ? (
-          <Button
-            type='button'
-            className='w-50 py-2 rounded-full text-lg font-bold'
-            onClick={() => setShowAnalysis(true)}
-          >
-            Analyze
-          </Button>
+          <>
+            <p className='text-[#AFADAC] text-xs italic opacity-80'>
+              <br />
+            </p>
+            <Button
+              type='button'
+              className='w-50 py-2 rounded-full text-lg font-bold'
+              onClick={() => setShowAnalysis(true)}
+            >
+              Analyze
+            </Button>
+          </>
         ) : (
-          <Button
-            type='button'
-            className='w-50 py-2 rounded-full text-lg font-bold'
-            onClick={() => alert('Signal 확인!')}
-          >
-            Is this Signal
-          </Button>
+          <>
+            <p className='text-[#AFADAC] text-xs italic opacity-80'>
+              It is divided into Signal and Noise.
+            </p>
+            <Button
+              type='button'
+              className='w-50 py-2 rounded-full text-lg font-bold'
+              onClick={() => alert('Signal 확인!')}
+            >
+              Is this Signal
+            </Button>
+          </>
         )}
       </motion.div>
     </div>

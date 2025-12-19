@@ -8,7 +8,6 @@ import OnBoardingPage from './pages/OnBoardingPage';
 import ReportView from './pages/ReportView';
 import EmojiPage from './pages/EmojiPage';
 import RetrospectWrite from './pages/RetrospectWrite/RestrospectWritePage';
-import AnalysisPage from './pages/AnalysisPage';
 import ConfirmPage from './pages/ConfirmPage';
 import DateSelectPage from './pages/DateSelectPage';
 import SplashPage from './pages/SplashPage';
@@ -51,10 +50,6 @@ const router = createBrowserRouter([
       {
         path: 'confirm',
         element: <ConfirmPage />,
-      },
-      {
-        path: 'analysis',
-        element: <AnalysisPage />,
       },
       {
         path: 'emoji',
