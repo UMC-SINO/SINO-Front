@@ -44,7 +44,7 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
                   key={filter}
                   onClick={() => handleBadgeClick(filter)}
                   className={`
-              px-3 py-1 rounded-full text-sm border transition
+              px-3 py-1 rounded-full text-sm border transition cursor-pointer
               ${
                 activeFilter === filter
                   ? 'bg-white text-black border-white'
@@ -57,7 +57,10 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
               ))}
             </div>
           )}
-          <button onClick={() => setIsFilterOpen((prev) => !prev)} className='text-white'>
+          <button
+            onClick={() => setIsFilterOpen((prev) => !prev)}
+            className='text-white cursor-pointer'
+          >
             <SlidersHorizontal />
           </button>
         </div>
