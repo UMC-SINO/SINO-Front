@@ -29,7 +29,7 @@ const HomePage = () => {
             <Button
               type='button'
               className='text-bgColor bg-[#FF6F4B] border border-[#FF6F4B] rounded-full w-[228px] py-2 text-xl font-semibold'
-              onClick={() => console.log('리포트 생성 페이지')}
+              onClick={() => navigate('/splash')}
             >
               Create the report
             </Button>

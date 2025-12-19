@@ -2,6 +2,7 @@ import Dropdown from '@/components/common/Dropdown';
 import Button from '@/components/common/Button';
 import { useState } from 'react';
 import { Splash1Icon, Splash2Icon } from '@/assets';
+import { useNavigate } from 'react-router-dom';
 
 const YearItems = ['Text', '2021', '2022', '2023', '2024', '2025', ''];
 const MonthItems = [
@@ -26,11 +27,13 @@ const SplashPage = () => {
   const [year, setYear] = useState('Text');
   const [month, setMonth] = useState('Text');
 
+  const navigate = useNavigate();
+
   const isValid = (v: string) => v !== 'Text' && v !== '';
   const canGoNext = isValid(year) && isValid(month);
 
   return (
-    <div className='relative min-h-screen w-full overflow-hidden bg-[#0F0F10]'>
+    <div className='relative min-h-screen w-full overflow-hidden]'>
       <Splash1Icon className='absolute left-0 top-1/2 -translate-y-1/2 w-125 md:w-200 pointer-events-none' />
       <Splash2Icon className='absolute right-0 top-[47%] -translate-y-1/2 translate-x-25 w-105 md:w-130 pointer-events-none' />
       <div className='relative z-10 flex min-h-screen flex-col justify-between px-8 py-10'>
@@ -52,11 +55,16 @@ const SplashPage = () => {
           </div>
         </div>
         <div className='flex items-center justify-between'>
-          <Button type='button' className='w-62.5 bg-[#E1E0E0] text-[#7C7979]'>
+          <Button
+            type='button'
+            onClick={() => navigate(-1)}
+            className='w-62.5 bg-gray text-[#7C7979]'
+          >
             Back
           </Button>
           <Button
             type='button'
+            onClick={() => navigate('/retro-report')}
             className='w-62.5 disabled:bg-[#E1E0E0] disabled:text-[#7C7979]'
             disabled={!canGoNext}
           >
