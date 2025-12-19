@@ -1,102 +1,85 @@
-import Button from '@/components/common/Button';
-import { MemoCard } from '@/components/common/MemoCard';
-import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { RetrospectMainBlock } from '@/components/retro/RetroWrite';
+import Button from '@/components/common/Button';
 import EmotionAnalysisList from '@/components/analysis/EmotionAnalysisList';
 
-const DUMMY_DATA = {
-  dateString: '2025/12',
-  title: '이번 달 회고 제목',
-  content: `이번 달은 감정의 변화가 많았다. 그래도 나름 잘 버텼고, 앞으로 더 나아가고 싶다.`,
-};
+export const RetrospectFlowPage = () => {
+  const [step, setStep] = useState<'write' | 'confirm' | 'analysis'>('write');
 
-const ConfirmPage = () => {
-  const [showAnalysis, setShowAnalysis] = useState(false);
-  const navigate = useNavigate();
+  const handleBack = () => console.log('Back clicked');
+  const handleSave = () => setStep('confirm');
+  const handleAnalyze = () => setStep('analysis');
+  const handleIsSignal = () => console.log('Is this Signal clicked');
 
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen p-6'>
-      <div className='flex flex-row items-center justify-center gap-20'>
-        <motion.div
-          className='w-70 h-100 shrink-0'
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-        >
-          <MemoCard
-            dateString={DUMMY_DATA.dateString}
-            title={DUMMY_DATA.title}
-            content={DUMMY_DATA.content}
-            readOnly={true}
-          />
-        </motion.div>
+    <div className='min-h-screen flex flex-1 justify-center  items-center flex-col p-6 text-white'>
+      <div className=' flex flex-col w-full justify-center items-center gap-8'>
+        {step === 'write' ? (
+          <div className='max-w-5xl w-2/5'>
+            <RetrospectMainBlock editable />
+          </div>
+        ) : (
+          <div className='grid grid-cols-4 gap-5 w-full max-w-6xl'>
+            <div className='col-span-2'>
+              <RetrospectMainBlock editable={false} />
+            </div>
 
-        <motion.div
-          className='flex-1 w-100 flex flex-col items-start justify-start'
-          initial={{ x: 300, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ type: 'spring', stiffness: 80, damping: 20, duration: 0.8 }}
-        >
-          {!showAnalysis ? (
-            <h1
-              className='text-2xl text-white leading-loose text-center'
-              style={{ width: '335px' }}
-            >
-              is your <span className='text-4xl'>Signal</span> or
-              <br />
-              <span className='text-5xl ml-55'>Noise?</span>
-            </h1>
-          ) : (
-            <>
-              <h1 className='text-3xl text-white mb-2 tracking-wide'>
-                Your Analyzed
-                <br />
-                Emotion
-              </h1>
-              <EmotionAnalysisList />
-            </>
-          )}
-        </motion.div>
+            <div className='flex flex-col justify-center items-center text-center h-full'>
+              {step === 'confirm' ? (
+                <h1 className='text-2xl leading-loose ml-20 mt-5'>
+                  is your <span className='text-4xl'>Signal</span> or
+                  <br />
+                  <span className='text-5xl ml-32'>Noise?</span>
+                </h1>
+              ) : (
+                <>
+                  <h1 className='text-3xl mb-4'>Your Analyzed Emotion</h1>
+                  <EmotionAnalysisList />
+                </>
+              )}
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* 버튼 그룹 */}
-      <motion.div
-        className='mt-30 flex flex-col items-center gap-2'
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6, duration: 0.8 }}
-      >
-        {!showAnalysis ? (
+      <div className='flex justify-center gap-8 mt-20'>
+        {step === 'write' && (
           <>
-            <p className='text-[#AFADAC] text-xs italic opacity-80'>
-              <br />
-            </p>
             <Button
               type='button'
-              className='w-50 py-2 rounded-full text-lg font-bold'
-              onClick={() => setShowAnalysis(true)}
+              className='px-6 py-2 rounded-full text-lg font-bold bg-gray-300 text-[#7C7979]'
+              onClick={handleBack}
             >
-              Analyze
+              Back
             </Button>
-          </>
-        ) : (
-          <>
-            <p className='text-[#AFADAC] text-xs italic opacity-80'>
-              It is divided into Signal and Noise.
-            </p>
             <Button
               type='button'
-              className='w-50 py-2 rounded-full text-lg font-bold'
-              onClick={() => navigate('/')}
+              className='px-6 py-2 rounded-full text-lg font-bold'
+              onClick={handleSave}
             >
-              Is this Signal
+              Save
             </Button>
           </>
         )}
-      </motion.div>
+        {step === 'confirm' && (
+          <Button
+            type='button'
+            className='w-50 py-2 rounded-full text-lg font-bold'
+            onClick={handleAnalyze}
+          >
+            Analyze
+          </Button>
+        )}
+        {step === 'analysis' && (
+          <Button
+            type='button'
+            className='w-50 py-2 rounded-full text-lg font-bold'
+            onClick={handleIsSignal}
+          >
+            Is this Signal
+          </Button>
+        )}
+      </div>
     </div>
   );
 };
-
-export default ConfirmPage;

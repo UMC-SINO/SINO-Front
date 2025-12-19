@@ -7,11 +7,10 @@ import LoginPage from './pages/signin/LoginPage';
 import OnBoardingPage from './pages/OnBoardingPage';
 import ReportView from './pages/ReportView';
 import EmojiPage from './pages/EmojiPage';
-import RetrospectWrite from './pages/RetrospectWrite/RestrospectWritePage';
-import ConfirmPage from './pages/ConfirmPage';
 import DateSelectPage from './pages/DateSelectPage';
 import SplashPage from './pages/SplashPage';
 import ErrorPage from './pages/ErrorPage';
+import { RetrospectFlowPage } from './pages/ConfirmPage';
 
 const router = createBrowserRouter([
   {
@@ -45,11 +44,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'retro',
-        element: <RetrospectWrite />,
-      },
-      {
-        path: 'confirm',
-        element: <ConfirmPage />,
+        element: <RetrospectFlowPage />,
       },
       {
         path: 'emoji',
