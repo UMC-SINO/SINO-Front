@@ -3,5 +3,6 @@ export interface NSCardType {
   context: string;
   date: string;
   bookmarked: boolean;
+  isSignal: boolean;
   image?: string;
 }

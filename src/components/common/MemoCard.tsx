@@ -19,7 +19,7 @@ export const MemoCard = ({
 }: Props) => {
   return (
     <div className='w-full h-full'>
-      <h5 className='text-sm text-white mb-2'>Memo</h5>
+      <h5 className='text-sm font-medium text-gray-400 mb-2'>Memo</h5>
 
       <div className='bg-white rounded-2xl p-5 h-full flex flex-col'>
         <p className='text-sm mb-1 text-black'>{dateString}</p>
