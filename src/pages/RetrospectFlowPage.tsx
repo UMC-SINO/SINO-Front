@@ -59,7 +59,7 @@ const RetrospectFlowPage = () => {
       </div>
 
       {/** 버튼 모음집 ~ */}
-      <div className='flex justify-center gap-8 mt-20'>
+      <div className='flex justify-center gap-8 mt-20 text-black'>
         {step === 'write' && (
           <>
             <Button
