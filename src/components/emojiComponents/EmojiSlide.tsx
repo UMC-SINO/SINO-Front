@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import EmojiSelectBar from './EmojiSelectBar';
 import Checkbox from './Checkbox';
@@ -54,6 +54,10 @@ const EmojiSlide = ({ onSavedChange }: EmojiSlideProps) => {
       return next;
     });
   };
+
+  useEffect(() => {
+    setSaveError(null);
+  }, [activeIndex]);
 
   return (
     <div>
