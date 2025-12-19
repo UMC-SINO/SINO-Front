@@ -3,7 +3,7 @@ import { NSCardList } from '@/components/common/NSList/NSCardList';
 import { NOISE_CARDS, SIGNAL_CARDS } from '@/data/nscard';
 import { useNavigate } from 'react-router-dom';
 
-const CardListPage = () => {
+const Homepage = () => {
   const navigate = useNavigate();
 
   return (
@@ -40,4 +40,4 @@ const CardListPage = () => {
   );
 };
 
-export default CardListPage;
+export default Homepage;

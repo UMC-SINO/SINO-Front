@@ -1,6 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
-import HomePage from './pages/Hompage';
 import ExamplePage from './pages/ExamplePage';
 import SignupPage from './pages/signin/SignupPage';
 import LoginPage from './pages/signin/LoginPage';
@@ -12,7 +11,7 @@ import AnalysisPage from './pages/AnalysisPage';
 import ConfirmPage from './pages/ConfirmPage';
 import DateSelectPage from './pages/DateSelectPage';
 import SplashPage from './pages/SplashPage';
-import CardListPage from './pages/CardListPage';
+import Homepage from './pages/HomePage';
 
 const router = createBrowserRouter([
   {
@@ -21,7 +20,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: <Homepage />,
       },
       {
         path: 'signup',
@@ -66,10 +65,6 @@ const router = createBrowserRouter([
       {
         path: 'splash',
         element: <SplashPage />,
-      },
-      {
-        path: 'cardList',
-        element: <CardListPage />,
       },
     ],
   },
