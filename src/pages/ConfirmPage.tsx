@@ -3,15 +3,16 @@ import { RetrospectMainBlock } from '@/components/retro/RetroWrite';
 import Button from '@/components/common/Button';
 import EmotionAnalysisList from '@/components/analysis/EmotionAnalysisList';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 export const RetrospectFlowPage = () => {
   const [step, setStep] = useState<'write' | 'confirm' | 'analysis'>('write');
+  const navigate = useNavigate();
 
-  const handleBack = () => console.log('Back clicked');
+  const handleBack = () => navigate(-1);
   const handleSave = () => setStep('confirm');
   const handleAnalyze = () => setStep('analysis');
-  const handleIsSignal = () => console.log('Is this Signal clicked');
-
+  const handleIsSignal = () => navigate('/');
   return (
     <div className='min-h-screen flex flex-1 justify-center  items-center flex-col p-6 text-white'>
       <div className=' flex flex-col w-full justify-center items-center gap-8'>
