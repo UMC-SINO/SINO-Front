@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { RetrospectMainBlock } from '@/components/retro/RetroWrite';
 import Button from '@/components/common/Button';
 import EmotionAnalysisList from '@/components/analysis/EmotionAnalysisList';
+import { motion } from 'framer-motion';
 
 export const RetrospectFlowPage = () => {
   const [step, setStep] = useState<'write' | 'confirm' | 'analysis'>('write');
@@ -19,26 +20,40 @@ export const RetrospectFlowPage = () => {
             <RetrospectMainBlock editable />
           </div>
         ) : (
-          <div className='grid grid-cols-4 gap-5 w-full max-w-6xl'>
-            <div className='col-span-2'>
-              <RetrospectMainBlock editable={false} />
-            </div>
+          <motion.div
+            className='flex flex-col items-start justify-start'
+            initial={{ x: 300, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ type: 'spring', stiffness: 80, damping: 20, duration: 0.8 }}
+          >
+            <div className='grid grid-cols-4 gap-5 w-full max-w-6xl'>
+              <div className='col-span-2'>
+                <RetrospectMainBlock editable={false} />
+              </div>
 
-            <div className='flex flex-col justify-center items-center text-center h-full'>
-              {step === 'confirm' ? (
-                <h1 className='text-2xl leading-loose ml-20 mt-5'>
-                  is your <span className='text-4xl'>Signal</span> or
-                  <br />
-                  <span className='text-5xl ml-32'>Noise?</span>
-                </h1>
-              ) : (
-                <>
-                  <h1 className='text-3xl mb-4'>Your Analyzed Emotion</h1>
-                  <EmotionAnalysisList />
-                </>
-              )}
+              <div className='flex flex-col w-100 justify-center items-center text-center h-full'>
+                {step === 'confirm' ? (
+                  <h1
+                    className='text-2xl text-white leading-loose text-center'
+                    style={{ width: '335px' }}
+                  >
+                    is your <span className='text-4xl'>Signal</span> or
+                    <br />
+                    <span className='text-5xl ml-55'>Noise?</span>
+                  </h1>
+                ) : (
+                  <>
+                    <h1 className='text-3xl text-white mb-2 tracking-wide'>
+                      Your Analyzed
+                      <br />
+                      Emotion
+                    </h1>
+                    <EmotionAnalysisList />
+                  </>
+                )}
+              </div>
             </div>
-          </div>
+          </motion.div>
         )}
       </div>
 
