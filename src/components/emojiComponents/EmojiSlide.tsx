@@ -2,8 +2,8 @@ import { LayoutGroup, motion } from 'framer-motion';
 import Check from '../../assets/emojis/Check.svg?react';
 import { useState } from 'react';
 import EmojiSelectBar from './EmojiSelectBar';
-import { Check as CheckIcon } from 'lucide-react';
 import { emojis } from '@/data/emoji';
+import Checkbox from './Checkbox';
 
 type EmojiSlideProps = {
   // eslint-disable-next-line no-unused-vars
@@ -113,26 +113,7 @@ const EmojiSlide = ({ onSavedChange }: EmojiSlideProps) => {
       </LayoutGroup>
       <div className='flex justify-center items-center gap-5 pt-15'>
         <EmojiSelectBar value={visible} max={emojis.length - 1} onChange={handleSelectBarChange} />
-        <label className='flex items-center gap-3 cursor-pointer select-none'>
-          <span className='relative inline-flex h-5 w-5 items-center justify-center'>
-            <input
-              type='checkbox'
-              checked={isCenterSaved}
-              onChange={handleSaveClicked}
-              className='absolute inset-0 top-1 h-5 w-5 appearance-none rounded border border-white/70 bg-transparent cursor-pointer'
-            />
-
-            {isCenterSaved && (
-              <CheckIcon
-                size={14}
-                strokeWidth={3}
-                className='relative top-1 text-white pointer-events-none'
-              />
-            )}
-          </span>
-
-          <span className='pt-1 text-white text-sm font-pretendard'>save</span>
-        </label>
+        <Checkbox checked={isCenterSaved} onChange={handleSaveClicked} label='save' />
       </div>
     </div>
   );
