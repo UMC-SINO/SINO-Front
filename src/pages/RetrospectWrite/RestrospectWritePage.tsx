@@ -1,36 +1,34 @@
-import { EmotionChips } from '@/components/common/Emotionchips';
 import { MemoCard } from '@/components/common/MemoCard';
 import { PhotoGrid } from '@/components/common/PhotoGrid';
 import { useRetrospectDraft } from '@/hooks/useRetrospectDraft';
 import { RetrospectHeader } from '@/components/ui/RetrospectHeader';
 import { ActionButtons } from '@/components/ui/ActionButton';
 import { useNavigate } from 'react-router-dom';
+import { EmotionChips, type EmotionOption } from '@/components/common/Emotionchips';
+import { emojis } from '@/data/emoji';
 
 export const RetrospectWritePage = () => {
-  const PREV_DATA = {
-    dateString: '2025/12',
-    emotionList: ['🥰', '😀', '😰', '😉', '🥺'], // 가상 데이터, 수정 예정
-  };
-
-  const draft = useRetrospectDraft(PREV_DATA.dateString);
+  const draft = useRetrospectDraft('2025/12');
   const navigate = useNavigate();
 
-  // 지금은 첫 작성 진입
-  // 나중에 "수정" 버튼으로 들어오면 'save'로 변경
+  const EMOTION_OPTIONS: EmotionOption[] = emojis
+    .filter((e) => ['Happy', 'Smile', 'Unrest', 'Sad', 'Worried'].includes(e.key))
+    .map((e) => ({
+      id: e.key,
+      label: e.label,
+      icon: <e.Comp />,
+    }));
+
   const writeAction: 'continue' | 'save' = 'continue';
 
   const handleBack = () => {
     console.log('back');
-    // 이전 페이지 이동
   };
 
   const handlePrimary = () => {
     if (writeAction === 'continue') {
       navigate('/confirm');
-      console.log('continue → 다음 단계');
-      // 다음 페이지로 이동 (추후 구현)
     } else {
-      console.log('save → 수정 저장');
       draft.saveDraft();
     }
   };
@@ -50,7 +48,7 @@ export const RetrospectWritePage = () => {
             onPickPhoto={draft.pickPhoto}
           />
 
-          <EmotionChips emotions={PREV_DATA.emotionList} />
+          <EmotionChips emotions={EMOTION_OPTIONS} />
         </div>
 
         <MemoCard

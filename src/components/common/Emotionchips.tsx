@@ -1,5 +1,13 @@
+import type React from 'react';
+
+export type EmotionOption = {
+  id: string;
+  label?: string;
+  icon: React.ReactNode;
+};
+
 type Props = {
-  emotions: string[];
+  emotions: EmotionOption[];
 };
 
 export const EmotionChips = ({ emotions }: Props) => {
@@ -9,8 +17,12 @@ export const EmotionChips = ({ emotions }: Props) => {
 
       <div className='w-full border border-[#FAFAFA] rounded-full px-5 py-3 flex justify-between items-center'>
         {emotions.map((emotion) => (
-          <div key={emotion} className='w-10 h-10 flex items-center justify-center text-2xl'>
-            {emotion}
+          <div
+            key={emotion.id}
+            className='w-10 h-10 flex items-center justify-center'
+            aria-label={emotion.label ?? emotion.id}
+          >
+            <div className='w-6 h-6 [&>svg]:w-full [&>svg]:h-full'>{emotion.icon}</div>
           </div>
         ))}
       </div>
