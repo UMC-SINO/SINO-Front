@@ -34,33 +34,37 @@ export const RetrospectWritePage = () => {
   };
 
   return (
-    <div className='min-h-screen text-white flex flex-col items-center justify-center p-6'>
-      <div className='mb-8'>
+    <div className='min-h-screen text-white flex flex-col items-center p-6'>
+      <div className='mt-20 mb-10'>
         <RetrospectHeader dateString={draft.dateString} />
       </div>
 
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch'>
-        <div className='flex flex-col gap-6'>
-          <PhotoGrid
-            photos={draft.photos}
-            onAddPhoto={draft.addPhoto}
-            onRemovePhoto={draft.removePhoto}
-            onPickPhoto={draft.pickPhoto}
-          />
+      <div className='flex flex-col items-center justify-center flex-1 w-full'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch'>
+          <div className='flex flex-col gap-6'>
+            <PhotoGrid
+              photos={draft.photos}
+              onAddPhoto={draft.addPhoto}
+              onRemovePhoto={draft.removePhoto}
+              onPickPhoto={draft.pickPhoto}
+            />
 
-          <EmotionChips emotions={EMOTION_OPTIONS} />
+            <EmotionChips emotions={EMOTION_OPTIONS} />
+          </div>
+
+          <MemoCard
+            dateString={draft.dateString}
+            title={draft.title}
+            content={draft.content}
+            onTitleChange={draft.setTitle}
+            onContentChange={draft.setContent}
+          />
         </div>
 
-        <MemoCard
-          dateString={draft.dateString}
-          title={draft.title}
-          content={draft.content}
-          onTitleChange={draft.setTitle}
-          onContentChange={draft.setContent}
-        />
+        <div className='mt-12'>
+          <ActionButtons writeAction={writeAction} onBack={handleBack} onPrimary={handlePrimary} />
+        </div>
       </div>
-
-      <ActionButtons writeAction={writeAction} onBack={handleBack} onPrimary={handlePrimary} />
     </div>
   );
 };

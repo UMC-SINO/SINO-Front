@@ -24,13 +24,12 @@ export const PhotoGrid = ({
   onRemovePhoto,
   onPickPhoto,
 }: PhotoGridProps) => {
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const total = photos.length;
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file || readOnly || total >= 4) return;
-
     onAddPhoto?.(file);
     e.target.value = '';
   };
@@ -40,7 +39,6 @@ export const PhotoGrid = ({
     return (
       <GridWrapper>
         <AddSlot span='col-span-2 row-span-2' onClick={() => fileInputRef.current?.click()} />
-
         <input
           ref={fileInputRef}
           type='file'
@@ -60,43 +58,10 @@ export const PhotoGrid = ({
           photo={photos[0]}
           span='col-span-2'
           readOnly={readOnly}
-          onPickPhoto={onPickPhoto}
-          onRemovePhoto={onRemovePhoto}
+          onPick={() => onPickPhoto?.(photos[0].id)}
+          onRemove={() => onRemovePhoto?.(photos[0].id)}
         />
-
         <AddSlot span='col-span-2' onClick={() => fileInputRef.current?.click()} />
-
-        <input
-          ref={fileInputRef}
-          type='file'
-          accept='image/*'
-          className='hidden'
-          onChange={handleFileChange}
-        />
-      </GridWrapper>
-    );
-  }
-  // 2개
-  if (total === 2) {
-    return (
-      <GridWrapper>
-        <PhotoSlot
-          photo={photos[0]}
-          span='col-span-1'
-          readOnly={readOnly}
-          onPickPhoto={onPickPhoto}
-          onRemovePhoto={onRemovePhoto}
-        />
-        <PhotoSlot
-          photo={photos[1]}
-          span='col-span-1'
-          readOnly={readOnly}
-          onPickPhoto={onPickPhoto}
-          onRemovePhoto={onRemovePhoto}
-        />
-
-        <AddSlot span='col-span-2' onClick={() => fileInputRef.current?.click()} />
-
         <input
           ref={fileInputRef}
           type='file'
@@ -108,7 +73,7 @@ export const PhotoGrid = ({
     );
   }
 
-  // 3개 이상
+  // 2개 이상
   return (
     <GridWrapper>
       {photos.slice(0, 4).map((photo) => (
@@ -116,8 +81,8 @@ export const PhotoGrid = ({
           key={photo.id}
           photo={photo}
           readOnly={readOnly}
-          onPickPhoto={onPickPhoto}
-          onRemovePhoto={onRemovePhoto}
+          onPick={() => onPickPhoto?.(photo.id)}
+          onRemove={() => onRemovePhoto?.(photo.id)}
         />
       ))}
 
@@ -145,49 +110,52 @@ const PhotoSlot = ({
   photo,
   span,
   readOnly,
-  onPickPhoto,
-  onRemovePhoto,
+  onPick,
+  onRemove,
 }: {
   photo: PhotoItem;
   span?: string;
   readOnly?: boolean;
-  onPickPhoto?: (id: string) => void;
-  onRemovePhoto?: (id: string) => void;
+  onPick: () => void;
+  onRemove: () => void;
 }) => (
   <div className={clsx('relative rounded-2xl overflow-hidden group', span)}>
     <img src={photo.url} alt='' className='absolute inset-0 w-full h-full object-cover' />
 
     {!readOnly && (
-      <button
-        type='button'
-        onClick={() => {
-          if (photo.isPick) return; // 이미 대표면 무시
-          onPickPhoto?.(photo.id);
-        }}
-        className={clsx(
-          'absolute top-2 right-2 px-3 py-1 rounded-full',
-          'text-[11px] font-semibold flex items-center gap-1',
-          'opacity-0 group-hover:opacity-100 transition-opacity',
-          photo.isPick
-            ? 'bg-[#FF8C6F] text-white'
-            : 'bg-white/20 text-white hover:bg-white hover:text-[#FF8C6F]',
-        )}
-      >
-        {photo.isPick && <Check size={12} />}
-        Pick
-      </button>
-    )}
+      <>
+        <button
+          type='button'
+          onClick={(e) => {
+            e.stopPropagation();
+            if (!photo.isPick) onPick();
+          }}
+          className={clsx(
+            'absolute top-2 right-2 px-3 py-1 rounded-full',
+            'text-[11px] font-semibold flex items-center gap-1',
+            'opacity-0 group-hover:opacity-100 transition-opacity',
+            photo.isPick
+              ? 'bg-[#FF8C6F] text-white'
+              : 'bg-white/20 text-white hover:bg-white hover:text-[#FF8C6F]',
+          )}
+        >
+          {photo.isPick && <Check size={12} />}
+          Pick
+        </button>
 
-    {!readOnly && (
-      <button
-        type='button'
-        onClick={() => onRemovePhoto?.(photo.id)}
-        className='absolute top-2 left-2 bg-black/40 hover:bg-black/60
-                   text-white rounded-full p-1.5
-                   opacity-0 group-hover:opacity-100 transition-opacity'
-      >
-        <Minus size={14} />
-      </button>
+        <button
+          type='button'
+          onClick={(e) => {
+            e.stopPropagation();
+            onRemove();
+          }}
+          className='absolute top-2 left-2 bg-black/40 hover:bg-black/60
+                     text-white rounded-full p-1.5
+                     opacity-0 group-hover:opacity-100 transition-opacity'
+        >
+          <Minus size={14} />
+        </button>
+      </>
     )}
   </div>
 );
