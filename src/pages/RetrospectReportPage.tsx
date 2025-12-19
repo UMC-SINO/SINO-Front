@@ -22,6 +22,8 @@ const TOP_EMOTION_ITEMS: {
 ];
 
 const RetrospectReportPage = () => {
+  const isSidebarOpen = false;
+
   return (
     <main className='overflow-y-auto pb-32 min-h-screen text-white'>
       <div className='max-w-250 mx-auto px-6 py-16 mt-10'>
@@ -47,8 +49,13 @@ const RetrospectReportPage = () => {
           </div>
         </div>
       </div>
-
-      <ReportActionBar />
+      <div
+        className={`fixed bottom-0 left-0 w-full z-30 transition-transform duration-300 ease-out ${
+          isSidebarOpen ? '-translate-x-70' : 'translate-x-0'
+        }`}
+      >
+        <ReportActionBar />
+      </div>
     </main>
   );
 };

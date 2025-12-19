@@ -49,15 +49,14 @@ const EmotionChangeSummary = ({ count, items }: Props) => {
           return (
             <div key={idx} className='flex gap-4'>
               <div className='w-2 h-2 rounded-full bg-[#FF6F4B] mt-3 shrink-0' />
-
               <div className='flex flex-col gap-1'>
                 <div className='flex items-center gap-3 text-white text-lg font-medium'>
-                  {FromIcon && <FromIcon className='w-8 h-8 shrink-0' />}
+                  {FromIcon && <FromIcon className='w-7 h-7' />}
                   <span>{item.from}</span>
 
                   <span className='mx-1'>→</span>
 
-                  {ToIcon && <ToIcon className='w-8 h-8 shrink-0' />}
+                  {ToIcon && <ToIcon className='w-7 h-7' />}
                   <span>{item.to}</span>
                 </div>
 
