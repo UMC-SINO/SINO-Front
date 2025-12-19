@@ -1,5 +1,5 @@
 import { Check as CheckIcon } from 'lucide-react';
-import { motion, useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
 import clsx from 'clsx';
 
 type CheckboxProps = {
@@ -11,31 +11,12 @@ type CheckboxProps = {
   shakeKey?: number;
 };
 
-const getRandomTransformOrigin = () => {
-  const value = (16 + 40 * Math.random()) / 100;
-  const value2 = (15 + 36 * Math.random()) / 100;
-  return {
-    originX: value,
-    originY: value2,
-  };
-};
-
-const getRandomDelay = () => -(Math.random() * 0.7 + 0.05);
-
-const randomDuration = () => Math.random() * 0.07 + 0.23;
-
 const variants = {
-  start: (i) => ({
-    rotate: i % 2 === 0 ? [-1, 1.3, 0] : [1, -1.4, 0],
-    transition: {
-      delay: getRandomDelay(),
-      repeat: 1,
-      duration: randomDuration(),
-    },
+  start: (i: number) => ({
+    rotate: i % 2 === 0 ? [0, -6, 6, -6, 6, 0] : [0, 6, -6, 6, -6, 0],
+    transition: { duration: 0.5 },
   }),
-  reset: {
-    rotate: 0,
-  },
+  reset: { rotate: 0 },
 };
 
 const Checkbox = ({
@@ -49,7 +30,7 @@ const Checkbox = ({
   const hasError = Boolean(error);
 
   return (
-    <div className='flex items-center gap-3'>
+    <div className='relative flex items-center'>
       <label className='flex items-center gap-3 cursor-pointer select-none'>
         <motion.span
           key={shakeKey}
