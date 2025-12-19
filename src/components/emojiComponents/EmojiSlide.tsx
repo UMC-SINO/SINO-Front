@@ -45,30 +45,50 @@ const EmojiSlide = ({ onSavedChange }: EmojiSlideProps) => {
     });
   };
 
+  const renderLeftEmoji = () => {
+    if (leftIdx < 0) {
+      return <div className='w-37.5 h-full opacity-0' />;
+    }
+
+    const LeftComp = emojis[leftIdx].Comp;
+
+    return (
+      <motion.div
+        key={`emoji-${leftIdx}`}
+        layout
+        layoutId={`emoji-${leftIdx}`}
+        animate={roleStyle('left')}
+        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+      >
+        <LeftComp className='w-full h-full' />
+      </motion.div>
+    );
+  };
+
+  const renderRightEmoji = () => {
+    const RightComp = emojis[rightIdx].Comp;
+
+    if (rightIdx < emojis.length) {
+      return (
+        <motion.div
+          key={`emoji-${rightIdx}`}
+          layout
+          layoutId={`emoji-${rightIdx}`}
+          animate={roleStyle('right')}
+          transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+        >
+          <RightComp className='w-full h-full' />
+        </motion.div>
+      );
+    }
+    return <div className='w-37.5 h-full opacity-0' />;
+  };
+
   return (
     <div>
       <LayoutGroup>
         <div className='flex w-full h-full items-center justify-center gap-5'>
-          <div className='w-full h-full items-center justify-center'>
-            {leftIdx >= 0 ? (
-              (() => {
-                const LeftComp = emojis[leftIdx].Comp;
-                return (
-                  <motion.div
-                    key={`emoji-${leftIdx}`}
-                    layout
-                    layoutId={`emoji-${leftIdx}`}
-                    animate={roleStyle('left')}
-                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                  >
-                    <LeftComp className='w-full h-full' />
-                  </motion.div>
-                );
-              })()
-            ) : (
-              <div className='w-37.5 h-full opacity-0' />
-            )}
-          </div>
+          <div className='w-full h-full items-center justify-center'>{renderLeftEmoji()}</div>
           <div className='w-full h-full items-center justify-center'>
             <motion.div
               key={`emoji-${visible}`}
@@ -88,26 +108,7 @@ const EmojiSlide = ({ onSavedChange }: EmojiSlideProps) => {
               </p>
             </motion.div>
           </div>
-          <div className='w-full h-full items-center justify-center'>
-            {rightIdx < emojis.length ? (
-              (() => {
-                const RightComp = emojis[rightIdx].Comp;
-                return (
-                  <motion.div
-                    key={`emoji-${rightIdx}`}
-                    layout
-                    layoutId={`emoji-${rightIdx}`}
-                    animate={roleStyle('right')}
-                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                  >
-                    <RightComp className='w-full h-full' />
-                  </motion.div>
-                );
-              })()
-            ) : (
-              <div className='w-37.5 h-full opacity-0' />
-            )}
-          </div>
+          <div className='w-full h-full items-center justify-center'>{renderRightEmoji()}</div>
         </div>
       </LayoutGroup>
       <div className='flex justify-center items-center gap-5 pt-15'>
