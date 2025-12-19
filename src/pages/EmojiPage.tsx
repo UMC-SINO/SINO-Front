@@ -37,7 +37,7 @@ const EmojiPage = () => {
       </div>
 
       <div className='flex gap-7 mt-4'>
-        <Button type='button' className='w-50 !bg-[#E1E0E0]' onClick={handleBack}>
+        <Button type='button' className='w-50 bg-[#E1E0E0]!' onClick={handleBack}>
           Back
         </Button>
         <Button type='button' className='w-50' onClick={handleContinue} disabled={!canContinue}>

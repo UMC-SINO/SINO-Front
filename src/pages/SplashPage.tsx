@@ -3,7 +3,6 @@ import Button from '@/components/common/Button';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Splash1Icon, Splash2Icon } from '@/assets';
-import { fa } from 'zod/v4/locales';
 
 const YearItems = ['Text', '2021', '2022', '2023', '2024', '2025', ''];
 const MonthItems = [
@@ -80,7 +79,7 @@ const SplashPage = () => {
           </motion.div>
         </div>
         <div className='flex items-center justify-between'>
-          <Button type='button' className='w-62.5 !bg-[#E1E0E0] text-[#7C7979]'>
+          <Button type='button' className='w-62.5 bg-[#E1E0E0]! text-[#7C7979]'>
             Back
           </Button>
           <Button
