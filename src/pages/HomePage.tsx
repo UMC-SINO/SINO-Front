@@ -1,9 +1,9 @@
 import Button from '@/components/common/Button';
-import { NSCardList } from '@/components/common/NSList/NSCardList';
+import { NSCardList } from '@/components/NSList/NSCardList';
 import { NOISE_CARDS, SIGNAL_CARDS } from '@/data/nscard';
 import { useNavigate } from 'react-router-dom';
 
-const Homepage = () => {
+const HomePage = () => {
   const navigate = useNavigate();
 
   return (
@@ -40,4 +40,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default HomePage;

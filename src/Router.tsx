@@ -11,7 +11,7 @@ import AnalysisPage from './pages/AnalysisPage';
 import ConfirmPage from './pages/ConfirmPage';
 import DateSelectPage from './pages/DateSelectPage';
 import SplashPage from './pages/SplashPage';
-import Homepage from './pages/HomePage';
+import HomePage from './pages/HomePage';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Homepage />,
+        element: <HomePage />,
       },
       {
         path: 'signup',
