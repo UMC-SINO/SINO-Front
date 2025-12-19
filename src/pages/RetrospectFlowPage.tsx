@@ -32,7 +32,7 @@ const RetrospectFlowPage = () => {
                 <RetrospectMainBlock editable={false} />
               </div>
 
-              <div className='flex flex-col w-100 justify-center items-center text-center h-full'>
+              <div className='flex flex-col w-100 justify-center items-start h-full'>
                 {step === 'confirm' ? (
                   <h1
                     className='text-2xl text-white leading-loose text-center'
@@ -44,7 +44,7 @@ const RetrospectFlowPage = () => {
                   </h1>
                 ) : (
                   <>
-                    <h1 className='text-3xl text-white mb-2 tracking-wide'>
+                    <h1 className='text-3xl text-white mb-2 ml-4 tracking-wide text-left'>
                       Your Analyzed
                       <br />
                       Emotion
