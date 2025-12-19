@@ -1,6 +1,7 @@
 import Dropdown from '@/components/common/Dropdown';
 import Button from '@/components/common/Button';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Splash1Icon, Splash2Icon } from '@/assets';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,6 +24,11 @@ const MonthItems = [
   '',
 ];
 
+const fade = {
+  hidden: { opacity: 0, y: 0 },
+  show: { opacity: 1, y: 0 },
+};
+
 const SplashPage = () => {
   const [year, setYear] = useState('Text');
   const [month, setMonth] = useState('Text');
@@ -33,12 +39,25 @@ const SplashPage = () => {
   const canGoNext = isValid(year) && isValid(month);
 
   return (
-    <div className='relative min-h-screen w-full overflow-hidden]'>
-      <Splash1Icon className='absolute left-0 top-1/2 -translate-y-1/2 w-125 md:w-200 pointer-events-none' />
-      <Splash2Icon className='absolute right-0 top-[47%] -translate-y-1/2 translate-x-25 w-105 md:w-130 pointer-events-none' />
+    <div className='relative min-h-screen w-full overflow-hidden bg-[#0F0F10]'>
+      <motion.div
+        initial='hidden'
+        animate='show'
+        variants={fade}
+        transition={{ duration: 3, ease: 'easeOut', delay: 0.1 }}
+        className='pointer-events-none'
+      >
+        <Splash1Icon className='absolute left-0 top-1/2 -translate-y-1/2 w-190' />
+      </motion.div>
       <div className='relative z-10 flex min-h-screen flex-col justify-between px-8 py-10'>
         <div className='flex flex-1 items-center justify-center'>
-          <div className='flex items-center gap-4 pl-90 pt-10'>
+          <motion.div
+            initial='hidden'
+            animate='show'
+            variants={fade}
+            transition={{ duration: 3, ease: 'easeOut', delay: 0.5 }}
+            className='flex items-center gap-4 pl-90 pt-10'
+          >
             <p className='text-white text-3xl font-pretendard font-semibold whitespace-nowrap'>
               Making sense of your
             </p>
@@ -52,13 +71,21 @@ const SplashPage = () => {
               className='min-w-35'
               onSelect={(value: string) => setMonth(value)}
             />
-          </div>
+          </motion.div>
+          <motion.div
+            initial='hidden'
+            animate='show'
+            variants={fade}
+            transition={{ duration: 3, ease: 'easeOut', delay: 1 }}
+          >
+            <Splash2Icon className='absolute right-0 top-[47%] -translate-y-1/2 translate-x-24 w-120 pointer-events-none' />
+          </motion.div>
         </div>
         <div className='flex items-center justify-between'>
           <Button
             type='button'
             onClick={() => navigate(-1)}
-            className='w-62.5 bg-gray text-[#7C7979]'
+            className='w-62.5 bg-[#E1E0E0]! text-[#7C7979]'
           >
             Back
           </Button>
