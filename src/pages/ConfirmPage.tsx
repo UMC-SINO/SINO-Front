@@ -88,7 +88,7 @@ const ConfirmPage = () => {
             <Button
               type='button'
               className='w-50 py-2 rounded-full text-lg font-bold'
-              onClick={() => alert('Signal 확인!')}
+              onClick={() => navigate('/')}
             >
               Is this Signal
             </Button>
