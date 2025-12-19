@@ -18,12 +18,12 @@ const EmojiPage = () => {
 
   const handleContinue = () => {
     if (!canContinue) return;
-    navigate('/next', { state: { savedIds } });
+    navigate('/retro', { state: { savedIds } });
   };
 
   return (
     <div className='flex flex-col items-center justify-center gap-10 min-h-screen'>
-      <div className='text-left text-[28px] font-bold leading-tight text-white'>
+      <div className='text-left text-2xl font-bold leading-tight text-white'>
         How are you <br />
         feeling{' '}
         <span className='text-[#FF8C6F]'>

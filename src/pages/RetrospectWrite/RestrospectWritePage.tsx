@@ -36,35 +36,33 @@ export const RetrospectWritePage = () => {
   };
 
   return (
-    <div className='min-h-screen bg-[#111111] text-white flex items-center justify-center p-6'>
-      <div className='w-full max-x-2xl'>
-        <div className='mb-8'>
-          <RetrospectHeader dateString={draft.dateString} />
-        </div>
-
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch'>
-          <div className='flex flex-col gap-6'>
-            <PhotoGrid
-              photos={draft.photos}
-              onAddPhoto={draft.addPhoto}
-              onRemovePhoto={draft.removePhoto}
-              onPickPhoto={draft.pickPhoto}
-            />
-
-            <EmotionChips emotions={PREV_DATA.emotionList} />
-          </div>
-
-          <MemoCard
-            dateString={draft.dateString}
-            title={draft.title}
-            content={draft.content}
-            onTitleChange={draft.setTitle}
-            onContentChange={draft.setContent}
-          />
-        </div>
-
-        <ActionButtons writeAction={writeAction} onBack={handleBack} onPrimary={handlePrimary} />
+    <div className='min-h-screen text-white flex flex-col items-center justify-center p-6'>
+      <div className='mb-8'>
+        <RetrospectHeader dateString={draft.dateString} />
       </div>
+
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch'>
+        <div className='flex flex-col gap-6'>
+          <PhotoGrid
+            photos={draft.photos}
+            onAddPhoto={draft.addPhoto}
+            onRemovePhoto={draft.removePhoto}
+            onPickPhoto={draft.pickPhoto}
+          />
+
+          <EmotionChips emotions={PREV_DATA.emotionList} />
+        </div>
+
+        <MemoCard
+          dateString={draft.dateString}
+          title={draft.title}
+          content={draft.content}
+          onTitleChange={draft.setTitle}
+          onContentChange={draft.setContent}
+        />
+      </div>
+
+      <ActionButtons writeAction={writeAction} onBack={handleBack} onPrimary={handlePrimary} />
     </div>
   );
 };

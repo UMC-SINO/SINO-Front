@@ -19,17 +19,17 @@ export const MemoCard = ({
 }: Props) => {
   return (
     <div className='w-full h-full'>
-      <div className='text-sm text-white mb-2'>Memo</div>
+      <h5 className='text-sm text-white mb-2'>Memo</h5>
 
       <div className='bg-white rounded-2xl p-5 h-full flex flex-col'>
-        <div className='text-[11px] text-gray-500 font-semibold mb-3'>{dateString}</div>
+        <p className='text-sm mb-1 text-black'>{dateString}</p>
 
         <input
           value={title}
           disabled={readOnly}
           onChange={(e) => !readOnly && onTitleChange?.(e.target.value)}
           placeholder={readOnly ? '제목 없음' : '제목'}
-          className='w-full outline-none bg-transparent text-lg font-extrabold text-gray-900 placeholder-gray-300 mb-3 disabled:cursor-default'
+          className='w-full outline-none bg-transparent text-lg font-extrabold text-gray-900 placeholder-black mb-3 disabled:cursor-default'
         />
 
         <textarea
@@ -37,7 +37,7 @@ export const MemoCard = ({
           disabled={readOnly}
           onChange={(e) => !readOnly && onContentChange?.(e.target.value)}
           placeholder={readOnly ? '작성된 내용이 없습니다.' : '최대 500자 작성이 가능합니다.'}
-          className='flex-1 resize-none outline-none bg-transparent text-sm text-gray-800 placeholder-gray-300 disabled:cursor-default'
+          className='flex-1 resize-none outline-none bg-transparent text-sm text-gray-800 placeholder-[#AFADAC] disabled:cursor-default'
         />
       </div>
     </div>
