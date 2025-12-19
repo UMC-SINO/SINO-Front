@@ -66,25 +66,21 @@ export default function DeleteConfirmModal({
           <p className='mt-2 text-white/45 text-[12px]'>{description}</p>
         </div>
 
-        <div className='mt-8 flex justify-center gap-6'>
-          <button
+        <div className='mt-8 flex justify-center gap-8'>
+          <Button
             type='button'
+            className='bg-transparent text-[#FF6F4B] border-2 w-[99px]'
             onClick={close}
-            className={clsx(
-              'h-11 w-30 rounded-full border border-[#FF6F4B] text-[#FF6F4B] flex-1',
-              'font-semibold hover:brightness-110 active:brightness-95',
-            )}
           >
             Back
-          </button>
-
+          </Button>
           <Button
             type='button'
             onClick={() => {
               // TODO: 실제 삭제 처리
               close();
             }}
-            className='h-11 w-30 rounded-full font-semibold flex-1'
+            className='w-[99px] rounded-full'
           >
             Delete
           </Button>
