@@ -23,13 +23,13 @@ const HomePage = () => {
         <div className='flex flex-col items-start gap-8'>
           <NSCardList cards={NOISE_CARDS} title='Noise' />
           <div className='flex flex-col items-start'>
-            <p className='text-gray-500 text-sm font-li opacity-80 mb-2'>
+            <p className='text-gray-500 text-sm opacity-80 mb-2'>
               Create a report of the top 10 signals
             </p>
             <Button
               type='button'
               className='text-bgColor bg-[#FF6F4B] border border-[#FF6F4B] rounded-full w-[228px] py-2'
-              onClick={() => navigate('/')}
+              onClick={() => navigate('/splash')}
             >
               Create the report
             </Button>

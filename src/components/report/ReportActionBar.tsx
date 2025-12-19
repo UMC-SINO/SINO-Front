@@ -9,7 +9,8 @@ const ReportActionBar = () => {
   };
 
   const handleCreateReport = () => {
-    navigate('/splash');
+    console.log('저장중');
+    navigate('/');
   };
 
   return (
