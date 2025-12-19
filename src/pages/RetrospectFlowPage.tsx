@@ -64,14 +64,14 @@ const RetrospectFlowPage = () => {
           <>
             <Button
               type='button'
-              className='px-6 py-2  w-[228px] rounded-full text-lg font-bold bg-gray-300 text-[#7C7979]'
+              className='px-6 py-2  w-[228px] rounded-full text-lg font-bold bg-gray-300 text-[#7C7979] mt-7'
               onClick={handleBack}
             >
               Back
             </Button>
             <Button
               type='button'
-              className='px-6 py-2  w-[228px] rounded-full text-lg font-bold'
+              className='px-6 py-2  w-[228px] rounded-full text-lg font-bold mt-7'
               onClick={handleSave}
             >
               Save
@@ -81,20 +81,25 @@ const RetrospectFlowPage = () => {
         {step === 'confirm' && (
           <Button
             type='button'
-            className=' w-[228px] py-2 rounded-full text-lg font-bold'
+            className=' w-[228px] py-2 rounded-full text-lg font-bold mt-7'
             onClick={handleAnalyze}
           >
             Analyze
           </Button>
         )}
         {step === 'analysis' && (
-          <Button
-            type='button'
-            className='w-[228px] py-2 rounded-full text-lg font-bold'
-            onClick={handleIsSignal}
-          >
-            Is this Signal
-          </Button>
+          <div className='flex flex-col items-center justify-center'>
+            <p className='text-gray-500 text-sm opacity-80 mb-2'>
+              It is divided into Signal and Noise.
+            </p>
+            <Button
+              type='button'
+              className='w-[228px] py-2 rounded-full text-lg font-bold'
+              onClick={handleIsSignal}
+            >
+              Is this Signal
+            </Button>
+          </div>
         )}
       </div>
     </div>
