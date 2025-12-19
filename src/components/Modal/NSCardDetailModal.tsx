@@ -23,7 +23,7 @@ export default function NSCardDetailModal({ isOpen, card, onClose }: NSCardDetai
       <div
         className='
         relative w-[830px] h-[562px] bg-bgColor rounded-4xl px-28 py-10
-        border border-white/10 backdrop-blur-sm
+        border border-white/10 backdrop-blur-sm shadow-2xl ring-2 ring-white/10
         text-base flex-none'
         onClick={(e) => e.stopPropagation()}
       >
