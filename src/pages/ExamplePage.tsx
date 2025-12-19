@@ -1,6 +1,6 @@
 import EmotionAnalysisList from '@/components/analysis/EmotionAnalysisList';
 
-import { NSCardList } from '@/components/common/NSList/NSCardList';
+import { NSCardList } from '@/components/NSList/NSCardList';
 import { NOISE_CARDS, SIGNAL_CARDS } from '@/data/nscard';
 
 const ExamplePage = () => {

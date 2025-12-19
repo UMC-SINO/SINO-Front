@@ -57,10 +57,7 @@ export const PhotoGrid = ({
         {photos.map((photo, index) => (
           <div
             key={photo.id}
-            className={clsx(
-              'relative rounded-2xl overflow-hidden bg-[#1a1a1a] group',
-              getPhotoPosClass(index),
-            )}
+            className={clsx('relative rounded-2xl overflow-hidden group', getPhotoPosClass(index))}
           >
             <img src={photo.url} alt='' className='w-full h-full object-cover' />
 
@@ -72,8 +69,8 @@ export const PhotoGrid = ({
               className={clsx(
                 'absolute top-2 right-2 px-3 py-1 rounded-full text-[11px] font-semibold flex items-center gap-1 transition-opacity opacity-0 group-hover:opacity-100',
                 photo.isPick
-                  ? 'bg-orange-500 text-white'
-                  : 'bg-white/20 text-white hover:bg-white hover:text-orange-500',
+                  ? 'bg-[#FF8C6F] text-white'
+                  : 'bg-white/20 text-white hover:bg-white hover:text-[#FF8C6F]',
                 readOnly && 'hidden',
               )}
             >
@@ -99,9 +96,9 @@ export const PhotoGrid = ({
             type='button'
             onClick={() => fileInputRef.current?.click()}
             className={clsx(
-              'rounded-2xl border border-dashed border-white/30',
+              'rounded-2xl border border-dashed border-white',
               'flex flex-col items-center justify-center',
-              'text-white/60 hover:text-white/80 transition',
+              'text-white hover:text-white/70 transition',
               getAddPosClass(),
             )}
           >

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
 const sliderItem = Array.from({ length: 8 });
+const colors = ['#FFB7A5', '#FF6F4B', '#FF8C6F'];
 
 const OnBoadingPage = () => {
   const navigate = useNavigate();
@@ -27,7 +28,11 @@ const OnBoadingPage = () => {
           }}
         >
           {[...sliderItem, ...sliderItem].map((_, i) => (
-            <div key={`left-${i}`} className='my-4 h-70 w-80 shrink-0 bg-[#FF6F4B]' />
+            <div
+              key={`left-${i}`}
+              className='my-4 h-70 w-80 shrink-0'
+              style={{ backgroundColor: colors[i % colors.length] }}
+            />
           ))}
         </motion.div>
       </div>
@@ -61,7 +66,11 @@ const OnBoadingPage = () => {
           }}
         >
           {[...sliderItem, ...sliderItem].map((_, i) => (
-            <div key={`right-${i}`} className='my-4 h-70 w-80 shrink-0 bg-[#FF6F4B]' />
+            <div
+              key={`right-${i}`}
+              className='my-4 h-70 w-80 shrink-0'
+              style={{ backgroundColor: colors[i % colors.length] }}
+            />
           ))}
         </motion.div>
       </div>
