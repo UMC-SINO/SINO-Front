@@ -7,9 +7,10 @@ import { RetrospectMainBlock } from '@/components/retro/RetrospectMainBlock';
 
 const RetrospectFlowPage = () => {
   const [step, setStep] = useState<'write' | 'confirm' | 'analysis'>('write');
+  const [analysisResult, setAnalysisResult] = useState<'Signal' | 'Noise' | null>(null);
 
   // 임시 테스트용
-  const tempResult: 'Signal' | 'Noise' = 'Noise';
+  const tempResult: 'Signal' | 'Noise' = 'Signal';
 
   const navigate = useNavigate();
 
