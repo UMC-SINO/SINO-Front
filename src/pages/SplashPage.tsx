@@ -3,12 +3,28 @@ import Button from '@/components/common/Button';
 import { useState } from 'react';
 import { Splash1Icon, Splash2Icon } from '@/assets';
 
-const YearItems = ['2021', '2022', '2023', '2024', '2025'];
-const MonthItems = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', 'Unknown'];
+const YearItems = ['Text', '2021', '2022', '2023', '2024', '2025', ''];
+const MonthItems = [
+  'Text',
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  '10',
+  '11',
+  '12',
+  'Unknown',
+  '',
+];
 
 const SplashPage = () => {
-  const [year, setYear] = useState<string | null>(null);
-  const [month, setMonth] = useState<string | null>(null);
+  const [year, setYear] = useState<string | null>('Text');
+  const [month, setMonth] = useState<string | null>('Text');
 
   const canGoNext = Boolean(year && month);
 
