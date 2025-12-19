@@ -10,7 +10,7 @@ const ReportActionBar = () => {
   };
 
   return (
-    <footer className='fixed bottom-0 left-0 right-4 z-50 bg-[#1a1a1a] border-t border-[#1a1a1a]'>
+    <footer className='fixed bottom-0 left-0 right-4 z-30 bg-[#1a1a1a] border-t border-[#1a1a1a]'>
       <div className='max-w-250 mx-auto px-6 py-5 flex justify-center gap-6'>
         <Button
           type='button'
