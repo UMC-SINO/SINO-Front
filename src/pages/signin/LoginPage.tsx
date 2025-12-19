@@ -3,8 +3,11 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signinSchema, type SigninFormData } from '@/schema/auth';
 import NameInput from '@/components/signin/NameInput';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -25,6 +28,7 @@ const LoginPage = () => {
     }
 
     console.log('로그인 성공', data);
+    navigate('/date-select');
   };
 
   return (

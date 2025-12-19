@@ -8,15 +8,16 @@ import OnBoardingPage from './pages/OnBoardingPage';
 import ReportView from './pages/ReportView';
 import EmojiPage from './pages/EmojiPage';
 import RetrospectWrite from './pages/RetrospectWrite/RestrospectWritePage';
-import AnalysisPage from './pages/AnalysisPage';
 import ConfirmPage from './pages/ConfirmPage';
 import DateSelectPage from './pages/DateSelectPage';
 import SplashPage from './pages/SplashPage';
+import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -51,15 +52,11 @@ const router = createBrowserRouter([
         element: <ConfirmPage />,
       },
       {
-        path: 'analysis',
-        element: <AnalysisPage />,
-      },
-      {
         path: 'emoji',
         element: <EmojiPage />,
       },
       {
-        path: 'dateSelect',
+        path: 'date-select',
         element: <DateSelectPage />,
       },
       {

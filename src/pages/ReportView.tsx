@@ -3,9 +3,11 @@ import { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Button from '@/components/common/Button';
 import { useNavigate } from 'react-router-dom';
+import { Afraid } from '@/assets';
 
 const items = Array.from({ length: 5 }, (_, i) => ({
   title: `Report 202${i + 1}`,
+  emohi: Afraid,
 }));
 
 const getOffset = (index: number, activeIndex: number, length: number) => {
@@ -56,7 +58,7 @@ const ReportView = () => {
             <motion.div
               key={item.title}
               animate={{
-                x: offset * 250,
+                x: offset * 230,
                 scale: offset === 0 ? 1 : 0.8,
                 opacity: Math.abs(offset) > 1 ? 0 : 1,
                 zIndex: offset === 0 ? 10 : 5,
@@ -67,9 +69,12 @@ const ReportView = () => {
                 stiffness: 260,
                 damping: 28,
               }}
-              className='absolute w-70 h-95 rounded-xl cursor-pointer bg-[#62605F] shadow-xl flex items-end justify-center p-4 '
+              className='absolute w-65 h-83 rounded-xl cursor-pointer bg-[#62605F] shadow-xl flex items-center justify-center p-4 '
             >
-              <h2 className='text-lg font-semibold text-white'>{item.title}</h2>
+              <div className='flex flex-col justify-center gap-5'>
+                <item.emohi />
+                <h2 className='text-center text-lg font-semibold text-white'>{item.title}</h2>
+              </div>
             </motion.div>
           );
         })}
@@ -82,7 +87,7 @@ const ReportView = () => {
         </button>
       </div>
 
-      <Button type='button' onClick={() => navigate(-1)} className=' w-50'>
+      <Button type='button' onClick={() => navigate(-1)} className='w-50'>
         Back
       </Button>
     </div>

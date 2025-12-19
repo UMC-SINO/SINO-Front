@@ -1,5 +1,6 @@
 import { BurgerIcon, HomeIcon, ReportIcon } from '@/assets';
 import clsx from 'clsx';
+import { useNavigate } from 'react-router-dom';
 
 interface SideBarProps {
   open: boolean;
@@ -7,6 +8,18 @@ interface SideBarProps {
 }
 
 const SideBar = ({ open, onClose }: SideBarProps) => {
+  const navigate = useNavigate();
+
+  const moveHome = () => {
+    navigate('/');
+    onClose();
+  };
+
+  const moveReportPage = () => {
+    navigate('/report-view');
+    onClose();
+  };
+
   return (
     <>
       <div
@@ -44,12 +57,20 @@ const SideBar = ({ open, onClose }: SideBarProps) => {
           </div>
 
           <nav className='mt-15 space-y-2'>
-            <button className='flex items-center gap-3 w-full px-4 py-2 rounded-md hover:bg-[#333232] transition pl-12'>
+            <button
+              type='button'
+              onClick={moveHome}
+              className='flex items-center gap-3 w-full px-4 py-2 rounded-md hover:bg-[#333232] transition pl-12 cursor-pointer'
+            >
               <HomeIcon />
               <span>Home</span>
             </button>
 
-            <button className='flex items-center gap-3 w-full px-4 py-2 rounded-md hover:bg-[#333232] transition pl-12'>
+            <button
+              type='button'
+              onClick={moveReportPage}
+              className='flex items-center gap-3 w-full px-4 py-2 rounded-md hover:bg-[#333232] transition pl-12 cursor-pointer'
+            >
               <ReportIcon />
               <span>Report library</span>
             </button>
