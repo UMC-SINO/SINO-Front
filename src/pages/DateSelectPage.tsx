@@ -27,7 +27,8 @@ export default function DateSelectPage() {
   const [selectedYear, setSelectedYear] = useState('Text');
   const [selectedMonth, setSelectedMonth] = useState('Text');
 
-  const isContinueEnabled = selectedYear !== 'Text' && selectedMonth !== 'Text';
+  const isValid = (v: string) => v !== 'Text' && v !== '';
+  const isContinueEnabled = isValid(selectedYear) && isValid(selectedMonth);
 
   const navigate = useNavigate();
 
@@ -54,9 +55,6 @@ export default function DateSelectPage() {
               className={clsx(
                 // 1) 기본 레이아웃
                 'w-120 [&>button]:text-xl [&>button]:rounded-full [&>button>div]:p-1.5',
-
-                // 2) 선택된 값에 따른 텍스트 색상
-                selectedYear === 'Text' ? '[&>button]:text-[#969392]' : '[&>button]:text-black',
               )}
               onSelect={(value) => setSelectedYear(value)}
             />
@@ -65,30 +63,26 @@ export default function DateSelectPage() {
           {/* Month */}
           <div className='flex flex-col items-center gap-2'>
             <div className='text-lg font-semibold text-[#FF6F4B]'>Month</div>
-              <Dropdown
-                items={monthItems}
-                className={clsx(
-                  // 1) 기본 레이아웃
-                  'w-50 [&>button]:text-xl [&>button]:rounded-full [&>button>div]:p-1.5',
-                // 2) 선택된 값에 따른 텍스트 색상
-                selectedMonth === 'Text' ? '[&>button]:text-[#969392]' : '[&>button]:text-black',
+            <Dropdown
+              items={monthItems}
+              className={clsx(
+                'w-50 [&>button]:text-xl [&>button]:rounded-full [&>button>div]:p-1.5',
               )}
               onSelect={(value) => setSelectedMonth(value)}
             />
           </div>
         </div>
 
-          {/* Continue 버튼 */}
-          <div className='mt-30'>
-            <Button
-              type='button'
-              disabled={!isContinueEnabled}
-              onClick={handleContinue}
-              className='py-2 mt-15 rounded-full'
-            >
-              Continue
-            </Button>
-          </div>
+        {/* Continue 버튼 */}
+        <div className='mt-30'>
+          <Button
+            type='button'
+            disabled={!isContinueEnabled}
+            onClick={handleContinue}
+            className='py-2 mt-15 rounded-full'
+          >
+            Continue
+          </Button>
         </div>
       </div>
     </div>
