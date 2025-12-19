@@ -12,9 +12,9 @@ const AnalysisPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen bg-black p-6'>
-      <div className='flex flex-row items-center justify-center gap-16'>
-        <div className='w-[290px] h-[391px] shrink-0 shadow-2xl'>
+    <div className='flex flex-col items-center justify-center min-h-screen p-6'>
+      <div className='flex flex-row items-center justify-center gap-18'>
+        <div className='w-70 h-100 shrink-0'>
           <MemoCard
             dateString={DUMMY_DATA.dateString}
             title={DUMMY_DATA.title}
@@ -23,8 +23,8 @@ const AnalysisPage = () => {
           />
         </div>
 
-        <div className='flex-1 max-w-120 flex flex-col items-start justify-start'>
-          <h1 className='text-3xl text-white mb-2 ml-4'>
+        <div className='flex-1 max-w-125 flex flex-col items-start justify-start bg-blue-500'>
+          <h1 className='text-3xl text-white mb-2 ml-4 tracking-wide'>
             Your Analyzed
             <br />
             Emotion
@@ -39,7 +39,7 @@ const AnalysisPage = () => {
         </p>
         <Button
           type='button'
-          className='px-12 py-4 rounded-full text-lg font-bold'
+          className='w-50 py-2 rounded-full text-lg font-bold'
           onClick={() => navigate('/analysis')}
         >
           Is this Signal
