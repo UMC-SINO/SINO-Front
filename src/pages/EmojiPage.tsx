@@ -22,7 +22,8 @@ const EmojiPage = () => {
   };
 
   return (
-    <div className='flex flex-col gap-10 items-center justify-center bg-black'>
+    <div className='flex flex-col min-h-screen gap-10 items-center justify-center bg-black'>
+      <div className='flex flex-row items-center justify-center gap-16'></div>
       <div className='text-left text-white font-pretendard text-[28px] font-bold leading-tight'>
         How are you <br />
         feeling{' '}
