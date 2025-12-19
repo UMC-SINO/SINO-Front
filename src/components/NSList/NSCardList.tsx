@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { NSCardType } from '@/types/NSCard';
 import { NSCard } from './NSCard';
 import { SlidersHorizontal } from 'lucide-react';
+import NSCardDetailModal from '../Modal/NSCardDetailModal';
 
 interface NSCardListProps {
   cards: NSCardType[];
@@ -11,6 +12,7 @@ interface NSCardListProps {
 export const NSCardList = ({ cards, title }: NSCardListProps) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string | null>('Year');
+  const [selectedCard, setSelectedCard] = useState<NSCardType | null>(null);
 
   const handleBadgeClick = (filter: string) => {
     setActiveFilter((prev) => (prev === filter ? null : filter));
@@ -73,9 +75,19 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
             card={card}
             onEdit={() => console.log('수정 페이지로 이동')}
             onDelete={() => console.log('카드 삭제 모달 열기')}
+            onClick={() => setSelectedCard(card)}
           />
         ))}
       </div>
+
+      {selectedCard && (
+        <NSCardDetailModal
+          isOpen={!!selectedCard}
+          onClose={() => {
+            setSelectedCard(null);
+          }}
+        />
+      )}
     </div>
   );
 };
