@@ -21,6 +21,7 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string | null>('Year');
   const [selectedCard, setSelectedCard] = useState<NSCardType | null>(null);
+  const [deletePostId, setDeletePostId] = useState<number | null>(null);
   const navigate = useNavigate();
 
   const { openModal } = useModalStore();
@@ -47,7 +48,7 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
   });
 
   const openDeleteModal = (card: NSCardType) => {
-    setSelectedCard(card);
+    setDeletePostId(card.id);
     openModal('delete');
   };
 
@@ -115,7 +116,7 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
       <EmotionSelectModal />
       <WriteReasonModal onCloseDetail={() => setSelectedCard(null)} />
       <SuccessChangeToSignalModal />
-      <DeleteConfirmModal postId={selectedCard?.id} />
+      <DeleteConfirmModal postId={deletePostId ?? undefined} />
     </div>
   );
 };
