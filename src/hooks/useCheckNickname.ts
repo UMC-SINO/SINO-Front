@@ -3,6 +3,6 @@ import { useMutation } from '@tanstack/react-query';
 
 export function useCheckNickname() {
   return useMutation({
-    mutationFn: postCheckNickname.checkNickname,
+    mutationFn: postCheckNickname,
   });
 }
