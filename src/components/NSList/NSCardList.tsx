@@ -4,7 +4,7 @@ import { NSCard } from './NSCard';
 import { SlidersHorizontal } from 'lucide-react';
 import NSCardDetailModal from '../Modal/NSCardDetailModal';
 import TurnToSignalModal from '../Modal/TurnToSignalModal';
-import EmotionSelectModal, { type EmotionOption } from '../Modal/EmotionSelectModal';
+import EmotionSelectModal from '../Modal/EmotionSelectModal';
 import SuccessChangeToSignalModal from '../Modal/SuccessChangeToSignalModal';
 import DeleteConfirmModal from '../Modal/DeleteConfirmModal';
 import WriteReasonModal from '../Modal/WriteReasonModal';
@@ -16,12 +16,6 @@ interface NSCardListProps {
   cards: NSCardType[];
   title: string;
 }
-
-const emotionOptions: EmotionOption[] = emojis.map((emoji) => ({
-  id: emoji.key,
-  label: emoji.label,
-  icon: <emoji.Comp />,
-}));
 
 export const NSCardList = ({ cards, title }: NSCardListProps) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -118,7 +112,7 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
       )}
 
       <TurnToSignalModal icon={<EmojiComp />} />
-      <EmotionSelectModal options={emotionOptions} />
+      <EmotionSelectModal />
       <WriteReasonModal onCloseDetail={() => setSelectedCard(null)} />
       <SuccessChangeToSignalModal />
       <DeleteConfirmModal />

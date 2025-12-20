@@ -4,6 +4,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { signinSchema, type SigninFormData } from '@/schema/auth';
 import NameInput from '@/components/signin/NameInput';
 import { useNavigate } from 'react-router-dom';
+import { postLogin } from '@/api/authApi';
+import { useMutation } from '@tanstack/react-query';
+import PageLoading from '@/components/common/PageLoading';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -11,25 +14,31 @@ const LoginPage = () => {
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors, isValid },
   } = useForm<SigninFormData>({
     resolver: zodResolver(signinSchema),
     mode: 'onChange',
   });
 
-  const onSubmit: SubmitHandler<SigninFormData> = (data) => {
-    if (data.name !== '누누누' && data.name !== 'jingni') {
-      setError('name', {
-        type: 'manual',
-        message: '존재하지 않는 닉네임입니다.',
-      });
-      return;
-    }
+  const loginMutation = useMutation({
+    mutationFn: postLogin,
+    onSuccess: () => {
+      navigate('/'); // 로그인 성공 후 이동
+    },
+    onError: (error) => {
+      console.error(error);
+    },
+  });
 
-    console.log('로그인 성공', data);
-    navigate('/date-select');
+  const onSubmit: SubmitHandler<SigninFormData> = (data) => {
+    loginMutation.mutate({
+      name: data.name,
+    });
   };
+
+  if (loginMutation.isPending) {
+    return <PageLoading />;
+  }
 
   return (
     <div className='relative min-h-screen text-white'>
