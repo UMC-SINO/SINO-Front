@@ -3,21 +3,47 @@ import EmotionAnalysisList from '../analysis/EmotionAnalysisList';
 import type { NSCardType } from '@/types/NSCard';
 import clsx from 'clsx';
 import { MemoCard } from '../common/MemoCard';
-import { useState } from 'react';
+// import { useState } from 'react';
 import Button from '../common/Button';
 import { useModalStore } from '@/stores/modalStore';
+import { patchToggleBookmark } from '@/api/postApi';
+import { isPostFail } from '@/types/post';
 
 interface NSCardDetailModalProps {
   open: boolean;
   card: NSCardType;
   onClose: () => void;
+  onUpdated?: (updated: NSCardType) => void;
 }
 
-const NSCardDetailModal = ({ open, card, onClose }: NSCardDetailModalProps) => {
-  const [bookmarked, setBookmarked] = useState(card.bookmarked);
+const NSCardDetailModal = ({ open, card, onClose, onUpdated }: NSCardDetailModalProps) => {
   const openTurnToSignal = useModalStore((s) => s.openModal);
 
   if (!open) return null;
+
+  const handleToggleBookmark = async () => {
+    // 서버 북마크 토글
+    const res = await patchToggleBookmark(card.id);
+
+    if (isPostFail(res)) {
+      alert(res.error.reason);
+      return;
+    }
+
+    const post = res.success;
+
+    // 프론트 카드 갱신 (필요한 필드만 동기화)
+    const updatedCard: NSCardType = {
+      ...card,
+      bookmarked: post.bookmark,
+      // 서버 기준으로 날짜/제목/본문도 동기화하고 싶으면 아래처럼:
+      // title: post.title,
+      // context: post.content,
+      // date: post.created_at,
+    };
+
+    onUpdated?.(updatedCard);
+  };
 
   return (
     <div
@@ -42,16 +68,16 @@ const NSCardDetailModal = ({ open, card, onClose }: NSCardDetailModalProps) => {
           <div className='flex items-center gap-2'>
             <button
               type='button'
-              onClick={() => setBookmarked((prev) => !prev)}
+              onClick={handleToggleBookmark}
               aria-label='Toggle bookmark'
               className='transition-transform active:scale-95 cursor-pointer'
             >
               <Star
                 size={28}
-                fill={bookmarked ? 'currentColor' : 'none'}
-                strokeWidth={bookmarked ? 0 : 2}
+                fill={card.bookmarked ? 'currentColor' : 'none'}
+                strokeWidth={card.bookmarked ? 0 : 2}
                 className={clsx(
-                  bookmarked ? 'text-[#FF6F4B]' : 'text-gray-500 hover:text-gray-300',
+                  card.bookmarked ? 'text-[#FF6F4B]' : 'text-gray-500 hover:text-gray-300',
                 )}
               />
             </button>
