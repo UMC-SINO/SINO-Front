@@ -1,25 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { NSCardType } from '@/types/NSCard';
 import { NSCard } from './NSCard';
 import { SlidersHorizontal } from 'lucide-react';
 import NSCardDetailModal from '../Modal/NSCardDetailModal';
-
 import TurnToSignalModal from '../Modal/TurnToSignalModal';
 import EmotionSelectModal, { type EmotionOption } from '../Modal/EmotionSelectModal';
 import SuccessChangeToSignalModal from '../Modal/SuccessChangeToSignalModal';
 import DeleteConfirmModal from '../Modal/DeleteConfirmModal';
 import WriteReasonModal from '../Modal/WriteReasonModal';
-
 import { emojis } from '@/data/emoji';
-import { useAtomValue, useSetAtom } from 'jotai';
-import {
-  isDeleteModalOpenAtom,
-  isEmotionSeletModalAtom,
-  isSuccessModalAtom,
-  isTurnToSignalModalAtom,
-  isWriteReasonModalAtom,
-} from '@/atoms';
 import { useNavigate } from 'react-router-dom';
+import { useModalStore } from '@/stores/modalStore';
 
 interface NSCardListProps {
   cards: NSCardType[];
@@ -38,16 +29,7 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
   const [selectedCard, setSelectedCard] = useState<NSCardType | null>(null);
   const navigate = useNavigate();
 
-  // open 값
-  const isTurnOpen = useAtomValue(isTurnToSignalModalAtom);
-  const isEmotionOpen = useAtomValue(isEmotionSeletModalAtom);
-  const isWriteReasonOpen = useAtomValue(isWriteReasonModalAtom);
-  const isSuccessOpen = useAtomValue(isSuccessModalAtom);
-  const isDeleteOpen = useAtomValue(isDeleteModalOpenAtom);
-
-  // setter
-  const setDeleteOpen = useSetAtom(isDeleteModalOpenAtom);
-  const setSuccessOpen = useSetAtom(isSuccessModalAtom);
+  const { openModal } = useModalStore();
 
   const EmojiComp = emojis[0].Comp;
 
@@ -70,28 +52,9 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
     }
   });
 
-  // 카드에서 삭제 눌렀을 때
   const openDeleteModal = () => {
     setSelectedCard(null);
-    setDeleteOpen(true);
-  };
-
-  // Delete 모달이 열리면 Detail 무조건 닫기
-  useEffect(() => {
-    if (isDeleteOpen) {
-      setSelectedCard(null);
-    }
-  }, [isDeleteOpen]);
-
-  // Success 모달이 뜨면 Detail 닫기
-  useEffect(() => {
-    if (isSuccessOpen) {
-      setSelectedCard(null);
-    }
-  }, [isSuccessOpen]);
-
-  const closeSuccessModal = () => {
-    setSuccessOpen(false);
+    openModal('delete');
   };
 
   return (
@@ -137,7 +100,10 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
             card={card}
             onEdit={() => navigate('/retro')}
             onDelete={openDeleteModal}
-            onClick={() => setSelectedCard(card)}
+            onClick={() => {
+              setSelectedCard(card);
+              openModal('detail');
+            }}
           />
         ))}
       </div>
@@ -151,11 +117,11 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
         />
       )}
 
-      <TurnToSignalModal open={isTurnOpen} icon={<EmojiComp className='w-full h-full' />} />
-      <EmotionSelectModal open={isEmotionOpen} options={emotionOptions} />
-      <WriteReasonModal open={isWriteReasonOpen} />
-      <SuccessChangeToSignalModal open={isSuccessOpen} onClose={closeSuccessModal} />
-      <DeleteConfirmModal open={isDeleteOpen} />
+      <TurnToSignalModal icon={<EmojiComp />} />
+      <EmotionSelectModal options={emotionOptions} />
+      <WriteReasonModal />
+      <SuccessChangeToSignalModal />
+      <DeleteConfirmModal />
     </div>
   );
 };

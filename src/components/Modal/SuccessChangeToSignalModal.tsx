@@ -1,34 +1,34 @@
 import React, { useEffect } from 'react';
-import clsx from 'clsx';
 import Button from '@/components/common/Button';
+import { useModalStore } from '@/stores/modalStore';
 
 type Props = {
-  open: boolean;
   title?: string;
   description?: string;
-  className?: string;
   icon?: React.ReactNode;
-  onClose: () => void;
 };
 
 export default function SuccessChangeToSignalModal({
-  open,
   title = 'Success to change Signal',
-  description = 'Remeber only signal emotion of 2025',
-  className,
+  description = 'Remember only signal emotion of 2025',
   icon,
-  onClose,
 }: Props) {
+  const { activeModal, closeModal } = useModalStore();
+  const isOpen = activeModal === 'success';
+
+  // ESC 닫기
   useEffect(() => {
-    if (!open) return;
+    if (!isOpen) return;
+
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') closeModal();
     };
+
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [open]);
+  }, [isOpen, closeModal]);
 
-  if (!open) return null;
+  if (!isOpen) return null;
 
   return (
     <div
@@ -39,16 +39,12 @@ export default function SuccessChangeToSignalModal({
       <button
         type='button'
         aria-label='Close modal'
-        onClick={onClose}
+        onClick={closeModal}
         className='absolute inset-0 bg-black/55 backdrop-blur-[10px]'
       />
 
       <div
-        className={clsx(
-          'relative w-180 max-w-[92vw] rounded-4xl bg-[#2B2B2B] px-12 py-12',
-          'shadow-[0_30px_80px_rgba(0,0,0,0.55)]',
-          className,
-        )}
+        className='relative w-180 max-w-[92vw] rounded-4xl bg-[#2B2B2B] px-12 py-12 shadow-[0_30px_80px_rgba(0,0,0,0.55)]'
         onClick={(e) => e.stopPropagation()}
       >
         <div className='flex justify-center'>
@@ -73,7 +69,11 @@ export default function SuccessChangeToSignalModal({
         </div>
 
         <div className='mt-8 flex justify-center'>
-          <Button type='button' onClick={onClose} className='h-13 w-30 rounded-full font-semibold'>
+          <Button
+            type='button'
+            onClick={closeModal}
+            className='h-13 w-30 rounded-full font-semibold'
+          >
             Okay
           </Button>
         </div>

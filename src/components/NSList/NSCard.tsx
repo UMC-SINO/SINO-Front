@@ -1,5 +1,6 @@
 import { Pencil, Trash2 } from 'lucide-react';
 import type { NSCardType } from '@/types/NSCard';
+import clsx from 'clsx';
 
 interface NSCardProps {
   card: NSCardType;
@@ -11,9 +12,10 @@ interface NSCardProps {
 export const NSCard = ({ card, onEdit, onDelete, onClick }: NSCardProps) => {
   return (
     <div
-      className={`relative group w-full h-full rounded-lg overflow-hidden bg-black cursor-pointer ${
-        !card.image ? 'border border-gray-200' : ''
-      }`}
+      className={clsx(
+        'relative group w-full h-full rounded-lg overflow-hidden bg-black cursor-pointer',
+        !card.image ? 'border border-gray-200' : '',
+      )}
       onClick={onClick}
     >
       {card.image ? (

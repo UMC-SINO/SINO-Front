@@ -5,8 +5,7 @@ import clsx from 'clsx';
 import { MemoCard } from '../common/MemoCard';
 import { useState } from 'react';
 import Button from '../common/Button';
-import { useSetAtom } from 'jotai';
-import { isTurnToSignalModalAtom } from '@/atoms';
+import { useModalStore } from '@/stores/modalStore';
 
 interface NSCardDetailModalProps {
   open: boolean;
@@ -16,7 +15,7 @@ interface NSCardDetailModalProps {
 
 const NSCardDetailModal = ({ open, card, onClose }: NSCardDetailModalProps) => {
   const [bookmarked, setBookmarked] = useState(card.bookmarked);
-  const setTurnOpen = useSetAtom(isTurnToSignalModalAtom);
+  const openTurnToSignal = useModalStore((s) => s.openModal);
 
   if (!open) return null;
 
@@ -66,7 +65,7 @@ const NSCardDetailModal = ({ open, card, onClose }: NSCardDetailModalProps) => {
             <Button
               type='button'
               className='text-bgColor bg-[#FF6F4B] border rounded-full scale-[0.8]  origin-right'
-              onClick={() => setTurnOpen(true)}
+              onClick={() => openTurnToSignal('turnToSignal')}
             >
               Turn to Signal
             </Button>
