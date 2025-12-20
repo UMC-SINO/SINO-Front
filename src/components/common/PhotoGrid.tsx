@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import React, { useRef, type ChangeEvent } from 'react';
-import { Camera, X } from 'lucide-react';
+import { Camera, Minus } from 'lucide-react';
 
 type PhotoGridProps = {
   image: string | null;
@@ -56,7 +56,7 @@ export const PhotoGrid = ({ image, onChange, editable = true }: PhotoGridProps) 
               }}
               className='absolute top-2 right-2 bg-black/60 hover:bg-black/80 text-white rounded-full p-1.5'
             >
-              <X size={14} />
+              <Minus size={14} />
             </button>
           )}
         </div>
