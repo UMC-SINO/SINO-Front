@@ -23,7 +23,7 @@ const TOP_EMOTION_ITEMS: {
 
 const RetrospectReportPage = () => {
   return (
-    <main className='overflow-y-auto pb-32 min-h-screen text-white'>
+    <main className='overflow-y-auto pb-32 min-h-screen text-white justify-center items-center flex '>
       <div className='max-w-250 mx-auto px-6 py-16 mt-10'>
         <h1 className='text-3xl font-semibold mb-12'>
           <span className='text-[#FF6F4B]'>User</span>

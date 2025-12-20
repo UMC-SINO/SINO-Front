@@ -11,14 +11,16 @@ interface NSCardProps {
 export const NSCard = ({ card, onEdit, onDelete, onClick }: NSCardProps) => {
   return (
     <div
-      className='relative group w-full h-full rounded-lg overflow-hidden bg-black border border-white cursor-pointer'
+      className={`relative group w-full h-full rounded-lg overflow-hidden bg-black cursor-pointer ${
+        !card.image ? 'border border-gray-200' : ''
+      }`}
       onClick={onClick}
     >
       {card.image ? (
         <img src={card.image} alt={card.title} className='w-full h-full object-cover' />
       ) : (
-        <div className='w-full h-full p-2 pt-6 text-xs text-gray-300'>
-          <p className='leading-tight line-clamp-4'>{card.context}</p>
+        <div className='w-full h-full p-1.5 pt-6 text-xs text-gray-300'>
+          <p className='leading-tight line-clamp-3'>{card.context}</p>
         </div>
       )}
 

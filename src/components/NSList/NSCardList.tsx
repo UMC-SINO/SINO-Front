@@ -19,6 +19,7 @@ import {
   isTurnToSignalModalAtom,
   isWriteReasonModalAtom,
 } from '@/atoms';
+import { useNavigate } from 'react-router-dom';
 
 interface NSCardListProps {
   cards: NSCardType[];
@@ -35,6 +36,7 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string | null>('Year');
   const [selectedCard, setSelectedCard] = useState<NSCardType | null>(null);
+  const navigate = useNavigate();
 
   // open 값
   const isTurnOpen = useAtomValue(isTurnToSignalModalAtom);
@@ -74,14 +76,14 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
     setDeleteOpen(true);
   };
 
-  // ✅ Delete 모달이 열리면 Detail 무조건 닫기 (중요)
+  // Delete 모달이 열리면 Detail 무조건 닫기
   useEffect(() => {
     if (isDeleteOpen) {
       setSelectedCard(null);
     }
   }, [isDeleteOpen]);
 
-  // ✅ Success 모달이 뜨면 Detail 닫기
+  // Success 모달이 뜨면 Detail 닫기
   useEffect(() => {
     if (isSuccessOpen) {
       setSelectedCard(null);
@@ -128,12 +130,12 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
       </div>
 
       {/* 카드 리스트 */}
-      <div className='grid grid-cols-4 grid-rows-4 w-108 h-108 border rounded-lg border-white p-4 gap-4'>
+      <div className='grid grid-cols-4 grid-rows-4 w-108 h-108 border rounded-2xl border-white p-4 gap-4'>
         {filteredCards.slice(0, 16).map((card, idx) => (
           <NSCard
             key={idx}
             card={card}
-            onEdit={() => console.log('수정 페이지로 이동')}
+            onEdit={() => navigate('/retro')}
             onDelete={openDeleteModal}
             onClick={() => setSelectedCard(card)}
           />

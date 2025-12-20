@@ -129,6 +129,13 @@ a {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed; /* 비활성화 상태에서는 막힌 커서 */
+}
+
 @theme {
   --color-bgColor: #202020;
   --color-gray: #e1e0e0;
