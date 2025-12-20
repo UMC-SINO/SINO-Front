@@ -110,7 +110,7 @@ const Dropdown = ({ items, className, onSelect }: DropdownProps) => {
   const isPlaceholder = selectedLabel === 'Text' || selectedLabel === '';
 
   return (
-    <div className='flex items-center justify-center'>
+    <div className='flex z-50 items-center justify-center'>
       <div className={clsx('relative min-w-40', className)}>
         <button
           onClick={() => setOpen((prev) => !prev)}

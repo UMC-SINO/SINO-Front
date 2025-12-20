@@ -39,7 +39,7 @@ const SplashPage = () => {
   const canGoNext = isValid(year) && isValid(month);
 
   return (
-    <div className='relative min-h-screen w-full overflow-hidden bg-[#0F0F10]'>
+    <div className='relative z-0 min-h-screen w-full overflow-hidden bg-[#0F0F10]'>
       <motion.div
         initial='hidden'
         animate='show'
@@ -49,7 +49,7 @@ const SplashPage = () => {
       >
         <Splash1Icon className='absolute left-0 top-1/2 -translate-y-1/2 w-190' />
       </motion.div>
-      <div className='relative z-10 flex min-h-screen flex-col justify-between px-8 py-10'>
+      <div className='relative z-50 flex min-h-screen flex-col justify-between px-8 py-10'>
         <div className='flex flex-1 items-center justify-center'>
           <motion.div
             initial='hidden'
@@ -78,7 +78,7 @@ const SplashPage = () => {
             variants={fade}
             transition={{ duration: 3, ease: 'easeOut', delay: 1 }}
           >
-            <Splash2Icon className='absolute right-0 top-[47%] -translate-y-1/2 translate-x-24 w-120 pointer-events-none' />
+            <Splash2Icon className='absolute z-10 right-0 top-[47%] -translate-y-1/2 translate-x-24 w-120 pointer-events-none' />
           </motion.div>
         </div>
         <div className='flex items-center justify-between'>
