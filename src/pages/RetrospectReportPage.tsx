@@ -1,5 +1,4 @@
 import ReportActionBar from '@/components/report/ReportActionBar';
-import ReportCard from '@/components/report/ReportCard';
 import TopEmotionSummary from '@/components/report/TopEmotionSummary';
 import EmotionChangeSummary from '@/components/report/EmotionChangeSummary';
 import EmotionAnalysisList from '@/components/analysis/EmotionAnalysisList';
@@ -33,8 +32,6 @@ const RetrospectReportPage = () => {
         </h1>
 
         <div className='grid grid-cols-[380px_1fr] gap-20 items-start'>
-          <ReportCard title='User’s Year report' content='내용' />
-
           <div className='flex flex-col gap-20'>
             <EmotionAnalysisList />
 
