@@ -4,7 +4,12 @@ import { EmotionChips } from '@/components/common/Emotionchips';
 import { MemoCard } from '@/components/common/MemoCard';
 import { WRITE_DATA } from '@/data/writeData';
 
-export const RetrospectMainBlock = ({ editable }: { editable: boolean }) => {
+type Props = {
+  editable: boolean;
+  hasPhotos?: boolean;
+};
+
+export const RetrospectMainBlock = ({ editable }: Props) => {
   return (
     <motion.div
       layoutId='retrospect-block'
