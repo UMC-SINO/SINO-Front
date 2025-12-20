@@ -22,25 +22,26 @@ const TOP_EMOTION_ITEMS: {
 
 const RetrospectReportPage = () => {
   return (
-    <main className='overflow-y-auto pb-32 min-h-screen text-white justify-center items-center flex '>
-      <div className='max-w-250 mx-auto px-6 py-16 mt-10'>
-        <h1 className='text-3xl font-semibold mb-12'>
+    <main className='pb-32 min-h-screen text-white flex flex-row'>
+      <div className='flex flex-1 flex-col mt-20 mx-40 justify-center'>
+        <h1 className='text-4xl font-semibold mb-20 flex gap-2'>
           <span className='text-[#FF6F4B]'>User</span>
           <span>’s </span>
           <span className='text-[#FF8C6F]'>YearMonth</span>
           <span> report</span>
         </h1>
-
-        <div className='grid grid-cols-[380px_1fr] gap-20 items-start'>
-          <div className='flex flex-col gap-20'>
+        <div className='flex justify-center items-center gap-10 mx-60'>
+          <div className='flex-1 items-center'>
+            <div className='flex flex-col justify-center items-center gap-10'>
+              <TopEmotionSummary year='2025' items={TOP_EMOTION_ITEMS} />
+              <EmotionChangeSummary
+                count={EMOTION_CHANGE_ITEMS.length}
+                items={EMOTION_CHANGE_ITEMS}
+              />
+            </div>
+          </div>
+          <div className=' flex-1 items-center '>
             <EmotionAnalysisList />
-
-            <TopEmotionSummary year='2025' items={TOP_EMOTION_ITEMS} />
-
-            <EmotionChangeSummary
-              count={EMOTION_CHANGE_ITEMS.length}
-              items={EMOTION_CHANGE_ITEMS}
-            />
           </div>
         </div>
       </div>

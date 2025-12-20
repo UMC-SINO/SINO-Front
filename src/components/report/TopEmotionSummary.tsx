@@ -20,10 +20,10 @@ const ICON_MAP = {
 
 const TopEmotionSummary = ({ year, items }: Props) => {
   return (
-    <div>
-      <h3 className='text-xl font-semibold mb-10'>Top 3 emotion in {year}</h3>
+    <div className=''>
+      <h3 className='text-3xl text-center font-normal mb-4 w-full'>Top 3 emotion in {year}</h3>
 
-      <div className='flex gap-12 items-end'>
+      <div className='flex gap-12 items-end justify-center'>
         {items.map((item, idx) => {
           const Icon = ICON_MAP[item.emotion];
 
@@ -32,11 +32,10 @@ const TopEmotionSummary = ({ year, items }: Props) => {
               <div
                 className={`${
                   idx === 1 ? 'w-28 h-28' : 'w-20 h-20'
-                } flex items-center justify-center mb-4`}
+                } flex items-center justify-center`}
               >
                 <Icon className='w-3/4 h-3/4' />
               </div>
-
               <span className='text-xl font-semibold'>{item.count}</span>
             </div>
           );
