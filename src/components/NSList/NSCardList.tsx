@@ -115,7 +115,7 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
       <EmotionSelectModal />
       <WriteReasonModal onCloseDetail={() => setSelectedCard(null)} />
       <SuccessChangeToSignalModal />
-      <DeleteConfirmModal />
+      <DeleteConfirmModal postId={selectedCard?.id} />
     </div>
   );
 };
