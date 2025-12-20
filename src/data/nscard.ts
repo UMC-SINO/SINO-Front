@@ -4,6 +4,7 @@ import duckImage2 from '@/assets/duck-2.png';
 
 export const SIGNAL_CARDS: NSCardType[] = [
   {
+    id: 1,
     title: '네이버 거래량 급증 감지',
     context: '장 초반 대비 거래량이 3배 이상 증가했습니다.',
     date: '2025-12-18',
@@ -12,6 +13,7 @@ export const SIGNAL_CARDS: NSCardType[] = [
     isSignal: true,
   },
   {
+    id: 2,
     title: '외국인 매도 집중',
     context: '외국인 순매도가 단기간 급증하고 있습니다.',
     date: '2025-12-17',
@@ -20,6 +22,7 @@ export const SIGNAL_CARDS: NSCardType[] = [
     isSignal: true,
   },
   {
+    id: 3,
     title: '단기 고점 형성 가능성',
     context: '기술적 지표상 단기 고점 신호가 감지되었습니다.',
     date: '2025-12-16',
@@ -27,6 +30,7 @@ export const SIGNAL_CARDS: NSCardType[] = [
     isSignal: true,
   },
   {
+    id: 3,
     title: '저항 구간 접근',
     context: '과거 고점 부근 저항 구간에 도달했습니다.',
     date: '2025-12-09',
@@ -34,6 +38,7 @@ export const SIGNAL_CARDS: NSCardType[] = [
     isSignal: true,
   },
   {
+    id: 4,
     title: '네이버 거래량 급증 감지',
     context: '장 초반 대비 거래량이 3배 이상 증가했습니다.',
     date: '2025-12-18',
@@ -42,6 +47,7 @@ export const SIGNAL_CARDS: NSCardType[] = [
     isSignal: true,
   },
   {
+    id: 5,
     title: '외국인 매도 집중',
     context: '외국인 순매도가 단기간 급증하고 있습니다.',
     date: '2025-12-17',
@@ -50,6 +56,7 @@ export const SIGNAL_CARDS: NSCardType[] = [
     isSignal: true,
   },
   {
+    id: 6,
     title: '단기 고점 형성 가능성',
     context: '기술적 지표상 단기 고점 신호가 감지되었습니다.',
     date: '2025-12-16',
@@ -58,6 +65,7 @@ export const SIGNAL_CARDS: NSCardType[] = [
     image: duckImage2,
   },
   {
+    id: 7,
     title: '저항 구간 접근',
     context: '과거 고점 부근 저항 구간에 도달했습니다.',
     date: '2025-12-09',
@@ -65,6 +73,7 @@ export const SIGNAL_CARDS: NSCardType[] = [
     isSignal: true,
   },
   {
+    id: 8,
     title: '네이버 거래량 급증 감지',
     context: '장 초반 대비 거래량이 3배 이상 증가했습니다.',
     date: '2025-12-18',
@@ -73,6 +82,7 @@ export const SIGNAL_CARDS: NSCardType[] = [
     isSignal: true,
   },
   {
+    id: 9,
     title: '외국인 매도 집중',
     context: '외국인 순매도가 단기간 급증하고 있습니다.',
     date: '2025-12-17',
@@ -81,6 +91,7 @@ export const SIGNAL_CARDS: NSCardType[] = [
     isSignal: true,
   },
   {
+    id: 10,
     title: '단기 고점 형성 가능성',
     context: '기술적 지표상 단기 고점 신호가 감지되었습니다.',
     date: '2025-12-16',
@@ -88,6 +99,7 @@ export const SIGNAL_CARDS: NSCardType[] = [
     isSignal: true,
   },
   {
+    id: 11,
     title: '저항 구간 접근',
     context: '과거 고점 부근 저항 구간에 도달했습니다.',
     date: '2025-12-09',
@@ -95,6 +107,7 @@ export const SIGNAL_CARDS: NSCardType[] = [
     isSignal: true,
   },
   {
+    id: 12,
     title: '네이버 거래량 급증 감지',
     context: '장 초반 대비 거래량이 3배 이상 증가했습니다.',
     date: '2025-12-18',
@@ -103,6 +116,7 @@ export const SIGNAL_CARDS: NSCardType[] = [
     isSignal: true,
   },
   {
+    id: 13,
     title: '외국인 매도 집중',
     context: '외국인 순매도가 단기간 급증하고 있습니다.',
     date: '2025-12-17',
@@ -111,6 +125,7 @@ export const SIGNAL_CARDS: NSCardType[] = [
     isSignal: true,
   },
   {
+    id: 14,
     title: '단기 고점 형성 가능성',
     context: '기술적 지표상 단기 고점 신호가 감지되었습니다.',
     date: '2025-12-16',
@@ -119,6 +134,7 @@ export const SIGNAL_CARDS: NSCardType[] = [
     image: duckImage2,
   },
   {
+    id: 15,
     title: '저항 구간 접근',
     context: '과거 고점 부근 저항 구간에 도달했습니다.',
     date: '2025-12-09',
@@ -130,6 +146,7 @@ export const SIGNAL_CARDS: NSCardType[] = [
 
 export const NOISE_CARDS: NSCardType[] = [
   {
+    id: 1,
     title: '장중 미세 변동',
     context: '유의미하지 않은 가격 변동이 감지되었습니다.',
     date: '2025-12-18',
@@ -138,6 +155,7 @@ export const NOISE_CARDS: NSCardType[] = [
     isSignal: false,
   },
   {
+    id: 2,
     title: '단기 체결 증가',
     context: '짧은 시간 동안 체결 빈도가 증가했습니다.',
     date: '2025-12-17',
@@ -146,6 +164,7 @@ export const NOISE_CARDS: NSCardType[] = [
     image: duckImage2,
   },
   {
+    id: 3,
     title: '호가 변동 잦음',
     context: '호가 변동이 잦으나 추세 변화는 없습니다.',
     date: '2025-12-16',
@@ -154,6 +173,7 @@ export const NOISE_CARDS: NSCardType[] = [
     isSignal: false,
   },
   {
+    id: 4,
     title: '가격 횡보 지속',
     context: '가격이 좁은 범위 내에서 횡보 중입니다.',
     date: '2025-12-13',
@@ -162,6 +182,7 @@ export const NOISE_CARDS: NSCardType[] = [
     isSignal: false,
   },
   {
+    id: 5,
     title: '장중 미세 변동',
     context: '유의미하지 않은 가격 변동이 감지되었습니다.',
     date: '2025-12-18',
@@ -170,6 +191,7 @@ export const NOISE_CARDS: NSCardType[] = [
     isSignal: false,
   },
   {
+    id: 6,
     title: '단기 체결 증가',
     context: '짧은 시간 동안 체결 빈도가 증가했습니다.',
     date: '2025-12-17',
@@ -178,6 +200,7 @@ export const NOISE_CARDS: NSCardType[] = [
     image: duckImage2,
   },
   {
+    id: 7,
     title: '호가 변동 잦음',
     context: '호가 변동이 잦으나 추세 변화는 없습니다.',
     date: '2025-12-16',
@@ -186,6 +209,7 @@ export const NOISE_CARDS: NSCardType[] = [
     isSignal: false,
   },
   {
+    id: 8,
     title: '가격 횡보 지속',
     context: '가격이 좁은 범위 내에서 횡보 중입니다.',
     date: '2025-12-13',
@@ -194,6 +218,7 @@ export const NOISE_CARDS: NSCardType[] = [
     isSignal: false,
   },
   {
+    id: 9,
     title: '장중 미세 변동',
     context: '유의미하지 않은 가격 변동이 감지되었습니다.',
     date: '2025-12-18',
@@ -202,6 +227,7 @@ export const NOISE_CARDS: NSCardType[] = [
     isSignal: false,
   },
   {
+    id: 10,
     title: '단기 체결 증가',
     context: '짧은 시간 동안 체결 빈도가 증가했습니다.',
     date: '2025-12-17',
@@ -209,6 +235,7 @@ export const NOISE_CARDS: NSCardType[] = [
     isSignal: false,
   },
   {
+    id: 11,
     title: '호가 변동 잦음',
     context: '호가 변동이 잦으나 추세 변화는 없습니다.',
     date: '2025-12-16',
@@ -217,6 +244,7 @@ export const NOISE_CARDS: NSCardType[] = [
     isSignal: false,
   },
   {
+    id: 12,
     title: '가격 횡보 지속',
     context: '가격이 좁은 범위 내에서 횡보 중입니다.',
     date: '2025-12-13',
@@ -225,6 +253,7 @@ export const NOISE_CARDS: NSCardType[] = [
     isSignal: false,
   },
   {
+    id: 13,
     title: '장중 미세 변동',
     context: '유의미하지 않은 가격 변동이 감지되었습니다.',
     date: '2025-12-18',
@@ -233,6 +262,7 @@ export const NOISE_CARDS: NSCardType[] = [
     isSignal: false,
   },
   {
+    id: 14,
     title: '단기 체결 증가',
     context: '짧은 시간 동안 체결 빈도가 증가했습니다.',
     date: '2025-12-17',
@@ -240,6 +270,7 @@ export const NOISE_CARDS: NSCardType[] = [
     isSignal: false,
   },
   {
+    id: 15,
     title: '호가 변동 잦음',
     context: '호가 변동이 잦으나 추세 변화는 없습니다.',
     date: '2025-12-16',
@@ -248,6 +279,7 @@ export const NOISE_CARDS: NSCardType[] = [
     isSignal: false,
   },
   {
+    id: 16,
     title: '가격 횡보 지속',
     context: '가격이 좁은 범위 내에서 횡보 중입니다.',
     date: '2025-12-13',
