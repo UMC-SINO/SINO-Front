@@ -1,9 +1,8 @@
-import { authApi } from '@/api/authApi';
-import type { NicknameRequest } from '@/types/auth';
+import { postCheckNickname } from '@/api/authApi';
 import { useMutation } from '@tanstack/react-query';
 
 export function useCheckNickname() {
   return useMutation({
-    mutationFn: (body: NicknameRequest) => authApi.checkNickname(body),
+    mutationFn: postCheckNickname.checkNickname,
   });
 }
