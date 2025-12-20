@@ -2,36 +2,101 @@ import Button from '@/components/common/Button';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signinSchema, type SigninFormData } from '@/schema/auth';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import NameInput from '@/components/signin/NameInput';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+import { useCheckNickname } from '@/hooks/useCheckNickname';
+import { useSignup } from '@/hooks/useSignup';
+import { isFail } from '@/types/auth';
+
+const getReason = (err: unknown) => {
+  if (!axios.isAxiosError(err)) return '알 수 없는 오류';
+  const data = err.response?.data as any;
+  return data?.error?.reason ?? '요청 처리 중 오류';
+};
 
 const SignupPage = () => {
   const [hasCheckedName, setHasCheckedName] = useState(false);
   const [isNameAvailable, setIsNameAvailable] = useState(false);
 
   const navigate = useNavigate();
+  const checkNickname = useCheckNickname();
+  const signup = useSignup();
 
   const {
     register,
     handleSubmit,
     trigger,
+    watch,
+    getValues,
     formState: { errors },
   } = useForm<SigninFormData>({
     resolver: zodResolver(signinSchema),
     mode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<SigninFormData> = (data) => {
-    console.log(data);
-    navigate('/login');
-  };
+  // 이름이 바뀌면 중복확인 상태 리셋
+  const name = watch('name');
+  useEffect(() => {
+    setHasCheckedName(false);
+    setIsNameAvailable(false);
+  }, [name]);
 
   const handleCheckName = async () => {
+    // 1) 프론트(스키마) 검증
     const isValid = await trigger('name');
     setHasCheckedName(true);
-    setIsNameAvailable(isValid);
+
+    if (!isValid) {
+      setIsNameAvailable(false);
+      return;
+    }
+
+    // 2) 서버 중복/유효성 검증
+    const currentName = getValues('name');
+
+    checkNickname.mutate(
+      { name: currentName },
+      {
+        onSuccess: (res) => {
+          if (isFail(res)) {
+            alert(res.error.reason);
+            setIsNameAvailable(false);
+            return;
+          }
+          setIsNameAvailable(true);
+        },
+        onError: (e) => {
+          alert(getReason(e));
+          setIsNameAvailable(false);
+        },
+      },
+    );
   };
+
+  const onSubmit: SubmitHandler<SigninFormData> = (data) => {
+    // 중복확인 통과 안 했으면 제출 막음
+    if (!hasCheckedName || !isNameAvailable) return;
+
+    signup.mutate(
+      { name: data.name },
+      {
+        onSuccess: (res) => {
+          if (isFail(res)) {
+            alert(res.error.reason);
+            return;
+          }
+          // 가입하면 무조건 로그인으로 이동
+          navigate('/login');
+        },
+        onError: (e) => alert(getReason(e)),
+      },
+    );
+  };
+
+  const isLoading = checkNickname.isPending || signup.isPending;
 
   return (
     <div className='relative min-h-screen text-white'>
@@ -53,7 +118,7 @@ const SignupPage = () => {
 
         <Button
           type='submit'
-          disabled={!isNameAvailable}
+          disabled={!isNameAvailable || isLoading}
           className='absolute top-60 text-bgColor rounded-full w-48 py-2'
         >
           Get started
