@@ -1,4 +1,5 @@
 export interface NSCardType {
+  id: number;
   title: string;
   context: string;
   date: string;
