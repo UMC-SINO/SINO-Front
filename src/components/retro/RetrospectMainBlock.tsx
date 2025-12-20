@@ -32,6 +32,12 @@ export const RetrospectMainBlock = ({
     e.target.value = '';
   };
 
+type Props = {
+  editable: boolean;
+  hasPhotos?: boolean;
+};
+
+export const RetrospectMainBlock = ({ editable }: Props) => {
   return (
     <motion.div
       layoutId='retrospect-block'
