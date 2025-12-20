@@ -2,8 +2,8 @@
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import Button from '@/components/common/Button';
-import { useSetAtom } from 'jotai';
 import { isWriteReasonModalAtom, isEmotionSeletModalAtom, isSuccessModalAtom } from '@/atoms';
+import { useSetAtom } from 'jotai';
 
 type Props = {
   open: boolean;
