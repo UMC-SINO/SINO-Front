@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { NSCardType } from '@/types/NSCard';
 import { NSCard } from './NSCard';
 import { SlidersHorizontal } from 'lucide-react';
@@ -21,7 +21,6 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string | null>('Year');
   const [selectedCard, setSelectedCard] = useState<NSCardType | null>(null);
-  const [deletePostId, setDeletePostId] = useState<number | null>(null);
   const navigate = useNavigate();
 
   const { openModal } = useModalStore();
@@ -41,7 +40,7 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
       case 'Month':
         return card.date.slice(5, 7) === '12';
       case 'Bookmark':
-        return card.bookmarked;
+        return card.book_mark;
       default:
         return true;
     }
@@ -50,11 +49,6 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
   const openDeleteModal = (card: NSCardType) => {
     openModal('delete', { postId: card.id });
   };
-
-  useEffect(() => {
-    if (deletePostId == null) return;
-    openModal('delete', { postId: deletePostId });
-  }, [deletePostId, openModal]);
 
   return (
     <div className='flex flex-col'>
