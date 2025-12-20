@@ -19,7 +19,7 @@ const LoginPage = () => {
   });
 
   const onSubmit: SubmitHandler<SigninFormData> = (data) => {
-    if (data.name !== '누누누') {
+    if (data.name !== '누누누' && data.name !== 'jingni') {
       setError('name', {
         type: 'manual',
         message: '존재하지 않는 닉네임입니다.',

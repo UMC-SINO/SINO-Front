@@ -1,59 +1,38 @@
 import React, { useEffect } from 'react';
-import clsx from 'clsx';
 import Button from '@/components/common/Button';
-import { useSetAtom } from 'jotai';
-import { isEmotionSeletModalAtom, isTurnToSignalModalAtom } from '@/atoms';
+import { useModalStore } from '@/stores/modalStore';
 
 type Props = {
-  open: boolean;
   title?: string;
   description?: string;
-  className?: string;
   icon: React.ReactNode;
 };
 
 export default function TurnToSignalModal({
-  open,
   title = 'This is the current feeling of Noise',
   description = 'Have your feelings changed?',
-  className,
   icon,
 }: Props) {
-  const setTurnOpen = useSetAtom(isTurnToSignalModalAtom);
-  const setEmotionOpen = useSetAtom(isEmotionSeletModalAtom);
+  const { activeModal, openModal, closeModal } = useModalStore();
 
-  const close = () => setTurnOpen(false);
+  const isOpen = activeModal === 'turnToSignal';
 
   useEffect(() => {
-    if (!open) return;
+    if (!isOpen) return;
+
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') close();
+      if (e.key === 'Escape') closeModal();
     };
+
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [open]);
+  }, [isOpen, closeModal]);
 
-  if (!open) return null;
+  if (!isOpen) return null;
 
   return (
-    <div
-      className='fixed inset-0 z-50 flex items-center justify-center'
-      aria-modal='true'
-      role='dialog'
-    >
-      <button
-        type='button'
-        aria-label='Close modal'
-        onClick={close}
-        className='absolute inset-0 bg-black/50 backdrop-blur-[6px]'
-      />
-
-      <div
-        className={clsx(
-          'relative w-180 max-w-[92vw] rounded-3xl bg-[#2B2B2B] px-10 py-9 shadow-2xl',
-          className,
-        )}
-      >
+    <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs'>
+      <div className='relative w-180 max-w-[92vw] rounded-3xl bg-[#2B2B2B] px-10 py-9 shadow-2xl'>
         <div className='flex justify-center'>
           <div className='h-24 w-24 flex items-center justify-center'>{icon}</div>
         </div>
@@ -66,7 +45,7 @@ export default function TurnToSignalModal({
         <div className='mt-8 flex justify-center gap-6'>
           <Button
             type='button'
-            onClick={close}
+            onClick={closeModal}
             className='w-40 h-13 bg-[#E1E0E0]! text-black! rounded-full hover:brightness-95!'
           >
             Back
@@ -75,8 +54,8 @@ export default function TurnToSignalModal({
           <Button
             type='button'
             onClick={() => {
-              setTurnOpen(false);
-              setEmotionOpen(true);
+              // TurnToSignal → EmotionSelect 로 전환
+              openModal('emotion');
             }}
             className='w-40 h-13 rounded-full'
           >

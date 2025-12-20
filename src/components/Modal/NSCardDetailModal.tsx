@@ -5,8 +5,7 @@ import clsx from 'clsx';
 import { MemoCard } from '../common/MemoCard';
 import { useState } from 'react';
 import Button from '../common/Button';
-import { useSetAtom } from 'jotai';
-import { isTurnToSignalModalAtom } from '@/atoms';
+import { useModalStore } from '@/stores/modalStore';
 
 interface NSCardDetailModalProps {
   open: boolean;
@@ -16,13 +15,13 @@ interface NSCardDetailModalProps {
 
 const NSCardDetailModal = ({ open, card, onClose }: NSCardDetailModalProps) => {
   const [bookmarked, setBookmarked] = useState(card.bookmarked);
-  const setTurnOpen = useSetAtom(isTurnToSignalModalAtom);
+  const openTurnToSignal = useModalStore((s) => s.openModal);
 
   if (!open) return null;
 
   return (
     <div
-      className='fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm'
+      className='fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs'
       onClick={onClose}
     >
       <div
@@ -66,7 +65,7 @@ const NSCardDetailModal = ({ open, card, onClose }: NSCardDetailModalProps) => {
             <Button
               type='button'
               className='text-bgColor bg-[#FF6F4B] border rounded-full scale-[0.8]  origin-right'
-              onClick={() => setTurnOpen(true)}
+              onClick={() => openTurnToSignal('turnToSignal')}
             >
               Turn to Signal
             </Button>
@@ -78,7 +77,7 @@ const NSCardDetailModal = ({ open, card, onClose }: NSCardDetailModalProps) => {
             <div className='flex flex-col'>
               <span className='text-sm font-medium text-gray-400 mb-2 block'>Picture</span>
               {card.image ? (
-                <div className='w-[292px] h-[216px]'>
+                <div className='w-73 h-54'>
                   <img
                     src={card.image}
                     alt={card.title}
@@ -86,7 +85,7 @@ const NSCardDetailModal = ({ open, card, onClose }: NSCardDetailModalProps) => {
                   />
                 </div>
               ) : (
-                <div className='w-[292px] h-[216px] bg-[#AFADAC] rounded-2xl flex items-center justify-center'>
+                <div className='w-73 h-54 bg-[#AFADAC] rounded-2xl flex items-center justify-center'>
                   <span className='text-gray-200 font-medium text-sm'>No Image</span>
                 </div>
               )}
@@ -94,7 +93,7 @@ const NSCardDetailModal = ({ open, card, onClose }: NSCardDetailModalProps) => {
 
             <div className='flex flex-col mt-auto'>
               <span className='text-sm font-medium text-gray-400 block mb-2 mt-4'>Emotion</span>
-              <div className='w-[292px] scale-[0.98] origin-left ml-1 h-full'>
+              <div className='w-73 scale-[0.98] origin-left ml-1 h-full'>
                 <EmotionAnalysisList isLabel={false} className='h-full' />
               </div>
             </div>
