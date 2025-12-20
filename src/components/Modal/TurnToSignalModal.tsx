@@ -31,18 +31,7 @@ export default function TurnToSignalModal({
   if (!isOpen) return null;
 
   return (
-    <div
-      className='fixed inset-0 z-50 flex items-center justify-center'
-      aria-modal='true'
-      role='dialog'
-    >
-      <button
-        type='button'
-        aria-label='Close modal'
-        onClick={closeModal}
-        className='absolute inset-0 bg-black/50 backdrop-blur-[6px]'
-      />
-
+    <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs'>
       <div className='relative w-180 max-w-[92vw] rounded-3xl bg-[#2B2B2B] px-10 py-9 shadow-2xl'>
         <div className='flex justify-center'>
           <div className='h-24 w-24 flex items-center justify-center'>{icon}</div>

@@ -1,10 +1,9 @@
 // src/components/Modal/WriteReasonModal.tsx
 import { useEffect, useState } from 'react';
-import clsx from 'clsx';
 import Button from '@/components/common/Button';
 import { useModalStore } from '@/stores/modalStore';
 
-export default function WriteReasonModal() {
+export default function WriteReasonModal({ onCloseDetail }: { onCloseDetail: () => void }) {
   const [value, setValue] = useState('');
 
   const { activeModal, openModal, closeModal } = useModalStore();
@@ -32,15 +31,10 @@ export default function WriteReasonModal() {
   const canNext = value.trim().length > 0;
 
   return (
-    <div className='fixed inset-0 z-50 flex items-center justify-center'>
-      {/* Backdrop */}
-      <button
-        type='button'
-        aria-label='Close modal'
-        onClick={closeModal}
-        className='absolute inset-0 bg-black/55 backdrop-blur-sm'
-      />
-
+    <div
+      onClick={closeModal}
+      className='fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs'
+    >
       {/* Modal Card */}
       <div
         className='relative w-205 max-w-[92vw] rounded-[26px] bg-linear-to-b from-[#2B2B2B] to-[#252525] px-16 py-14 shadow-[0_30px_80px_rgba(0,0,0,0.55)]'
@@ -58,14 +52,7 @@ export default function WriteReasonModal() {
             value={value}
             onChange={(e) => setValue(e.target.value)}
             placeholder='텍스트 입력전'
-            className={clsx(
-              'w-140 max-w-[88vw] h-35',
-              'rounded-[18px] bg-white',
-              'px-5 py-4 text-[14px] text-black',
-              'placeholder:text-black/35 resize-none outline-none',
-              'shadow-[inset_0_0_0_1px_rgba(0,0,0,0.08)]',
-              'focus:shadow-[inset_0_0_0_2px_rgba(255,111,75,0.55)]',
-            )}
+            className='w-140 max-w-[88vw] h-35 rounded-[18px] bg-white px-5 py-4 text-[14px] text-black placeholder:text-black/35 resize-none outline-none focus:shadow-[inset_0_0_0_2px_rgba(255,111,75,0.55)]'
           />
         </div>
 
@@ -82,7 +69,7 @@ export default function WriteReasonModal() {
             type='button'
             disabled={!canNext}
             onClick={() => {
-              // TODO: value 저장 / API 연결
+              onCloseDetail();
               openModal('success');
             }}
             className='w-42.5 h-13.5 rounded-full text-lg'

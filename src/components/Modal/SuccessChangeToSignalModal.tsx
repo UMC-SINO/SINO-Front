@@ -32,17 +32,9 @@ export default function SuccessChangeToSignalModal({
 
   return (
     <div
-      className='fixed inset-0 z-50 flex items-center justify-center'
-      role='dialog'
-      aria-modal='true'
+      onClick={closeModal}
+      className='fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs'
     >
-      <button
-        type='button'
-        aria-label='Close modal'
-        onClick={closeModal}
-        className='absolute inset-0 bg-black/55 backdrop-blur-[10px]'
-      />
-
       <div
         className='relative w-180 max-w-[92vw] rounded-4xl bg-[#2B2B2B] px-12 py-12 shadow-[0_30px_80px_rgba(0,0,0,0.55)]'
         onClick={(e) => e.stopPropagation()}

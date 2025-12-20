@@ -58,18 +58,10 @@ export default function EmotionSelectModal({
 
   return (
     <div
-      className='fixed inset-0 z-50 flex items-center justify-center'
+      className='fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs'
       role='dialog'
       aria-modal='true'
     >
-      {/* Backdrop */}
-      <button
-        type='button'
-        aria-label='Close modal'
-        onClick={closeModal}
-        className='absolute inset-0 bg-black/50 backdrop-blur-[6px]'
-      />
-
       <div className='relative w-190 max-w-[92vw] rounded-3xl bg-[#2B2B2B] px-12 py-10 shadow-2xl'>
         {/* Emoji Grid */}
         <div className='flex justify-center'>

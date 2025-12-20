@@ -32,23 +32,13 @@ export default function DeleteConfirmModal({
 
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   if (!isOpen) return null;
 
   return (
-    <div
-      className='fixed inset-0 z-50 flex items-center justify-center'
-      role='dialog'
-      aria-modal='true'
-    >
-      <button
-        type='button'
-        aria-label='Close modal'
-        onClick={close}
-        className='absolute inset-0 bg-black/40 backdrop-blur-[10px]'
-      />
-
+    <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs'>
       <div
         className='relative w-130 max-w-[92vw] rounded-4xl bg-[#2B2B2B] px-12 py-10 shadow-[0_30px_80px_rgba(0,0,0,0.55)]'
         onClick={(e) => e.stopPropagation()}
@@ -64,7 +54,7 @@ export default function DeleteConfirmModal({
         <div className='mt-8 flex justify-center gap-8'>
           <Button
             type='button'
-            className='bg-transparent text-[#FF6F4B] border-2 w-[99px]'
+            className='bg-transparent text-[#FF6F4B] border-2 w-25'
             onClick={close}
           >
             Back
@@ -76,7 +66,7 @@ export default function DeleteConfirmModal({
               // TODO: 실제 삭제 API
               close();
             }}
-            className='w-[99px] rounded-full'
+            className='w-25 rounded-full'
           >
             Delete
           </Button>
