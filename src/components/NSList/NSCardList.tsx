@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { NSCardType } from '@/types/NSCard';
 import { NSCard } from './NSCard';
 import { SlidersHorizontal } from 'lucide-react';
@@ -48,9 +48,13 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
   });
 
   const openDeleteModal = (card: NSCardType) => {
-    setDeletePostId(card.id);
-    openModal('delete');
+    openModal('delete', { postId: card.id });
   };
+
+  useEffect(() => {
+    if (deletePostId == null) return;
+    openModal('delete', { postId: deletePostId });
+  }, [deletePostId, openModal]);
 
   return (
     <div className='flex flex-col'>
@@ -116,7 +120,7 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
       <EmotionSelectModal />
       <WriteReasonModal onCloseDetail={() => setSelectedCard(null)} />
       <SuccessChangeToSignalModal />
-      <DeleteConfirmModal postId={deletePostId ?? undefined} />
+      <DeleteConfirmModal />
     </div>
   );
 };

@@ -11,15 +11,15 @@ type Props = {
 };
 
 export default function DeleteConfirmModal({
-  postId,
   title = 'Are you sure you want to ',
   description = 'Deleted posts cannot be recovered.',
 }: Props) {
   // const navigate = useNavigate();
-  const { activeModal, closeModal } = useModalStore();
+  const { activeModal, closeModal, payload } = useModalStore();
   const { mutate: deleteMutate, isPending } = useDeletePost();
 
   const isOpen = activeModal === 'delete';
+  const postId = payload?.postId;
 
   const close = () => {
     closeModal();
