@@ -14,12 +14,27 @@ export type ApiFail<TErrorData = null, TCode extends string = string> = {
   success: null;
 };
 
-export type ApiSuccess<TSuccessData = null> = {
+export type ApiSuccess = {
   resultType: 'SUCCESS';
   error: null;
-  success: TSuccessData;
+  success: {
+    message: string;
+    deletedPost: {
+      id: number;
+      user_id: number;
+      year: number;
+      month: number;
+      book_mark: boolean;
+      title: string;
+      content: string;
+      heart: number;
+      is_deleted: boolean;
+      deleted_at: Date;
+      created_at: Date;
+    };
+  };
 };
 
-export type ApiResponse<TSuccessData = null, TErrorData = null, TCode extends string = string> =
-  | ApiSuccess<TSuccessData>
+export type ApiResponse<TErrorData = null, TCode extends string = string> =
+  | ApiSuccess
   | ApiFail<TErrorData, TCode>;
