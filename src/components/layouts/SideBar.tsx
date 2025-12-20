@@ -1,6 +1,7 @@
 import { BurgerIcon, HomeIcon, ReportIcon } from '@/assets';
 import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
+import userImage from '@/assets/userImage.png';
 
 interface SideBarProps {
   open: boolean;
@@ -47,12 +48,11 @@ const SideBar = ({ open, onClose }: SideBarProps) => {
           </button>
 
           <div className='flex flex-col items-center mt-10'>
-            <button
-              type='button'
-              className='w-24 h-24 rounded-full bg-white flex items-center justify-center text-[#C8C6C6] text-3xl cursor-pointer hover:brightness-90 transition'
-            >
-              +
-            </button>
+            <img
+              src={userImage}
+              alt='user profile'
+              className='w-24 h-24 rounded-full object-cover bg-white'
+            />
             <span className='mt-2 font-medium text-3xl'>name</span>
           </div>
 
