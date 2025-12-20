@@ -1,14 +1,9 @@
-export type PhotoItem = {
-  id: string;
-  url: string;
-  isPick: boolean;
-  file?: File;
-};
+export type RetrospectStep = 'write' | 'confirm' | 'analysis';
 
-export type RetrospectDraft = {
-  dateString: string;
-  photos: PhotoItem[];
-  emotion: string | null;
-  title: string;
-  content: string;
-};
+export type AnalysisResult = 'Signal' | 'Noise';
+
+export interface RetrospectUIState {
+  step: RetrospectStep;
+  editable: boolean;
+  hasPhotos: boolean;
+}
