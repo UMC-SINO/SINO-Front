@@ -1,9 +1,8 @@
-import { authApi } from '@/api/authApi';
-import type { NicknameRequest } from '@/types/auth';
+import { postLogin } from '@/api/authApi';
 import { useMutation } from '@tanstack/react-query';
 
 export function useLogin() {
   return useMutation({
-    mutationFn: (body: NicknameRequest) => authApi.login(body),
+    mutationFn: postLogin.login,
   });
 }
