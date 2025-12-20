@@ -6,18 +6,63 @@ import { MemoCard } from '../common/MemoCard';
 import { useState } from 'react';
 import Button from '../common/Button';
 import { useModalStore } from '@/stores/modalStore';
+import { patchToggleBookmark } from '@/api/postApi';
+import { isPostFail } from '@/types/post';
+import { useEffect } from 'react';
 
 interface NSCardDetailModalProps {
   open: boolean;
   card: NSCardType;
   onClose: () => void;
+  onUpdated?: (updated: NSCardType) => void;
 }
 
-const NSCardDetailModal = ({ open, card, onClose }: NSCardDetailModalProps) => {
-  const [bookmarked, setBookmarked] = useState(card.bookmarked);
+const NSCardDetailModal = ({ open, card, onClose, onUpdated }: NSCardDetailModalProps) => {
   const openTurnToSignal = useModalStore((s) => s.openModal);
 
+  const [localBookmarked, setLocalBookmarked] = useState(card.book_mark);
+  const [isToggling, setIsToggling] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    setLocalBookmarked(card.book_mark);
+  }, [open, card.id, card.book_mark]);
+
   if (!open) return null;
+
+  const handleToggleBookmark = async () => {
+    console.log('toggle bookmark postId:', card.id, 'card:', card);
+    if (isToggling) return;
+
+    // optimistic update (즉시 UI 반영)
+    const prev = localBookmarked;
+    const next = !prev;
+    setLocalBookmarked(next);
+    setIsToggling(true);
+
+    try {
+      const res = await patchToggleBookmark(card.id);
+
+      if (isPostFail(res)) {
+        // 실패면 롤백
+        setLocalBookmarked(prev);
+        alert(res.error.reason);
+        return;
+      }
+
+      const post = res.success;
+
+      const confirmed = post.book_mark;
+      setLocalBookmarked(confirmed);
+
+      onUpdated?.({
+        ...card,
+        book_mark: confirmed,
+      });
+    } finally {
+      setIsToggling(false);
+    }
+  };
 
   return (
     <div
@@ -42,16 +87,16 @@ const NSCardDetailModal = ({ open, card, onClose }: NSCardDetailModalProps) => {
           <div className='flex items-center gap-2'>
             <button
               type='button'
-              onClick={() => setBookmarked((prev) => !prev)}
+              onClick={handleToggleBookmark}
               aria-label='Toggle bookmark'
               className='transition-transform active:scale-95 cursor-pointer'
             >
               <Star
                 size={28}
-                fill={bookmarked ? 'currentColor' : 'none'}
-                strokeWidth={bookmarked ? 0 : 2}
+                fill={localBookmarked ? 'currentColor' : 'none'}
+                strokeWidth={localBookmarked ? 0 : 2}
                 className={clsx(
-                  bookmarked ? 'text-[#FF6F4B]' : 'text-gray-500 hover:text-gray-300',
+                  localBookmarked ? 'text-[#FF6F4B]' : 'text-gray-500 hover:text-gray-300',
                 )}
               />
             </button>

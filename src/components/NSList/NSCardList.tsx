@@ -15,9 +15,11 @@ import { useModalStore } from '@/stores/modalStore';
 interface NSCardListProps {
   cards: NSCardType[];
   title: string;
+  // 북마크 토글 성공 시, 업데이트된 카드(혹은 id+book_mark)를 부모로 전달
+  onCardUpdate?: (updated: NSCardType) => void;
 }
 
-export const NSCardList = ({ cards, title }: NSCardListProps) => {
+export const NSCardList = ({ cards, title, onCardUpdate }: NSCardListProps) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string | null>('Year');
   const [selectedCard, setSelectedCard] = useState<NSCardType | null>(null);
@@ -40,11 +42,19 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
       case 'Month':
         return card.date.slice(5, 7) === '12';
       case 'Bookmark':
-        return card.bookmarked;
+        return card.book_mark;
       default:
         return true;
     }
   });
+
+  const handleCardUpdate = (updated: NSCardType) => {
+    // 1) 부모 리스트 반영
+    onCardUpdate?.(updated);
+
+    // 2) 모달이 보고 있는 selectedCard도 반영
+    setSelectedCard((prev) => (prev && prev.id === updated.id ? updated : prev));
+  };
 
   const openDeleteModal = () => {
     setSelectedCard(null);
@@ -88,9 +98,9 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
 
       {/* 카드 리스트 */}
       <div className='grid grid-cols-4 grid-rows-4 w-108 h-108 border rounded-2xl border-white p-4 gap-4'>
-        {filteredCards.slice(0, 16).map((card, idx) => (
+        {filteredCards.slice(0, 16).map((card) => (
           <NSCard
-            key={idx}
+            key={card.id}
             card={card}
             onEdit={() => navigate('/retro')}
             onDelete={openDeleteModal}
@@ -108,6 +118,7 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
           open={!!selectedCard}
           card={selectedCard}
           onClose={() => setSelectedCard(null)}
+          onUpdated={handleCardUpdate}
         />
       )}
 
