@@ -23,14 +23,15 @@ const RetrospectFlowPage = () => {
       <div className=' flex flex-col w-full justify-center items-center gap-8'>
         <LayoutGroup>
           {step === 'write' ? (
-            <div className='w-5/9'>
+            <motion.div layout className=''>
               <RetrospectMainBlock editable={true} />
-            </div>
+            </motion.div>
           ) : (
             <motion.div
+              layout
               className='flex flex-col items-start justify-start'
               initial={{ x: 300, opacity: 0, scale: 1.02 }}
-              animate={{ x: 0, opacity: 1, scale: 0.95 }}
+              animate={{ x: 0, opacity: 1, scale: 1 }}
               transition={{ type: 'spring', stiffness: 80, damping: 20, duration: 0.8 }}
             >
               <div className='grid grid-cols-2 gap-5 w-full max-w-6xl'>
@@ -40,23 +41,31 @@ const RetrospectFlowPage = () => {
 
                 <div className='flex flex-col justify-center items-start h-full ml-8'>
                   {step === 'confirm' ? (
-                    <h1
-                      className='text-2xl text-white leading-loose text-center'
+                    <motion.h1
+                      initial={{ x: 80, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{
+                        delay: 0.7, // ← RetrospectMainBlock 이동 끝난 뒤
+                        type: 'spring',
+                        stiffness: 70,
+                        damping: 18,
+                      }}
+                      className='text-2xl text-white text-center'
                       style={{ width: '335px' }}
                     >
-                      is your <span className='text-4xl'>Signal</span> or
+                      is your <span className='text-3xl'>Signal</span> or
                       <br />
-                      <span className='text-5xl ml-55'>Noise?</span>
-                    </h1>
+                      <span className='text-3xl ml-50'>Noise?</span>
+                    </motion.h1>
                   ) : (
-                    <div className='flex flex-col w-full max-w-4xl mx-auto'>
+                    <div className='flex flex-col w-full max-w-120'>
                       <h1 className='text-3xl text-white mb-6 tracking-wide text-left'>
                         Your Analyzed
                         <br />
                         Emotion
                       </h1>
 
-                      <EmotionAnalysisList className='w-full' />
+                      <EmotionAnalysisList />
                     </div>
                   )}
                 </div>

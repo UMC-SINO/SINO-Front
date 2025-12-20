@@ -27,7 +27,7 @@ const NSCardDetailModal = ({ open, card, onClose }: NSCardDetailModalProps) => {
     >
       <div
         className='relative w-min-1/2 min-h-1/3 bg-[#1E1E1E] rounded-4xl px-28 py-10
-       shadow-[0_0_80px_-10px_rgba(255,255,255,0.2),0_40px_60px_-20px_rgba(0,0,0,0.7)]
+       shadow-[0_0_25px_rgba(255,255,255,0.25),0_0_80px_rgba(255,255,255,0.12)]
        border border-white/10 
        backdrop-blur-sm text-base flex-none'
         onClick={(e) => e.stopPropagation()}
