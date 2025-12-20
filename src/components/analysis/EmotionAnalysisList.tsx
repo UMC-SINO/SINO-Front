@@ -1,17 +1,27 @@
-import { ANALYSIS_DATA } from '@/data/analysisData';
+import type { EmotionAnalysis } from '@/types/analyze';
 import { GraphItem } from './GraphItem';
 
 interface EmotionAnalysisListProps {
-  isLabel?: boolean;
+  emotions?: EmotionAnalysis[]; // API에서 받은 데이터
   className?: string;
+  isLabel?: boolean;
 }
 
-const EmotionAnalysisList = ({ isLabel = true, className = '' }: EmotionAnalysisListProps) => {
+const EmotionAnalysisList = ({
+  emotions = [],
+  className = '',
+  isLabel = true,
+}: EmotionAnalysisListProps) => {
   return (
     <div className={`w-full h-full ${className}`}>
       <div className='mb-8'>
-        {ANALYSIS_DATA.map((data) => (
-          <GraphItem key={data.id} id={data.id} aiScore={data.aiScore} userScore={data.userScore} />
+        {emotions.map((data) => (
+          <GraphItem
+            key={data.emotion_name}
+            id={data.emotion_name}
+            aiScore={data.percentage}
+            userScore={0} // TODO : 사용자 점수 불러오기 !!!!
+          />
         ))}
       </div>
       {isLabel && (
