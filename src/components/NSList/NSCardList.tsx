@@ -4,7 +4,7 @@ import { NSCard } from './NSCard';
 import { SlidersHorizontal } from 'lucide-react';
 import NSCardDetailModal from '../Modal/NSCardDetailModal';
 import TurnToSignalModal from '../Modal/TurnToSignalModal';
-import EmotionSelectModal, { type EmotionOption } from '../Modal/EmotionSelectModal';
+import EmotionSelectModal from '../Modal/EmotionSelectModal';
 import SuccessChangeToSignalModal from '../Modal/SuccessChangeToSignalModal';
 import DeleteConfirmModal from '../Modal/DeleteConfirmModal';
 import WriteReasonModal from '../Modal/WriteReasonModal';
@@ -16,12 +16,6 @@ interface NSCardListProps {
   cards: NSCardType[];
   title: string;
 }
-
-const emotionOptions: EmotionOption[] = emojis.map((emoji) => ({
-  id: emoji.key,
-  label: emoji.label,
-  icon: <emoji.Comp />,
-}));
 
 export const NSCardList = ({ cards, title }: NSCardListProps) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -52,8 +46,8 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
     }
   });
 
-  const openDeleteModal = () => {
-    setSelectedCard(null);
+  const openDeleteModal = (card: NSCardType) => {
+    setSelectedCard(card);
     openModal('delete');
   };
 
@@ -94,12 +88,12 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
 
       {/* 카드 리스트 */}
       <div className='grid grid-cols-4 grid-rows-4 w-108 h-108 border rounded-2xl border-white p-4 gap-4'>
-        {filteredCards.slice(0, 16).map((card, idx) => (
+        {filteredCards.slice(0, 16).map((card) => (
           <NSCard
-            key={idx}
+            key={card.id}
             card={card}
             onEdit={() => navigate('/retro')}
-            onDelete={openDeleteModal}
+            onDelete={() => openDeleteModal(card)}
             onClick={() => {
               setSelectedCard(card);
               openModal('detail');
@@ -118,7 +112,7 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
       )}
 
       <TurnToSignalModal icon={<EmojiComp />} />
-      <EmotionSelectModal options={emotionOptions} />
+      <EmotionSelectModal />
       <WriteReasonModal onCloseDetail={() => setSelectedCard(null)} />
       <SuccessChangeToSignalModal />
       <DeleteConfirmModal />
