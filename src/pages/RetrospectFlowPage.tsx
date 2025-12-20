@@ -7,6 +7,7 @@ import { LayoutGroup, motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { RetrospectMainBlock } from '@/components/retro/RetrospectMainBlock';
 import type { RetrospectStep } from '@/types/retrospect';
+import { WRITE_DATA } from '@/data/writeData';
 
 const RetrospectFlowPage = () => {
   const [step, setStep] = useState<RetrospectStep>('write');
