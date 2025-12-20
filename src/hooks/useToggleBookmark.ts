@@ -7,7 +7,7 @@ type Vars = { postId: number };
 type PostsListCache = Post[];
 
 function toggleInList(list: PostsListCache, postId: number) {
-  return list.map((p) => (p.id === postId ? { ...p, bookmark: !p.bookmark } : p));
+  return list.map((p) => (p.id === postId ? { ...p, bookmark: !p.book_mark } : p));
 }
 
 export function useToggleBookmark(params: { year?: number; month?: number; bookmark?: boolean }) {
@@ -30,7 +30,7 @@ export function useToggleBookmark(params: { year?: number; month?: number; bookm
       if (prevDetail)
         qc.setQueryData(postKeys.detail(postId), {
           ...prevDetail,
-          bookmark: !prevDetail.bookmark,
+          bookmark: !prevDetail.book_mark,
         });
 
       return { prevList, prevDetail };
