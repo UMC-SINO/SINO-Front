@@ -36,7 +36,7 @@ type Props = {
 const EmotionChangeSummary = ({ count, items }: Props) => {
   return (
     <div className='flex flex-col gap-8'>
-      <p className='text-sm text-white'>
+      <p className='text text-white'>
         you change noise to signal <span className='text-[#FF6F4B] font-semibold'>{count}</span>{' '}
         times
       </p>
