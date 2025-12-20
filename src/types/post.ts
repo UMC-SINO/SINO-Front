@@ -31,7 +31,7 @@ export type Post = {
   user_id: number;
   year: number;
   month: number;
-  bookmark: boolean;
+  book_mark: boolean;
   title: string;
   content: string;
   heart: number;
@@ -64,28 +64,3 @@ export type ToggleBookmarkResponse = PostApiResponse<
   ToggleBookmarkSuccess,
   ToggleBookmarkErrorData
 >;
-
-/** DELETE /api/posts/{postId} (소프트 삭제)
- *  성공 예시:
- *  success: {
- *    message: "Post with ID 1 deleted.",
- *    deletedPost: { ...Post, is_deleted:true ... }
- *  }
- */
-export type DeletePostParams = {
-  postId: number;
-};
-
-export type DeletePostSuccess = {
-  message: string;
-  deletedPost: Post;
-};
-
-// 에러: (스웨거에 P001, P002, P003 그리고 P004 언급)
-// - P001: { postId: "abc" }
-// - P002: { postId: 999 }
-// - P003: null
-// - P004: (이미 삭제된 게시글 등) data가 있을 수도/없을 수도 → 일단 유연하게
-export type DeletePostErrorData = { postId: string } | { postId: number } | null;
-
-export type DeletePostResponse = PostApiResponse<DeletePostSuccess, DeletePostErrorData>;
