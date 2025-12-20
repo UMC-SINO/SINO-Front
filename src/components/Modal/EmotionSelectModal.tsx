@@ -1,28 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import clsx from 'clsx';
+
 import Button from '@/components/common/Button';
 import { useModalStore } from '@/stores/modalStore';
+import { emojis } from '@/data/emoji';
 
-export type EmotionOption = {
-  id: string;
-  label?: string;
-  icon: React.ReactNode;
-};
+import Check from '@/assets/emojis/Check.svg?react';
 
-type Props = {
-  options: EmotionOption[];
-  maxSelect?: number;
-  title?: string;
-  description?: string;
-};
-
-export default function EmotionSelectModal({
-  options,
-  maxSelect = 5,
-  title = 'Please select an emotion',
-  description = 'You can select up to 5',
-}: Props) {
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+export default function EmotionSelectModal() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [checkedIndex, setCheckedIndex] = useState<number | null>(null);
 
   const { activeModal, openModal, closeModal } = useModalStore();
   const isOpen = activeModal === 'emotion';
@@ -38,23 +26,27 @@ export default function EmotionSelectModal({
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [isOpen, closeModal]);
 
-  // 모달 열릴 때마다 초기화
+  // 모달 열릴 때 초기화
   useEffect(() => {
-    if (isOpen) setSelectedIds([]);
+    if (isOpen) {
+      setActiveIndex(0);
+      setCheckedIndex(null);
+    }
   }, [isOpen]);
 
   if (!isOpen) return null;
 
-  const canSignal = selectedIds.length > 0;
+  const total = emojis.length;
 
-  const toggle = (id: string) => {
-    setSelectedIds((prev) => {
-      const has = prev.includes(id);
-      if (has) return prev.filter((x) => x !== id);
-      if (prev.length >= maxSelect) return prev;
-      return [...prev, id];
-    });
+  const getOffset = (index: number) => {
+    const raw = index - activeIndex;
+    const half = Math.floor(total / 2);
+    if (raw > half) return raw - total;
+    if (raw < -half) return raw + total;
+    return raw;
   };
+
+  const isChecked = checkedIndex === activeIndex;
 
   return (
     <div
@@ -62,45 +54,57 @@ export default function EmotionSelectModal({
       role='dialog'
       aria-modal='true'
     >
-      <div className='relative w-190 max-w-[92vw] rounded-3xl bg-[#2B2B2B] px-12 py-10 shadow-2xl'>
-        {/* Emoji Grid */}
-        <div className='flex justify-center'>
-          <div className='grid grid-cols-5 gap-x-7 gap-y-5'>
-            {options.map((opt) => {
-              const selected = selectedIds.includes(opt.id);
-              const disabled = !selected && selectedIds.length >= maxSelect;
+      <div className='relative w-200 max-w-[92vw] rounded-3xl bg-[#2B2B2B] px-12 py-10 shadow-2xl'>
+        {/* ===== Emoji Slide UI ===== */}
+        <div className='relative flex justify-center items-center h-80 overflow-hidden w-full'>
+          {emojis.map((emoji, index) => {
+            const offset = getOffset(index);
+            const Comp = emoji.Comp;
+            const isCenter = offset === 0;
 
-              return (
-                <button
-                  key={opt.id}
-                  type='button'
-                  onClick={() => !disabled && toggle(opt.id)}
-                  aria-label={opt.label ?? opt.id}
-                  className={clsx(
-                    'h-11 w-11 flex items-center justify-center rounded-full transition',
-                    selected ? 'ring-2 ring-[#FF6F4B] bg-white/5' : 'hover:bg-white/5',
-                    disabled && 'opacity-40 cursor-not-allowed',
+            const distance = Math.abs(offset);
+            const opacity = Math.max(0, 1 - distance * 0.6);
+
+            return (
+              <motion.div
+                key={emoji.key}
+                animate={{
+                  x: offset * 160,
+                  scale: isCenter ? 1 : 0.65,
+                  opacity,
+                  zIndex: isCenter ? 10 : 5,
+                }}
+                transition={{ type: 'spring', stiffness: 280, damping: 30 }}
+                className='absolute cursor-pointer'
+                onClick={() => {
+                  setActiveIndex(index);
+                  if (isCenter) {
+                    setCheckedIndex((prev) => (prev === index ? null : index));
+                  }
+                }}
+              >
+                <div className='relative flex flex-col items-center'>
+                  <Comp className='w-40 h-40' />
+
+                  {/* 체크 아이콘 */}
+                  {isCenter && isChecked && (
+                    <Check className='absolute -top-8 -right-8 w-24 h-24 pointer-events-none' />
                   )}
-                >
-                  <div className='h-8 w-8 [&>svg]:w-full [&>svg]:h-full'>{opt.icon}</div>
-                </button>
-              );
-            })}
-          </div>
+
+                  {isCenter && <p className='mt-5 text-center text-white'>{emoji.label}</p>}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
-        {/* Text */}
+        {/* ===== Text ===== */}
         <div className='mt-7 text-center'>
-          <h2 className='text-white text-[18px] font-semibold'>{title}</h2>
-          <p className='mt-2 text-white/50 text-[12px]'>
-            {description}{' '}
-            <span className='text-white/40'>
-              ({selectedIds.length}/{maxSelect})
-            </span>
-          </p>
+          <h2 className='text-white text-[18px] font-semibold'>Please select an emotion</h2>
+          <p className='mt-2 text-white/50 text-[12px]'>You can select only one</p>
         </div>
 
-        {/* Actions */}
+        {/* ===== Actions ===== */}
         <div className='mt-8 flex justify-center gap-7'>
           <button
             type='button'
@@ -112,11 +116,10 @@ export default function EmotionSelectModal({
 
           <Button
             type='button'
-            disabled={!canSignal}
-            onClick={() => openModal('writeReason')}
+            disabled={!isChecked}
             className={clsx(
               'w-40 h-13 rounded-full font-semibold text-lg',
-              canSignal
+              isChecked
                 ? 'bg-[#FF6F4B] hover:brightness-90 text-black'
                 : 'bg-[#6B6B6B] text-white/80 cursor-not-allowed',
             )}
