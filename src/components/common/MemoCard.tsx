@@ -19,7 +19,7 @@ export const MemoCard = ({
 }: Props) => {
   return (
     <div className='w-full h-full'>
-      <h5 className='text-sm font-medium text-gray-400 mb-2'>Memo</h5>
+      <h5 className='text-sm font-medium text-white mb-2'>Memo</h5>
 
       <div className='bg-white rounded-2xl p-5 h-full flex flex-col'>
         <p className='text-sm mb-1 text-black'>{dateString}</p>
@@ -36,6 +36,7 @@ export const MemoCard = ({
           value={content}
           disabled={readOnly}
           onChange={(e) => !readOnly && onContentChange?.(e.target.value)}
+          maxLength={500}
           placeholder={readOnly ? '작성된 내용이 없습니다.' : '최대 500자 작성이 가능합니다.'}
           className='flex-1 resize-none outline-none bg-transparent text-sm text-gray-800 placeholder-[#AFADAC] disabled:cursor-default'
         />

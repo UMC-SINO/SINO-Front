@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import { useState } from 'react';
 import Button from '@/components/common/Button';
 import EmotionAnalysisList from '@/components/analysis/EmotionAnalysisList';
@@ -5,16 +7,17 @@ import { LayoutGroup, motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { RetrospectMainBlock } from '@/components/retro/RetrospectMainBlock';
 import type { RetrospectStep } from '@/types/retrospect';
+import { WRITE_DATA } from '@/data/writeData';
 
 const RetrospectFlowPage = () => {
   const [step, setStep] = useState<RetrospectStep>('write');
   const [analysisResult, setAnalysisResult] = useState<'Signal' | 'Noise' | null>(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   // 임시 테스트용
   const tempResult: 'Signal' | 'Noise' = 'Signal';
 
   const photos = WRITE_DATA.photos; // or 실제 상태/응답 데이터
-  const hasPhotos = photos.length > 0;
 
   const navigate = useNavigate();
 
@@ -28,7 +31,11 @@ const RetrospectFlowPage = () => {
         <LayoutGroup>
           {step === 'write' ? (
             <motion.div layout className=''>
-              <RetrospectMainBlock editable={true} />
+              <RetrospectMainBlock
+                editable={true}
+                image={previewImage}
+                onChangeImage={setPreviewImage}
+              />
             </motion.div>
           ) : (
             <motion.div
@@ -40,7 +47,11 @@ const RetrospectFlowPage = () => {
             >
               <div className='grid grid-cols-2 gap-5 w-full max-w-6xl'>
                 <div className='scale-[0.8] w-[115%] origin-center'>
-                  <RetrospectMainBlock editable={false} />
+                  <RetrospectMainBlock
+                    editable={false}
+                    image={previewImage}
+                    onChangeImage={setPreviewImage}
+                  />
                 </div>
 
                 <div className='flex flex-col justify-center items-start h-full ml-8'>
@@ -79,7 +90,7 @@ const RetrospectFlowPage = () => {
         </LayoutGroup>
       </div>
 
-      {/** 버튼 모음집 ~ */}
+      {/* 버튼 모음집 ~ */}
       <div className='flex justify-center gap-8 mt-10 text-black'>
         {step === 'write' && (
           <>
