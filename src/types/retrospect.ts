@@ -5,5 +5,4 @@ export type AnalysisResult = 'Signal' | 'Noise';
 export interface RetrospectUIState {
   step: RetrospectStep;
   editable: boolean;
-  hasPhotos: boolean;
 }

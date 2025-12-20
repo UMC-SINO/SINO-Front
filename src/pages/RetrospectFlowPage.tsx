@@ -18,7 +18,6 @@ const RetrospectFlowPage = () => {
   const tempResult: 'Signal' | 'Noise' = 'Signal';
 
   const photos = WRITE_DATA.photos; // or 실제 상태/응답 데이터
-  const hasPhotos = photos.length > 0;
 
   const navigate = useNavigate();
 
