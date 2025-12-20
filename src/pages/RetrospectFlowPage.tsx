@@ -4,9 +4,10 @@ import EmotionAnalysisList from '@/components/analysis/EmotionAnalysisList';
 import { LayoutGroup, motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { RetrospectMainBlock } from '@/components/retro/RetrospectMainBlock';
+import type { RetrospectStep } from '@/types/retrospect';
 
 const RetrospectFlowPage = () => {
-  const [step, setStep] = useState<'write' | 'confirm' | 'analysis'>('write');
+  const [step, setStep] = useState<RetrospectStep>('write');
   const [analysisResult, setAnalysisResult] = useState<'Signal' | 'Noise' | null>(null);
 
   // 임시 테스트용
