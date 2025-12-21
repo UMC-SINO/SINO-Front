@@ -112,7 +112,7 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
 
       <TurnToSignalModal />
       <EmotionSelectModal />
-      <WriteReasonModal onCloseDetail={() => setSelectedPostId(null)} />
+      <WriteReasonModal />
       <SuccessChangeToSignalModal />
       <DeleteConfirmModal />
     </div>
