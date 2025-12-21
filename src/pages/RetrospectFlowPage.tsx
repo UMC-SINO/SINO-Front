@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { RetrospectMainBlock } from '@/components/retro/RetrospectMainBlock';
 import type { RetrospectStep } from '@/types/retrospect';
 import { usePostAnalyze } from '@/hooks/usePostAnalyze';
-import type { AnalyzeSuccessData } from '@/types/analyze';
+import type { EmotionAnalysis } from '@/types/analyze';
 import { useMutation } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import {
@@ -17,13 +17,14 @@ import {
   selectedEmojisAtom,
 } from '@/atoms';
 import { postWrite } from '@/api/postApi';
+import { pickData } from '@/types/common';
 
 const RetrospectFlowPage = () => {
   const [step, setStep] = useState<RetrospectStep>('write');
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const [analysisResult, setAnalysisResult] = useState<'Signal' | 'Noise' | null>(null);
-  const [emotions, setEmotions] = useState<AnalyzeSuccessData[]>([]);
+  const [emotions, setEmotions] = useState<EmotionAnalysis[]>([]);
   const navigate = useNavigate();
 
   const [selectedDateTime, setSelectedDateTime] = useAtom(selectedDateTimeAtom);
@@ -61,14 +62,15 @@ const RetrospectFlowPage = () => {
     }
 
     mutateAnalyze(postId, {
-      onSuccess: (data) => {
-        // 성공했을 때 처리
-        setAnalysisResult(data.success?.signalNoiseResult ?? null);
-        setEmotions(data.success?.emotions ?? []);
+      onSuccess: (res) => {
+        const analysis = res.resultType === 'SUCCESS' ? pickData(res) : undefined;
+
+        setAnalysisResult(analysis?.signalNoiseResult ?? null);
+        setEmotions(analysis?.emotions ?? []);
         setStep('analysis');
       },
       onError: () => {
-        console.error('분석 실패:');
+        console.error('분석 실패');
         alert('분석 중 오류 발생');
       },
     });

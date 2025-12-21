@@ -3,6 +3,7 @@ import Button from '@/components/common/Button';
 import { useModalStore } from '@/stores/modalStore';
 import { useGetAnalysis } from '@/hooks/useGetAnalysis';
 import { emojis } from '@/data/emoji';
+import { pickData } from '@/types/common';
 
 export default function TurnToSignalModal() {
   const { activeModal, payload, openModal, closeModal } = useModalStore();
@@ -22,11 +23,13 @@ export default function TurnToSignalModal() {
 
   const postId = payload?.postId ?? 127;
 
-  const { data: response, isLoading, isError } = useGetAnalysis(postId);
+  const { data: response } = useGetAnalysis(postId);
 
   if (!isOpen) return null; // 렌더링은 여전히 조건부
 
-  const icon_name = response?.success?.emotions[0]?.emotion_name;
+  const analysis = response?.resultType === 'SUCCESS' ? pickData(response) : undefined;
+
+  const icon_name = analysis?.emotions?.[0]?.emotion_name;
 
   const emojiData = emojis.find((e) => e.key === icon_name);
 

@@ -8,7 +8,6 @@ import EmotionSelectModal from '../Modal/EmotionSelectModal';
 import SuccessChangeToSignalModal from '../Modal/SuccessChangeToSignalModal';
 import DeleteConfirmModal from '../Modal/DeleteConfirmModal';
 import WriteReasonModal from '../Modal/WriteReasonModal';
-import { emojis } from '@/data/emoji';
 import { useNavigate } from 'react-router-dom';
 import { useModalStore } from '@/stores/modalStore';
 
@@ -24,7 +23,6 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
 
   const navigate = useNavigate();
   const { openModal } = useModalStore();
-  const EmojiComp = emojis[0].Comp;
 
   const openDeleteModal = (card: NSItem) => {
     openModal('delete', { postId: card.id });
@@ -97,7 +95,7 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
 
       <TurnToSignalModal />
       <EmotionSelectModal />
-      <WriteReasonModal onCloseDetail={() => setSelectedCard(null)} />
+      <WriteReasonModal />
       <SuccessChangeToSignalModal />
       <DeleteConfirmModal />
     </div>

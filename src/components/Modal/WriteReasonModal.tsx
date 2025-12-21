@@ -4,7 +4,7 @@ import Button from '@/components/common/Button';
 import { useModalStore } from '@/stores/modalStore';
 import { usePostOneline } from '@/hooks/usePostOneline';
 
-export default function WriteReasonModal({ onCloseDetail }: { onCloseDetail: () => void }) {
+export default function WriteReasonModal() {
   const [value, setValue] = useState('');
 
   const { activeModal, payload, openModal, closeModal } = useModalStore();
