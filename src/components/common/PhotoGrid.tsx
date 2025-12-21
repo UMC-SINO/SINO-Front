@@ -6,10 +6,11 @@ import { Camera, Minus } from 'lucide-react';
 type PhotoGridProps = {
   image: string | null;
   onChange: (image: string | null) => void;
+  onFileChange?: (file: File) => void;
   editable?: boolean;
 };
 
-export const PhotoGrid = ({ image, onChange, editable = true }: PhotoGridProps) => {
+export const PhotoGrid = ({ image, onChange, editable = true, onFileChange }: PhotoGridProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +18,10 @@ export const PhotoGrid = ({ image, onChange, editable = true }: PhotoGridProps) 
     if (!file || !editable) return;
 
     const url = URL.createObjectURL(file);
-    onChange(url);
+    onChange(url); // preview
+
+    if (onFileChange) onFileChange(file); // 실제 파일 전달
+
     e.target.value = '';
   };
 

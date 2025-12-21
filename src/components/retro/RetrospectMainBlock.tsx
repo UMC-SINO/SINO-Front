@@ -4,9 +4,15 @@ import { motion } from 'framer-motion';
 import { EmotionChips } from '@/components/common/Emotionchips';
 import { MemoCard } from '@/components/common/MemoCard';
 import { PhotoGrid } from '../common/PhotoGrid';
-import { useRef, useState, type ChangeEvent } from 'react';
-import { selectedDateTimeAtom, selectedEmojisAtom } from '@/atoms';
-import { useAtomValue } from 'jotai';
+import { useRef, type ChangeEvent } from 'react';
+import {
+  retrospectContentAtom,
+  retrospectPhotoAtom,
+  retrospectTitleAtom,
+  selectedDateTimeAtom,
+  selectedEmojisAtom,
+} from '@/atoms';
+import { useAtom, useAtomValue } from 'jotai';
 
 type RetrospectMainBlockProps = {
   editable: boolean;
@@ -19,8 +25,9 @@ export const RetrospectMainBlock = ({
   image,
   onChangeImage,
 }: RetrospectMainBlockProps) => {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [title, setTitle] = useAtom(retrospectTitleAtom);
+  const [content, setContent] = useAtom(retrospectContentAtom);
+  const [, setPhotoFile] = useAtom(retrospectPhotoAtom);
 
   const selectedDateTime = useAtomValue(selectedDateTimeAtom);
   const emotions = useAtomValue(selectedEmojisAtom);
@@ -40,7 +47,10 @@ export const RetrospectMainBlock = ({
     if (!file || !editable) return;
 
     const url = URL.createObjectURL(file);
-    onChangeImage(url);
+
+    onChangeImage(url); // preview
+    setPhotoFile(file); // 실제 전송용
+
     e.target.value = '';
   };
 
@@ -61,7 +71,12 @@ export const RetrospectMainBlock = ({
             }
           }}
         >
-          <PhotoGrid image={image} onChange={onChangeImage} editable={editable} />
+          <PhotoGrid
+            image={image}
+            onChange={onChangeImage}
+            editable={editable}
+            onFileChange={(file) => setPhotoFile(file)}
+          />
         </div>
 
         <input ref={fileInputRef} type='file' accept='image/*' hidden onChange={handleFileChange} />
