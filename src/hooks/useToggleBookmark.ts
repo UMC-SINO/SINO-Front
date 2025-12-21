@@ -43,13 +43,6 @@ export function useToggleBookmark(params: { year?: number; month?: number; bookm
     },
 
     onSuccess: (res, { postId }) => {
-      if (res.resultType === 'FAIL') {
-        // 서버 FAIL이면 최신화로 복구
-        qc.invalidateQueries({ queryKey: listKey });
-        qc.invalidateQueries({ queryKey: postKeys.detail(postId) });
-        return;
-      }
-
       const updated = res.success; // Post
 
       // 리스트에서 해당 post 교체
