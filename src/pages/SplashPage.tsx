@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Splash1Icon, Splash2Icon } from '@/assets';
 import { useNavigate } from 'react-router-dom';
+import { usePostReport } from '@/hooks/usePostReport';
+import type { ReportApiResponse } from '@/types/report';
 
 const YearItems = ['Text', '2021', '2022', '2023', '2024', '2025', ''];
 const MonthItems = [
@@ -34,9 +36,27 @@ const SplashPage = () => {
   const [month, setMonth] = useState('Text');
 
   const navigate = useNavigate();
+  console.log({ year: Number(year), month: Number(month), userId: 11 });
+  const { mutate: createReport, isLoading } = usePostReport();
 
   const isValid = (v: string) => v !== 'Text' && v !== '';
   const canGoNext = isValid(year) && isValid(month);
+
+  const handleNext = () => {
+    if (!canGoNext) return;
+
+    // API 호출
+    createReport(
+      { year: Number(year), month: Number(month), userId: 11 }, // userId 필요 시 변경
+      {
+        onSuccess: (res: ReportApiResponse) => {
+          console.log('보고서 생성 성공:', res);
+          navigate('/retro-report', { state: { reportData: res } });
+        },
+        onError: (err) => console.error('보고서 생성 실패:', err),
+      },
+    );
+  };
 
   return (
     <div className='relative z-0 min-h-screen w-full overflow-hidden bg-[#0F0F10]'>
@@ -49,6 +69,7 @@ const SplashPage = () => {
       >
         <Splash1Icon className='absolute left-0 top-1/2 -translate-y-1/2 w-190' />
       </motion.div>
+
       <div className='relative z-50 flex min-h-screen flex-col justify-between px-8 py-10'>
         <div className='flex flex-1 items-center justify-center'>
           <motion.div
@@ -81,6 +102,7 @@ const SplashPage = () => {
             <Splash2Icon className='absolute z-10 right-0 top-[47%] -translate-y-1/2 translate-x-24 w-120 pointer-events-none' />
           </motion.div>
         </div>
+
         <div className='flex items-center justify-between'>
           <Button
             type='button'
@@ -91,11 +113,11 @@ const SplashPage = () => {
           </Button>
           <Button
             type='button'
-            onClick={() => navigate('/retro-report')}
+            onClick={handleNext}
             className='w-62.5 disabled:bg-[#E1E0E0] disabled:text-[#7C7979]'
-            disabled={!canGoNext}
+            disabled={!canGoNext || isLoading}
           >
-            Next
+            {isLoading ? 'Creating...' : 'Next'}
           </Button>
         </div>
       </div>

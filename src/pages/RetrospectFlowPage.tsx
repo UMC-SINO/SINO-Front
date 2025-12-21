@@ -19,7 +19,7 @@ const RetrospectFlowPage = () => {
   const { mutate: mutateAnalyze, isLoading: isAnalyzing } = usePostAnalyze();
 
   const handleAnalyze = () => {
-    mutateAnalyze(127, {
+    mutateAnalyze(126, {
       //postId 값 목데이터
       onSuccess: (data) => {
         // 성공했을 때 처리
