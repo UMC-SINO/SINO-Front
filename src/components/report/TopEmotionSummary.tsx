@@ -1,42 +1,43 @@
-import Smile from '@/assets/emojis/Smile.svg?react';
-import Happy from '@/assets/emojis/Happy.svg?react';
-import Sad from '@/assets/emojis/Sad.svg?react';
+// TopEmotionSummary.tsx
+import { emojis } from '@/data/emoji';
 
-type TopEmotion = {
-  emotion: 'Smile' | 'Happy' | 'Sad';
+type TopEmotionItem = {
+  emotion: string;
   count: number;
 };
 
 type Props = {
   year: string;
-  items: TopEmotion[];
+  emotionCounts: TopEmotionItem[];
 };
+const TopEmotionSummary = ({ year, emotionCounts }: Props) => {
+  if (!emotionCounts || Object.keys(emotionCounts).length === 0) return null;
 
-const ICON_MAP = {
-  Smile,
-  Happy,
-  Sad,
-};
+  const sortedTopEmotions = emotionCounts.sort((a, b) => b.count - a.count).slice(0, 3);
 
-const TopEmotionSummary = ({ year, items }: Props) => {
+  const displayOrder = [
+    sortedTopEmotions[1], // 왼쪽
+    sortedTopEmotions[0], // 중앙
+    sortedTopEmotions[2], // 오른쪽
+  ];
+
   return (
-    <div className=''>
-      <h3 className='text-3xl text-center font-normal mb-4 w-full'>Top 3 emotion in {year}</h3>
+    <div>
+      <h3 className='text-3xl text-center font-normal mb-4 w-full'>Top emotions in {year}</h3>
 
       <div className='flex gap-12 items-end justify-center'>
-        {items.map((item, idx) => {
-          const Icon = ICON_MAP[item.emotion];
+        {displayOrder.map((item, idx) => {
+          const EmojiComp = emojis.find((e) => e.key === item.emotion)?.Comp ?? emojis[0].Comp;
 
           return (
-            <div key={idx} className='flex flex-col items-center'>
+            <div key={item.emotion} className='flex flex-col items-center'>
               <div
-                className={`${
-                  idx === 1 ? 'w-28 h-28' : 'w-20 h-20'
-                } flex items-center justify-center`}
+                className={`${idx === 1 ? 'w-28 h-28' : 'w-20 h-20'} flex items-center justify-center`}
               >
-                <Icon className='w-3/4 h-3/4' />
+                <EmojiComp className='w-3/4 h-3/4' />
               </div>
               <span className='text-xl font-semibold'>{item.count}</span>
+              <span className='text-sm text-white/60'>{item.emotion}</span>
             </div>
           );
         })}
