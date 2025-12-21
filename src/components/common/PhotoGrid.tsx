@@ -6,7 +6,7 @@ import { Camera, Minus } from 'lucide-react';
 type PhotoGridProps = {
   image: string | null;
   onChange: (image: string | null) => void;
-  onFileChange?: (file: File) => void;
+  onFileChange?: (file: File) => void; // 추가
   editable?: boolean;
 };
 

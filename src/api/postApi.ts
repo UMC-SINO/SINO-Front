@@ -34,11 +34,7 @@ export const postWrite = async (params: PostWriteParams): Promise<wirteResponse>
     formData.append('photo', params.photo);
   }
 
-  const { data } = await axiosInstance.post('/api/posts/create', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
+  const { data } = await axiosInstance.post('/api/posts/create', formData);
 
   return data;
 };
