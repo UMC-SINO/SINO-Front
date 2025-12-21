@@ -5,12 +5,14 @@ interface EmotionAnalysisListProps {
   emotions?: EmotionAnalysis[]; // API에서 받은 데이터
   className?: string;
   isLabel?: boolean;
+  count?: number;
 }
 
 const EmotionAnalysisList = ({
   emotions = [],
   className = '',
   isLabel = true,
+  count = 1,
 }: EmotionAnalysisListProps) => {
   return (
     <div className={`w-full h-full ${className}`}>
@@ -20,7 +22,7 @@ const EmotionAnalysisList = ({
             key={data.emotion_name}
             id={data.emotion_name}
             aiScore={data.percentage}
-            userScore={0} // TODO : 사용자 점수 불러오기 !!!!
+            userScore={100 / count}
           />
         ))}
       </div>

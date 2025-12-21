@@ -60,7 +60,7 @@ const RetrospectReportPage = () => {
           </div>
 
           <div className='flex-1 items-center'>
-            <EmotionAnalysisList emotions={} />
+            <EmotionAnalysisList emotions={success?.aiEmotionPercentages} />
           </div>
         </div>
       </div>
