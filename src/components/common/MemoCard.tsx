@@ -29,7 +29,7 @@ export const MemoCard = ({
           disabled={readOnly}
           onChange={(e) => !readOnly && onTitleChange?.(e.target.value)}
           placeholder={readOnly ? '제목 없음' : '제목'}
-          className='w-full outline-none bg-transparent text-lg font-extrabold text-gray-900 placeholder-black mb-3 disabled:cursor-default'
+          className='w-full outline-none bg-transparent text-lg font-extrabold text-gray-900 placeholder-[#AFADAC] mb-3 disabled:cursor-default'
         />
 
         <textarea
