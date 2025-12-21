@@ -11,4 +11,5 @@ if (!baseURL) {
 // 인스턴스 정의
 export const axiosInstance = axios.create({
   baseURL,
+  withCredentials: true,
 });

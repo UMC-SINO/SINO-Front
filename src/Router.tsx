@@ -61,7 +61,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'retro-report',
-        element: <RetrospectReportPage />,
+        element: <RetrospectReportPage year={2025} />,
       },
     ],
   },
