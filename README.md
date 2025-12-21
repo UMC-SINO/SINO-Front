@@ -67,6 +67,4 @@
          ex) `feature/#1-get-user`
         
 3. 모든 QA 및 버그 수정 완료 시 main으로 병합
-
 4. 긴급 수정은 hotfix 브랜치에서 진행 후, 병합
-
