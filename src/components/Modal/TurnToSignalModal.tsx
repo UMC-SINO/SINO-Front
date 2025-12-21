@@ -1,19 +1,11 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Button from '@/components/common/Button';
 import { useModalStore } from '@/stores/modalStore';
+import { useGetAnalysis } from '@/hooks/useGetAnalysis';
+import { emojis } from '@/data/emoji';
 
-type Props = {
-  title?: string;
-  description?: string;
-  icon: React.ReactNode;
-};
-
-export default function TurnToSignalModal({
-  title = 'This is the current feeling of Noise',
-  description = 'Have your feelings changed?',
-  icon,
-}: Props) {
-  const { activeModal, openModal, closeModal } = useModalStore();
+export default function TurnToSignalModal() {
+  const { activeModal, payload, openModal, closeModal } = useModalStore();
 
   const isOpen = activeModal === 'turnToSignal';
 
@@ -28,18 +20,32 @@ export default function TurnToSignalModal({
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [isOpen, closeModal]);
 
-  if (!isOpen) return null;
+  const postId = payload?.postId ?? 127;
+
+  const { data: response, isLoading, isError } = useGetAnalysis(postId);
+
+  if (!isOpen) return null; // 렌더링은 여전히 조건부
+
+  const icon_name = response?.success?.emotions[0]?.emotion_name;
+
+  const emojiData = emojis.find((e) => e.key === icon_name);
+
+  const EmojiComp = emojiData ? emojiData.Comp : emojis[0].Comp;
 
   return (
     <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs'>
       <div className='relative w-180 max-w-[92vw] rounded-3xl bg-[#2B2B2B] px-10 py-9 shadow-2xl'>
         <div className='flex justify-center'>
-          <div className='h-24 w-24 flex items-center justify-center'>{icon}</div>
+          <div className='h-24 w-24 flex items-center justify-center'>
+            <EmojiComp />
+          </div>
         </div>
 
         <div className='mt-5 text-center'>
-          <h2 className='text-white text-[20px] font-semibold'>{title}</h2>
-          <p className='mt-2 text-white/60 text-[13px]'>{description}</p>
+          <h2 className='text-white text-[20px] font-semibold'>
+            This is the current feeling of Noise
+          </h2>
+          <p className='mt-2 text-white/60 text-[13px]'>Have your feelings changed?</p>
         </div>
 
         <div className='mt-8 flex justify-center gap-6'>

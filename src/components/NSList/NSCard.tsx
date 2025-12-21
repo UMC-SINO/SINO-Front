@@ -34,7 +34,7 @@ export const NSCard = ({ card, onEdit, onDelete, onClick }: NSCardProps) => {
               onDelete();
             }}
             title='Delete'
-            className='p-0.5 rounded cursor-pointer'
+            className='p-0.5 rounded cursor-pointer disabled:opacity-50'
           >
             <Trash2 size={14} className='text-gray-300' />
           </button>

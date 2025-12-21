@@ -2,13 +2,20 @@
 import { useEffect, useState } from 'react';
 import Button from '@/components/common/Button';
 import { useModalStore } from '@/stores/modalStore';
+import { usePostOneline } from '@/hooks/usePostOneline';
 
 export default function WriteReasonModal({ onCloseDetail }: { onCloseDetail: () => void }) {
   const [value, setValue] = useState('');
 
-  const { activeModal, openModal, closeModal } = useModalStore();
+  const { activeModal, payload, openModal, closeModal } = useModalStore();
   const isOpen = activeModal === 'writeReason';
 
+  const { mutate: saveOneline } = usePostOneline(() => {
+    closeModal();
+    openModal('success');
+  });
+
+  const postId = payload?.postId ?? 127;
   // 열릴 때 초기화
   useEffect(() => {
     if (isOpen) setValue('');
@@ -68,10 +75,7 @@ export default function WriteReasonModal({ onCloseDetail }: { onCloseDetail: () 
           <Button
             type='button'
             disabled={!canNext}
-            onClick={() => {
-              onCloseDetail();
-              openModal('success');
-            }}
+            onClick={() => saveOneline({ postId: postId!, oneline: value })}
             className='w-42.5 h-13.5 rounded-full text-lg'
           >
             Next
