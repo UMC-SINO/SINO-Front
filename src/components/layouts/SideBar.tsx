@@ -3,6 +3,8 @@ import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 import userImage from '@/assets/userImage.png';
 import { useAuth } from '@/hooks/useAuth';
+import { getMe } from '@/api/authApi';
+import { useEffect, useState } from 'react';
 
 interface SideBarProps {
   open: boolean;
@@ -13,6 +15,36 @@ const SideBar = ({ open, onClose }: SideBarProps) => {
   const navigate = useNavigate();
 
   const { setLoggedOut } = useAuth();
+
+  const [name, setName] = useState<string>('');
+
+  useEffect(() => {
+    if (!open) return;
+
+    let alive = true;
+
+    (async () => {
+      try {
+        const res = await getMe();
+
+        if (!alive) return;
+
+        if (res.resultType === 'SUCCESS') {
+          // 명세서에 "success": { "name": "newuser1" } 라고 되어 있어서 타입 안 건드리고 객체로 캐스팅함
+          const payload = res.success as unknown as { name?: string };
+          setName(payload?.name ?? '');
+        } else {
+          setName('');
+        }
+      } catch {
+        if (alive) setName('');
+      }
+    })();
+
+    return () => {
+      alive = false;
+    };
+  }, [open]);
 
   const moveHome = () => {
     navigate('/');
@@ -62,7 +94,7 @@ const SideBar = ({ open, onClose }: SideBarProps) => {
               alt='user profile'
               className='w-24 h-24 rounded-full object-cover bg-white'
             />
-            <span className='mt-2 font-medium text-3xl'>name</span>
+            <span className='mt-2 font-medium text-3xl'>{name}</span>
           </div>
 
           <nav className='mt-15 space-y-2'>
