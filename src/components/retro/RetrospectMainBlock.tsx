@@ -18,8 +18,8 @@ export const RetrospectMainBlock = ({
   image,
   onChangeImage,
 }: RetrospectMainBlockProps) => {
-  const [title, setTitle] = useState(WRITE_DATA.title);
-  const [content, setContent] = useState(WRITE_DATA.content);
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 

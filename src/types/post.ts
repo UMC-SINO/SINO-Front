@@ -1,3 +1,5 @@
+import type { CommonResponse } from './common';
+
 // 0) 공통 응답 래퍼 (Posts용)
 export type PostApiErrorCode = 'P001' | 'P002' | 'P003' | 'P004';
 
@@ -64,3 +66,8 @@ export type ToggleBookmarkResponse = PostApiResponse<
   ToggleBookmarkSuccess,
   ToggleBookmarkErrorData
 >;
+
+export type wirteResponse = CommonResponse<{
+  postId: number;
+  photo_url: string;
+}>;

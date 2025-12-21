@@ -34,7 +34,7 @@ const HomePage = () => {
           <Button
             type='button'
             className='bg-bgColor text-[#FF6F4B] border border-[#FF6F4B] rounded-full w-[228px] py-2 mt-7'
-            onClick={() => navigate('/retro')}
+            onClick={() => navigate('/date-select')}
           >
             Add
           </Button>
