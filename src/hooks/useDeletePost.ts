@@ -1,5 +1,5 @@
+import { deletePost } from '@/api/postApi';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deletePost } from '@/api/PostApi';
 
 export function useDeletePost() {
   const queryClient = useQueryClient();
