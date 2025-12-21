@@ -3,6 +3,8 @@ import { NSCardList } from '@/components/NSList/NSCardList';
 import { NOISE_CARDS, SIGNAL_CARDS } from '@/data/nscard';
 import { useAuth } from '@/hooks/useAuth';
 import { useEffect } from 'react';
+import type { NSCardType } from '@/types/NSCard';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
@@ -15,11 +17,20 @@ const HomePage = () => {
     }
   }, [navigate, isLoggedIn]);
 
+  const [signalCards, setSignalCards] = useState<NSCardType[]>(SIGNAL_CARDS);
+  const [noiseCards, setNoiseCards] = useState<NSCardType[]>(NOISE_CARDS);
+
+  const handleCardUpdate = (updated: NSCardType) =>
+    setSignalCards((prev) => prev.map((c) => (c.id === updated.id ? updated : c)));
+
+  const handleUpdateNoise = (updated: NSCardType) =>
+    setNoiseCards((prev) => prev.map((c) => (c.id === updated.id ? updated : c)));
+
   return (
     <div className='text-4xl min-h-dvh flex flex-col items-center justify-center font-semibold gap-10 py-10'>
       <div className='flex flex-row gap-8 items-start'>
         <div className='flex flex-col items-end gap-8 mb-4'>
-          <NSCardList cards={SIGNAL_CARDS} title='Signal' />
+          <NSCardList cards={signalCards} title='Signal' onCardUpdate={handleCardUpdate} />
           <Button
             type='button'
             className='bg-bgColor text-[#FF6F4B] border border-[#FF6F4B] rounded-full w-[228px] py-2 mt-7'
@@ -30,7 +41,7 @@ const HomePage = () => {
         </div>
 
         <div className='flex flex-col items-start gap-8'>
-          <NSCardList cards={NOISE_CARDS} title='Noise' />
+          <NSCardList cards={noiseCards} title='Noise' onCardUpdate={handleUpdateNoise} />
           <div className='flex flex-col items-start'>
             <p className='text-gray-500 text-sm opacity-80 mb-2'>
               Create a report of the top 10 signals
