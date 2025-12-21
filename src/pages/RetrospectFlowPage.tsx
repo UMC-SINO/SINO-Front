@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '@/components/common/Button';
 import EmotionAnalysisList from '@/components/analysis/EmotionAnalysisList';
 import { LayoutGroup, motion } from 'framer-motion';
@@ -22,6 +22,7 @@ const RetrospectFlowPage = () => {
   const handleSave = () => setStep('confirm');
   const handleAnalyze = () => setStep('analysis');
   const handleIsSignal = () => navigate('/');
+
   return (
     <div className='min-h-screen flex justify-center items-center flex-col p-6 text-white'>
       <div className=' flex flex-col w-full justify-center items-center gap-8'>

@@ -1,9 +1,11 @@
 import { BurgerIcon, Logo } from '@/assets';
 import { useState } from 'react';
 import SideBar from './SideBar';
+import { useAuth } from '@/hooks/useAuth';
 
 const NavBar = () => {
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+  const { isLoggedIn } = useAuth();
 
   return (
     <>
@@ -15,13 +17,15 @@ const NavBar = () => {
             </div>
             <span className='font-semibold text-[#FAFAFA]'>SINO</span>
           </div>
-          <button
-            type='button'
-            onClick={() => setIsSideBarOpen(true)}
-            className='bg-bgColor p-2 hover:bg-gray-600 transition rounded-full cursor-pointer'
-          >
-            <BurgerIcon />
-          </button>
+          {isLoggedIn() && (
+            <button
+              type='button'
+              onClick={() => setIsSideBarOpen(true)}
+              className='bg-bgColor p-2 hover:bg-gray-600 transition rounded-full cursor-pointer'
+            >
+              <BurgerIcon />
+            </button>
+          )}
         </div>
       </header>
 

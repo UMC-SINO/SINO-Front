@@ -16,6 +16,7 @@ const LoginPage = () => {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isValid },
   } = useForm<SigninFormData>({
     resolver: zodResolver(signinSchema),
@@ -26,10 +27,18 @@ const LoginPage = () => {
     mutationFn: postLogin,
     onSuccess: () => {
       setLoggedIn();
-      navigate('/'); // 로그인 성공 후 이동
+      navigate('/');
     },
-    onError: (error) => {
-      console.error(error);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onError: (error: any) => {
+      if (error.response?.status === 401) {
+        const message = error.response.data?.error?.reason ?? '로그인에 실패했습니다.';
+
+        setError('name', {
+          type: 'server',
+          message,
+        });
+      }
     },
   });
 

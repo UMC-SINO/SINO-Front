@@ -1,10 +1,19 @@
 import Button from '@/components/common/Button';
 import { NSCardList } from '@/components/NSList/NSCardList';
 import { NOISE_CARDS, SIGNAL_CARDS } from '@/data/nscard';
+import { useAuth } from '@/hooks/useAuth';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const { isLoggedIn } = useAuth();
+
+  useEffect(() => {
+    if (!isLoggedIn()) {
+      navigate('/onboarding', { replace: true });
+    }
+  }, [navigate, isLoggedIn]);
 
   return (
     <div className='text-4xl min-h-dvh flex flex-col items-center justify-center font-semibold gap-10 py-10'>
