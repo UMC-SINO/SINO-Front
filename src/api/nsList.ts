@@ -1,36 +1,28 @@
 import type { NSListResponse } from '@/types/NSList';
 import { axiosInstance } from './api';
 
-type BaseRequest = {
-  userId: number;
-};
-
-export type SignalListRequest =
-  | (BaseRequest & {
-      filter: 'year';
+export type PostsListRequest =
+  | {
+      type: 'signal' | 'noise';
+      sort: 'year';
       year: string;
-      month: '';
-    })
-  | (BaseRequest & {
-      filter: 'month';
+      month?: never;
+    }
+  | {
+      type: 'signal' | 'noise';
+      sort: 'month';
       year: string;
       month: string;
-    })
-  | (BaseRequest & {
-      filter: 'bookmark';
-      year?: null;
-      month?: null;
-    });
+    }
+  | {
+      type: 'signal' | 'noise';
+      sort: 'bookmark';
+      year?: never;
+      month?: never;
+    };
 
-export const getSignalList = async (params: SignalListRequest): Promise<NSListResponse> => {
-  const { data } = await axiosInstance.get('/api/posts/signal', {
-    params,
-  });
-  return data;
-};
-
-export const getNoiseList = async (params: SignalListRequest): Promise<NSListResponse> => {
-  const { data } = await axiosInstance.get('/api/posts/noise', {
+export const getNSList = async (params: PostsListRequest): Promise<NSListResponse> => {
+  const { data } = await axiosInstance.get('/api/posts', {
     params,
   });
   return data;

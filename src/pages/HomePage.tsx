@@ -5,7 +5,7 @@ import Button from '@/components/common/Button';
 import { NSCardList } from '@/components/NSList/NSCardList';
 import { useAuth } from '@/hooks/useAuth';
 import type { NSItem } from '@/types/NSList';
-import { getNoiseList, getSignalList } from '@/api/nsList';
+import { getNSList } from '@/api/nsList';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -17,21 +17,27 @@ const HomePage = () => {
     }
   }, [navigate, isLoggedIn]);
 
-  const requestBody = {
-    userId: 1,
-    filter: 'year',
+  const baseParams = {
+    sort: 'year',
     year: '2025',
-    month: '',
   } as const;
 
   const { data: signalData } = useQuery({
-    queryKey: ['signalList', requestBody],
-    queryFn: () => getSignalList(requestBody),
+    queryKey: ['posts', 'signal', baseParams],
+    queryFn: () =>
+      getNSList({
+        ...baseParams,
+        type: 'signal',
+      }),
   });
 
   const { data: noiseData } = useQuery({
-    queryKey: ['noiseList', requestBody],
-    queryFn: () => getNoiseList(requestBody),
+    queryKey: ['posts', 'noise', baseParams],
+    queryFn: () =>
+      getNSList({
+        ...baseParams,
+        type: 'noise',
+      }),
   });
 
   const signalCards: NSItem[] = useMemo(() => signalData?.success?.result ?? [], [signalData]);
