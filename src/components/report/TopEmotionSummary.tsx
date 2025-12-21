@@ -1,9 +1,12 @@
 import Smile from '@/assets/emojis/Smile.svg?react';
 import Happy from '@/assets/emojis/Happy.svg?react';
 import Sad from '@/assets/emojis/Sad.svg?react';
+import { Afraid, Boredom, Joyful, Shameful, Unrest, Worried } from '@/assets';
+import { Angry } from 'lucide-react';
+import type React from 'react';
 
 type TopEmotion = {
-  emotion: 'Smile' | 'Happy' | 'Sad';
+  emotion: string;
   count: number;
 };
 
@@ -12,10 +15,17 @@ type Props = {
   items: TopEmotion[];
 };
 
-const ICON_MAP = {
+const ICON_MAP: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
   Smile,
   Happy,
   Sad,
+  Worried,
+  Angry,
+  Afraid,
+  Joyful,
+  Boredom,
+  Shameful,
+  Unrest,
 };
 
 const TopEmotionSummary = ({ year, items }: Props) => {
@@ -36,6 +46,7 @@ const TopEmotionSummary = ({ year, items }: Props) => {
               >
                 <Icon className='w-3/4 h-3/4' />
               </div>
+
               <span className='text-xl font-semibold'>{item.count}</span>
             </div>
           );
