@@ -10,6 +10,7 @@ import DeleteConfirmModal from '../Modal/DeleteConfirmModal';
 import WriteReasonModal from '../Modal/WriteReasonModal';
 import { useNavigate } from 'react-router-dom';
 import { useModalStore } from '@/stores/modalStore';
+import { useNSDetail } from '@/hooks/useNSDetail';
 
 interface NSCardListProps {
   cards: NSItem[];
@@ -19,10 +20,12 @@ interface NSCardListProps {
 export const NSCardList = ({ cards, title }: NSCardListProps) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string | null>('Year');
-  const [selectedCard, setSelectedCard] = useState<NSItem | null>(null);
+  const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
 
   const navigate = useNavigate();
   const { openModal } = useModalStore();
+
+  const { data: detailCard, isLoading } = useNSDetail(selectedPostId);
 
   const openDeleteModal = (card: NSItem) => {
     openModal('delete', { postId: card.id });
@@ -45,7 +48,7 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
 
   return (
     <div className='flex flex-col'>
-      {/* 헤더 */}
+      {/* Header */}
       <div className='flex items-center justify-between mb-2'>
         <h1 className='text-white text-3xl font-medium'>{title}</h1>
 
@@ -74,23 +77,37 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
         </div>
       </div>
 
+      {/* Card Grid */}
       <div className='grid grid-cols-4 grid-rows-4 w-108 h-108 border rounded-2xl border-white p-4 gap-4'>
-        {filteredCards.slice(0, 16).map((card) => (
-          <NSCard
-            key={card.id}
-            card={card}
-            onEdit={() => navigate('/retro')}
-            onDelete={() => openDeleteModal(card)}
-            onClick={() => {
-              setSelectedCard(card);
-              openModal('detail');
-            }}
-          />
-        ))}
+        {filteredCards.length === 0 ? (
+          <div className='col-span-4 row-span-4 flex flex-col items-center justify-center text-white/60'>
+            <p className='text-lg font-medium mb-2'>아직 작성된 {title}가 없어요</p>
+            <p className='text-sm'>왼쪽 아래 Add 버튼을 눌러 추가해보세요</p>
+          </div>
+        ) : (
+          filteredCards.slice(0, 16).map((card) => (
+            <NSCard
+              key={card.id}
+              card={card}
+              onEdit={() => navigate('/retro')}
+              onDelete={() => openDeleteModal(card)}
+              onClick={() => {
+                setSelectedPostId(card.id);
+                openModal('detail');
+              }}
+            />
+          ))
+        )}
       </div>
 
-      {selectedCard && (
-        <NSCardDetailModal open card={selectedCard} onClose={() => setSelectedCard(null)} />
+      {/* Detail Modal */}
+      {selectedPostId && (
+        <NSCardDetailModal
+          open
+          card={detailCard}
+          isLoading={isLoading}
+          onClose={() => setSelectedPostId(null)}
+        />
       )}
 
       <TurnToSignalModal />

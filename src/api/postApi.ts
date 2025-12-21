@@ -1,6 +1,7 @@
 import { axiosInstance } from './api';
 import type { ToggleBookmarkResponse, wirteResponse, DeletePostSuccess } from '@/types/post';
 import type { ApiResponse } from '@/types/common';
+import type { NSDetailResponse } from '@/types/emoji';
 
 export const deletePost = async (postId: number) => {
   const { data } = await axiosInstance.delete<ApiResponse<DeletePostSuccess>>(
@@ -43,5 +44,10 @@ export const postWrite = async (params: PostWriteParams): Promise<wirteResponse>
 
   const { data } = await axiosInstance.post('/api/posts/create', formData);
 
+  return data;
+};
+
+export const getNSDetail = async (postId: number): Promise<NSDetailResponse> => {
+  const { data } = await axiosInstance.get(`/api/posts/${postId}`);
   return data;
 };
