@@ -39,16 +39,6 @@ export const NSCard = ({ card, onEdit, onDelete, onClick }: NSCardProps) => {
             <Trash2 size={14} className='text-gray-300' />
           </button>
         )}
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onEdit();
-          }}
-          title='Edit'
-          className='p-0.5 rounded cursor-pointer'
-        >
-          <Pencil size={14} className='text-gray-300' />
-        </button>
       </div>
     </div>
   );

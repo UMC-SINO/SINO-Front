@@ -17,12 +17,16 @@ export const MemoCard = ({
   onTitleChange,
   onContentChange,
 }: Props) => {
+  const date = new Date(dateString);
+  const kstDate = new Date(date.getTime() + 9 * 60 * 60 * 1000);
+  const formatted = kstDate.toISOString().slice(0, 10);
+
   return (
     <div className='w-full h-full'>
       <h5 className='text-sm font-medium text-white mb-2'>Memo</h5>
 
       <div className='bg-white rounded-2xl p-5 h-full flex flex-col'>
-        <p className='text-sm mb-1 text-black'>{dateString}</p>
+        <p className='text-sm mb-1 text-black'>{formatted}</p>
 
         <input
           value={title}
