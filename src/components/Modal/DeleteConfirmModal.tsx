@@ -49,7 +49,7 @@ export default function DeleteConfirmModal({
       return;
     }
 
-    deleteMutate(101, {
+    deleteMutate(postId, {
       onSuccess: (res) => {
         console.log('삭제 성공 응답:', res);
         close();
