@@ -1,8 +1,8 @@
 const KEY = 'userId';
 
 export const useAuth = () => {
-  const setLoggedIn = () => {
-    localStorage.setItem(KEY, '1');
+  const setLoggedIn = (userId: number) => {
+    localStorage.setItem(KEY, String(userId));
   };
 
   const setLoggedOut = () => {

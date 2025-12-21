@@ -25,8 +25,10 @@ const LoginPage = () => {
 
   const loginMutation = useMutation({
     mutationFn: postLogin,
-    onSuccess: () => {
-      setLoggedIn();
+    onSuccess: (data) => {
+      const userId = data?.success?.id;
+
+      setLoggedIn(userId);
       navigate('/');
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

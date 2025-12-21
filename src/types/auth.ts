@@ -1,3 +1,5 @@
+import type { CommonResponse } from './common';
+
 // 닉네임(=name)만 받는 인증 모델
 export type NicknameRequest = {
   name: string;
@@ -30,3 +32,8 @@ export type ApiResponse<TData = null, TErrorData = null> =
 export const isFail = <TData, TErrorData>(
   res: ApiResponse<TData, TErrorData>,
 ): res is ApiFailResponse<TErrorData> => res.resultType === 'FAIL';
+
+export type loginResponse = CommonResponse<{
+  id: number;
+  name: string;
+}>;

@@ -1,23 +1,21 @@
 import { Star, X } from 'lucide-react';
 import EmotionAnalysisList from '../analysis/EmotionAnalysisList';
-import type { NSCardType } from '@/types/NSCard';
+import type { NSItem } from '@/types/NSList';
 import clsx from 'clsx';
 import { MemoCard } from '../common/MemoCard';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '../common/Button';
 import { useModalStore } from '@/stores/modalStore';
 import { patchToggleBookmark } from '@/api/postApi';
 import { isPostFail } from '@/types/post';
-import { useEffect } from 'react';
 
 interface NSCardDetailModalProps {
   open: boolean;
-  card: NSCardType;
+  card: NSItem;
   onClose: () => void;
-  onUpdated?: (updated: NSCardType) => void;
 }
 
-const NSCardDetailModal = ({ open, card, onClose, onUpdated }: NSCardDetailModalProps) => {
+const NSCardDetailModal = ({ open, card, onClose }: NSCardDetailModalProps) => {
   const openTurnToSignal = useModalStore((s) => s.openModal);
 
   const [localBookmarked, setLocalBookmarked] = useState(card.book_mark);
@@ -30,11 +28,11 @@ const NSCardDetailModal = ({ open, card, onClose, onUpdated }: NSCardDetailModal
 
   if (!open) return null;
 
+  const isSignal = card.signal_noise === 'signal';
+
   const handleToggleBookmark = async () => {
-    console.log('toggle bookmark postId:', card.id, 'card:', card);
     if (isToggling) return;
 
-    // optimistic update (즉시 UI 반영)
     const prev = localBookmarked;
     const next = !prev;
     setLocalBookmarked(next);
@@ -44,21 +42,13 @@ const NSCardDetailModal = ({ open, card, onClose, onUpdated }: NSCardDetailModal
       const res = await patchToggleBookmark(card.id);
 
       if (isPostFail(res)) {
-        // 실패면 롤백
         setLocalBookmarked(prev);
-        alert(res.error.reason);
+
         return;
       }
 
-      const post = res.success;
-
-      const confirmed = post.book_mark;
+      const confirmed = res.success.book_mark;
       setLocalBookmarked(confirmed);
-
-      onUpdated?.({
-        ...card,
-        book_mark: confirmed,
-      });
     } finally {
       setIsToggling(false);
     }
@@ -71,25 +61,25 @@ const NSCardDetailModal = ({ open, card, onClose, onUpdated }: NSCardDetailModal
     >
       <div
         className='relative w-min-1/2 min-h-1/3 bg-[#1E1E1E] rounded-4xl px-28 py-10
-       shadow-[0_0_25px_rgba(255,255,255,0.25),0_0_80px_rgba(255,255,255,0.12)]
-       border border-white/10 
-       backdrop-blur-sm text-base flex-none'
+        shadow-[0_0_25px_rgba(255,255,255,0.25),0_0_80px_rgba(255,255,255,0.12)]
+        border border-white/10 backdrop-blur-sm text-base flex-none'
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className='absolute top-8 right-8 text-gray-400 hover:text-white transition-colors cursor-pointer'
+          className='absolute top-8 right-8 text-gray-400 hover:text-white transition-colors'
         >
           <X size={32} />
         </button>
 
+        {/* Header */}
         <header className='flex items-center gap-2 mb-4 justify-between'>
           <div className='flex items-center gap-2'>
             <button
               type='button'
               onClick={handleToggleBookmark}
               aria-label='Toggle bookmark'
-              className='transition-transform active:scale-95 cursor-pointer'
+              className='transition-transform active:scale-95'
             >
               <Star
                 size={28}
@@ -102,14 +92,14 @@ const NSCardDetailModal = ({ open, card, onClose, onUpdated }: NSCardDetailModal
             </button>
 
             <h2 className='text-3xl text-gray-100 font-medium tracking-tight'>
-              {card.isSignal ? 'My Signal' : 'My Noise'}
+              {isSignal ? 'My Signal' : 'My Noise'}
             </h2>
           </div>
 
-          {!card.isSignal && (
+          {!isSignal && (
             <Button
               type='button'
-              className='text-bgColor bg-[#FF6F4B] border rounded-full scale-[0.8]  origin-right'
+              className='text-bgColor bg-[#FF6F4B] border rounded-full scale-[0.8] origin-right'
               onClick={() => openTurnToSignal('turnToSignal')}
             >
               Turn to Signal
@@ -118,13 +108,15 @@ const NSCardDetailModal = ({ open, card, onClose, onUpdated }: NSCardDetailModal
         </header>
 
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+          {/* Left */}
           <section className='flex flex-col justify-between h-full'>
             <div className='flex flex-col'>
               <span className='text-sm font-medium text-gray-400 mb-2 block'>Picture</span>
-              {card.image ? (
+
+              {card.photo_url ? (
                 <div className='w-73 h-54'>
                   <img
-                    src={card.image}
+                    src={card.photo_url}
                     alt={card.title}
                     className='w-full h-full object-cover rounded-2xl'
                   />
@@ -144,8 +136,9 @@ const NSCardDetailModal = ({ open, card, onClose, onUpdated }: NSCardDetailModal
             </div>
           </section>
 
+          {/* Right */}
           <section className='flex flex-col h-full pb-8'>
-            <MemoCard dateString={card.date} title={card.title} content={card.context} />
+            <MemoCard dateString={card.created_at} title={card.title} content={card.content} />
           </section>
         </div>
       </div>

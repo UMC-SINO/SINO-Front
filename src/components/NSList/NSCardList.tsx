@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { NSCardType } from '@/types/NSCard';
+import type { NSItem } from '@/types/NSList';
 import { NSCard } from './NSCard';
 import { SlidersHorizontal } from 'lucide-react';
 import NSCardDetailModal from '../Modal/NSCardDetailModal';
@@ -13,29 +13,20 @@ import { useNavigate } from 'react-router-dom';
 import { useModalStore } from '@/stores/modalStore';
 
 interface NSCardListProps {
-  cards: NSCardType[];
+  cards: NSItem[];
   title: string;
-  onCardUpdate?: (updated: NSCardType) => void;
 }
 
-export const NSCardList = ({ cards, title, onCardUpdate }: NSCardListProps) => {
+export const NSCardList = ({ cards, title }: NSCardListProps) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string | null>('Year');
-  const [selectedCard, setSelectedCard] = useState<NSCardType | null>(null);
+  const [selectedCard, setSelectedCard] = useState<NSItem | null>(null);
 
   const navigate = useNavigate();
   const { openModal } = useModalStore();
   const EmojiComp = emojis[0].Comp;
 
-  const handleCardUpdate = (updated: NSCardType) => {
-    // 1) 부모 리스트 반영
-    onCardUpdate?.(updated);
-
-    // 2) 상세 모달 카드 반영
-    setSelectedCard((prev) => (prev && prev.id === updated.id ? updated : prev));
-  };
-
-  const openDeleteModal = (card: NSCardType) => {
+  const openDeleteModal = (card: NSItem) => {
     openModal('delete', { postId: card.id });
   };
 
@@ -44,9 +35,9 @@ export const NSCardList = ({ cards, title, onCardUpdate }: NSCardListProps) => {
 
     switch (activeFilter) {
       case 'Year':
-        return card.date.startsWith('2025');
+        return card.created_at.startsWith('2025');
       case 'Month':
-        return card.date.slice(5, 7) === '12';
+        return card.created_at.slice(5, 7) === '12';
       case 'Bookmark':
         return card.book_mark;
       default:
@@ -101,12 +92,7 @@ export const NSCardList = ({ cards, title, onCardUpdate }: NSCardListProps) => {
       </div>
 
       {selectedCard && (
-        <NSCardDetailModal
-          open
-          card={selectedCard}
-          onClose={() => setSelectedCard(null)}
-          onUpdated={handleCardUpdate}
-        />
+        <NSCardDetailModal open card={selectedCard} onClose={() => setSelectedCard(null)} />
       )}
 
       <TurnToSignalModal />
