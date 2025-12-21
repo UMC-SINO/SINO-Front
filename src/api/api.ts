@@ -8,7 +8,8 @@ if (!baseURL) {
   );
 }
 
-// 인스턴스 정의
+// 인스턴스 정
 export const axiosInstance = axios.create({
   baseURL,
+  withCredentials: true,
 });

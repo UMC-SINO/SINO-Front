@@ -1,12 +1,10 @@
-import axios from 'axios';
+// api/postApi.ts
 import type { ApiResponse, DeletePostSuccess, PostErrorCode } from '@/types/post';
+import { axiosInstance } from './api';
 
 export const deletePost = async (postId: number) => {
-  const { data } = await axios.delete<ApiResponse<DeletePostSuccess, null, PostErrorCode>>(
-    `http://52.91.220.116:3000/api/posts/${postId}`,
-    {
-      headers: { accept: 'application/json' },
-    },
+  const { data } = await axiosInstance.delete<ApiResponse<DeletePostSuccess, null, PostErrorCode>>(
+    `/api/posts/${postId}`,
   );
 
   return data;
