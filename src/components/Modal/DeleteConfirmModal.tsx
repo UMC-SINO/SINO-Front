@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import Button from '@/components/common/Button';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useModalStore } from '@/stores/modalStore';
+import { useDeletePost } from '@/hooks/useDeletePost';
 
 type Props = {
+  postId?: number;
   title?: string;
   description?: string;
 };
@@ -12,14 +14,16 @@ export default function DeleteConfirmModal({
   title = 'Are you sure you want to ',
   description = 'Deleted posts cannot be recovered.',
 }: Props) {
-  const navigate = useNavigate();
-  const { activeModal, closeModal } = useModalStore();
+  // const navigate = useNavigate();
+  const { activeModal, closeModal, payload } = useModalStore();
+  const { mutate: deleteMutate, isPending } = useDeletePost();
 
   const isOpen = activeModal === 'delete';
+  const postId = payload?.postId;
 
   const close = () => {
     closeModal();
-    navigate('/');
+    // navigate('/');
   };
 
   // ESC 닫기
@@ -36,6 +40,26 @@ export default function DeleteConfirmModal({
   }, [isOpen]);
 
   if (!isOpen) return null;
+
+  const handleDelete = () => {
+    console.log('DELETE 클릭, postId=', postId);
+
+    if (typeof postId !== 'number') {
+      alert('postId가 없어서 삭제 요청을 못 보냄!');
+      return;
+    }
+
+    deleteMutate(postId, {
+      onSuccess: (res) => {
+        console.log('삭제 성공 응답:', res);
+        close();
+      },
+      onError: (err) => {
+        console.error('삭제 실패:', err);
+        alert('삭제 실패! 콘솔/네트워크 확인');
+      },
+    });
+  };
 
   return (
     <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs'>
@@ -62,11 +86,9 @@ export default function DeleteConfirmModal({
 
           <Button
             type='button'
-            onClick={() => {
-              // TODO: 실제 삭제 API
-              close();
-            }}
+            onClick={handleDelete}
             className='w-25 rounded-full'
+            disabled={isPending}
           >
             Delete
           </Button>
