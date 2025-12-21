@@ -6,10 +6,10 @@ interface NameInputProps {
   register: UseFormRegister<SigninFormData>;
   onCheckName?: () => void;
   error?: FieldError;
-  hasCheckedName?: boolean;
+  isNameAvailable?: boolean;
 }
 
-const NameInput = ({ mode, register, onCheckName, error, hasCheckedName }: NameInputProps) => {
+const NameInput = ({ mode, register, onCheckName, error, isNameAvailable }: NameInputProps) => {
   return (
     <div className='w-full flex flex-col items-center gap-3 relative'>
       <label className='text-xl tracking-wide'>Name</label>
@@ -34,13 +34,13 @@ const NameInput = ({ mode, register, onCheckName, error, hasCheckedName }: NameI
         )}
       </div>
 
-      {mode === 'signup' &&
-        hasCheckedName &&
-        (error ? (
-          <p className='absolute text-sm text-[#FF8381] mt-27'>{error.message}</p>
-        ) : (
-          <p className='absolute text-sm text-[#72DC70] mt-27'>사용 가능한 닉네임입니다.</p>
-        ))}
+      {mode === 'signup' && error && (
+        <p className='absolute text-sm text-[#FF8381] mt-27'>{error.message}</p>
+      )}
+
+      {mode === 'signup' && isNameAvailable && !error && (
+        <p className='absolute text-sm text-[#72DC70] mt-27'>사용 가능한 닉네임입니다.</p>
+      )}
 
       {mode === 'login' && error && (
         <p className='absolute text-sm text-[#FF8381] mt-27'>{error.message}</p>

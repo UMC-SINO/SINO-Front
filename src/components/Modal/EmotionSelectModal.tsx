@@ -117,6 +117,7 @@ export default function EmotionSelectModal() {
           <Button
             type='button'
             disabled={!isChecked}
+            onClick={() => openModal('writeReason')}
             className={clsx(
               'w-40 h-13 rounded-full font-semibold text-lg',
               isChecked

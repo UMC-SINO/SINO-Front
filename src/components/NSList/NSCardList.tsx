@@ -15,9 +15,11 @@ import { useModalStore } from '@/stores/modalStore';
 interface NSCardListProps {
   cards: NSCardType[];
   title: string;
+  // 북마크 토글 성공 시, 업데이트된 카드(혹은 id+book_mark)를 부모로 전달
+  onCardUpdate?: (updated: NSCardType) => void;
 }
 
-export const NSCardList = ({ cards, title }: NSCardListProps) => {
+export const NSCardList = ({ cards, title, onCardUpdate }: NSCardListProps) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string | null>('Year');
   const [selectedCard, setSelectedCard] = useState<NSCardType | null>(null);
@@ -48,6 +50,13 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
 
   const openDeleteModal = (card: NSCardType) => {
     openModal('delete', { postId: card.id });
+    
+  const handleCardUpdate = (updated: NSCardType) => {
+    // 1) 부모 리스트 반영
+    onCardUpdate?.(updated);
+
+    // 2) 모달이 보고 있는 selectedCard도 반영
+    setSelectedCard((prev) => (prev && prev.id === updated.id ? updated : prev));
   };
 
   return (
@@ -107,6 +116,7 @@ export const NSCardList = ({ cards, title }: NSCardListProps) => {
           open={!!selectedCard}
           card={selectedCard}
           onClose={() => setSelectedCard(null)}
+          onUpdated={handleCardUpdate}
         />
       )}
 
