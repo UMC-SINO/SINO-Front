@@ -45,13 +45,6 @@ const RetrospectFlowPage = () => {
 
       setPostId(createdPostId);
       setStep('confirm');
-
-      setSelectedDateTime(null);
-      setSelectedEmotions([]);
-      setTitle('');
-      setContent('');
-      setPhotoFile(null);
-      setPreviewImage(null);
     },
     onError: () => {
       console.error('글 저장 실패');
@@ -98,7 +91,16 @@ const RetrospectFlowPage = () => {
       photo: photoFile ?? null,
     });
   };
-  const handleIsSignal = () => navigate('/');
+  const handleIsSignal = () => {
+    setSelectedDateTime(null);
+    setSelectedEmotions([]);
+    setTitle('');
+    setContent('');
+    setPhotoFile(null);
+    setPreviewImage(null);
+
+    navigate('/');
+  };
 
   return (
     <div className='min-h-screen flex justify-center items-center flex-col p-6 text-white'>
