@@ -3,7 +3,7 @@ import Button from '@/components/common/Button';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
-const sliderItem = Array.from({ length: 8 });
+const sliderItem = Array.from({ length: 9 });
 const colors = ['#FFB7A5', '#FF6F4B', '#FF8C6F'];
 
 const OnBoadingPage = () => {
