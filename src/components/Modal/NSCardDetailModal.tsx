@@ -93,7 +93,7 @@ const NSCardDetailModal = ({ open, card, isLoading, onClose }: NSCardDetailModal
             <Button
               type='button'
               className='bg-[#FF6F4B] text-black rounded-full px-5 py-2 text-sm'
-              onClick={() => openTurnToSignal('turnToSignal')}
+              onClick={() => openTurnToSignal('turnToSignal', { postId: card.id })}
             >
               Turn to Signal
             </Button>
