@@ -1,6 +1,6 @@
 export const postKeys = {
   all: ['posts'] as const,
-  list: (params: { year?: number; month?: number; bookmark?: boolean }) =>
+  list: (params: { year?: number; month?: number; book_mark?: boolean }) =>
     ['posts', 'list', params] as const,
   detail: (postId: number) => ['posts', 'detail', postId] as const,
 };

@@ -7,10 +7,10 @@ type Vars = { postId: number };
 type PostsListCache = Post[];
 
 function toggleInList(list: PostsListCache, postId: number) {
-  return list.map((p) => (p.id === postId ? { ...p, bookmark: !p.book_mark } : p));
+  return list.map((p) => (p.id === postId ? { ...p, book_mark: !p.book_mark } : p));
 }
 
-export function useToggleBookmark(params: { year?: number; month?: number; bookmark?: boolean }) {
+export function useToggleBookmark(params: { year?: number; month?: number; book_mark?: boolean }) {
   const qc = useQueryClient();
   const listKey = postKeys.list(params);
 
@@ -30,7 +30,7 @@ export function useToggleBookmark(params: { year?: number; month?: number; bookm
       if (prevDetail)
         qc.setQueryData(postKeys.detail(postId), {
           ...prevDetail,
-          bookmark: !prevDetail.book_mark,
+          book_mark: !prevDetail.book_mark,
         });
 
       return { prevList, prevDetail };
@@ -43,7 +43,7 @@ export function useToggleBookmark(params: { year?: number; month?: number; bookm
     },
 
     onSuccess: (res, { postId }) => {
-      if (res.resultType === 'FAIL') {
+      if (res.resultType !== 'SUCCESS' || !res.success) {
         // 서버 FAIL이면 최신화로 복구
         qc.invalidateQueries({ queryKey: listKey });
         qc.invalidateQueries({ queryKey: postKeys.detail(postId) });
