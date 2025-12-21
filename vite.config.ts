@@ -7,7 +7,7 @@ import svgr from 'vite-plugin-svgr';
 export default defineConfig({
   plugins: [react(), tailwindcss(), svgr()],
   server: {
-    port: 3000, // 포트 번호 설정
+    port: 5173, // 포트 번호 설정
   },
   resolve: {
     alias: {
