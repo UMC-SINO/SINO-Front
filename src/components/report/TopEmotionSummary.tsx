@@ -13,17 +13,20 @@ type Props = {
 const TopEmotionSummary = ({ year, emotionCounts }: Props) => {
   if (!emotionCounts || Object.keys(emotionCounts).length === 0) return null;
 
-  const sortedTopEmotions = Object.entries(emotionCounts)
-    .map(([emotion, count]) => ({ emotion, count: Number(count) }))
-    .sort((a, b) => b.count - a.count)
-    .slice(0, 3);
+  const sortedTopEmotions = emotionCounts.sort((a, b) => b.count - a.count).slice(0, 3);
+
+  const displayOrder = [
+    sortedTopEmotions[1], // 왼쪽
+    sortedTopEmotions[0], // 중앙
+    sortedTopEmotions[2], // 오른쪽
+  ];
 
   return (
     <div>
       <h3 className='text-3xl text-center font-normal mb-4 w-full'>Top emotions in {year}</h3>
 
       <div className='flex gap-12 items-end justify-center'>
-        {sortedTopEmotions.map((item, idx) => {
+        {displayOrder.map((item, idx) => {
           const EmojiComp = emojis.find((e) => e.key === item.emotion)?.Comp ?? emojis[0].Comp;
 
           return (

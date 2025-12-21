@@ -45,13 +45,12 @@ const SplashPage = () => {
   const handleNext = () => {
     if (!canGoNext) return;
 
-    // API 호출
     createReport(
-      { year: Number(year), month: Number(month), userId: 11 }, // userId 필요 시 변경
+      { year: Number(year), month: Number(month), userId: 11 }, // userId 목데이터
       {
         onSuccess: (res: ReportApiResponse) => {
           console.log('보고서 생성 성공:', res);
-          navigate('/retro-report', { state: { reportData: res } });
+          navigate('/retro-report', { state: { reportData: res, year } });
         },
         onError: (err) => console.error('보고서 생성 실패:', err),
       },
