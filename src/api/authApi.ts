@@ -15,3 +15,8 @@ export const postLogin = async (body: NicknameRequest) => {
   const { data } = await axiosInstance.post<ApiResponse>('/api/auth/login', body);
   return data;
 };
+
+export const getMe = async () => {
+  const { data } = await axiosInstance.get<ApiResponse>('/api/auth/me');
+  return data;
+};
