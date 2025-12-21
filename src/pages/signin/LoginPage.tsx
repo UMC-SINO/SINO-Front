@@ -7,9 +7,11 @@ import { useNavigate } from 'react-router-dom';
 import { postLogin } from '@/api/authApi';
 import { useMutation } from '@tanstack/react-query';
 import PageLoading from '@/components/common/PageLoading';
+import { useAuth } from '@/hooks/useAuth';
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const { setLoggedIn } = useAuth();
 
   const {
     register,
@@ -23,6 +25,7 @@ const LoginPage = () => {
   const loginMutation = useMutation({
     mutationFn: postLogin,
     onSuccess: () => {
+      setLoggedIn();
       navigate('/'); // 로그인 성공 후 이동
     },
     onError: (error) => {
