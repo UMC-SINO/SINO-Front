@@ -8,7 +8,7 @@ import type { RetrospectStep } from '@/types/retrospect';
 import { usePostAnalyze } from '@/hooks/usePostAnalyze';
 import type { AnalyzeSuccessData } from '@/types/analyze';
 import { useMutation } from '@tanstack/react-query';
-import { useAtomValue } from 'jotai';
+import { useAtom } from 'jotai';
 import {
   retrospectContentAtom,
   retrospectPhotoAtom,
@@ -26,11 +26,11 @@ const RetrospectFlowPage = () => {
   const [emotions, setEmotions] = useState<AnalyzeSuccessData[]>([]);
   const navigate = useNavigate();
 
-  const selectedDateTime = useAtomValue(selectedDateTimeAtom);
-  const selectedEmotions = useAtomValue(selectedEmojisAtom);
-  const title = useAtomValue(retrospectTitleAtom);
-  const content = useAtomValue(retrospectContentAtom);
-  const photoFile = useAtomValue(retrospectPhotoAtom);
+  const [selectedDateTime, setSelectedDateTime] = useAtom(selectedDateTimeAtom);
+  const [selectedEmotions, setSelectedEmotions] = useAtom(selectedEmojisAtom);
+  const [title, setTitle] = useAtom(retrospectTitleAtom);
+  const [content, setContent] = useAtom(retrospectContentAtom);
+  const [photoFile, setPhotoFile] = useAtom(retrospectPhotoAtom);
   const [postId, setPostId] = useState<number | null>(null);
 
   const writeMutation = useMutation({
@@ -45,6 +45,13 @@ const RetrospectFlowPage = () => {
 
       setPostId(createdPostId);
       setStep('confirm');
+
+      setSelectedDateTime(null);
+      setSelectedEmotions([]);
+      setTitle('');
+      setContent('');
+      setPhotoFile(null);
+      setPreviewImage(null);
     },
     onError: () => {
       console.error('글 저장 실패');
