@@ -42,7 +42,7 @@ export default function DeleteConfirmModal({
   if (!isOpen) return null;
 
   const handleDelete = () => {
-    console.log('DELETE 클릭, postId=', 101); // ✅ 이거 찍혀야 함
+    console.log('DELETE 클릭, postId=', postId);
 
     if (typeof postId !== 'number') {
       alert('postId가 없어서 삭제 요청을 못 보냄!');

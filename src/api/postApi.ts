@@ -1,13 +1,14 @@
-// api/postApi.ts
-import type { ApiResponse, DeletePostSuccess, PostErrorCode, ToggleBookmarkResponse } from '@/types/post';
+import type { DeletePostSuccess, ToggleBookmarkResponse } from '@/types/post';
 import { axiosInstance } from './api';
+import type { ApiResponse } from '@/types/common';
 
 export const deletePost = async (postId: number) => {
-  const { data } = await axiosInstance.delete<ApiResponse<DeletePostSuccess, null, PostErrorCode>>(
+  const { data } = await axiosInstance.delete<ApiResponse<DeletePostSuccess>>(
     `/api/posts/${postId}`,
   );
+  return data;
+};
 
-// PATCH /api/posts/{postId}/bookmark
 export const patchToggleBookmark = async (postId: number) => {
   const { data } = await axiosInstance.patch<ToggleBookmarkResponse>(
     `/api/posts/${postId}/bookmark`,
