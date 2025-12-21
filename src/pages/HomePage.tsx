@@ -45,7 +45,7 @@ const HomePage = () => {
           <NSCardList cards={signalCards} title='Signal' />
           <Button
             type='button'
-            className='bg-bgColor text-[#FF6F4B] border border-[#FF6F4B] rounded-full w-[228px] py-2 mt-7'
+            className='bg-bgColor text-[#FF6F4B] border border-[#FF6F4B] rounded-full w-57 py-2 mt-7'
             onClick={() => navigate('/date-select')}
           >
             Add
@@ -60,7 +60,7 @@ const HomePage = () => {
             </p>
             <Button
               type='button'
-              className='text-bgColor bg-[#FF6F4B] border border-[#FF6F4B] rounded-full w-[228px] py-2'
+              className='text-bgColor bg-[#FF6F4B] border border-[#FF6F4B] rounded-full w-57 py-2'
               onClick={() => navigate('/splash')}
             >
               Create the report
