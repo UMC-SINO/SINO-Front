@@ -28,3 +28,26 @@ export const pickData = <TData>(res: ApiSuccessResponse<TData>) => {
   // 서버가 data 또는 result 둘 중 뭘 쓰든 여기서 흡수
   return (res.data ?? res.result) as TData | undefined;
 };
+
+export type CommonResponse<T> = {
+  resultType: string;
+  error: null | {
+    errorCode: string;
+    reason: string;
+    data: null;
+  };
+  success: T;
+};
+
+export interface EmotionAnalysis {
+  emotion_name: string;
+  percentage: number;
+}
+
+export interface AnalyzeSuccessData {
+  signalNoiseResult: 'Signal' | 'Noise';
+  emotions: EmotionAnalysis[];
+  analyzedAt: string;
+}
+
+export type PostAnalyzeResponse = CommonResponse<AnalyzeSuccessData>;

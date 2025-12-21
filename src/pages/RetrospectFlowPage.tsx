@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Button from '@/components/common/Button';
 import EmotionAnalysisList from '@/components/analysis/EmotionAnalysisList';
 import { LayoutGroup, motion } from 'framer-motion';
@@ -6,36 +6,106 @@ import { useNavigate } from 'react-router-dom';
 import { RetrospectMainBlock } from '@/components/retro/RetrospectMainBlock';
 import type { RetrospectStep } from '@/types/retrospect';
 import { usePostAnalyze } from '@/hooks/usePostAnalyze';
-import type { AnalyzeSuccessData } from '@/types/analyze';
+import { useMutation } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
+import {
+  retrospectContentAtom,
+  retrospectPhotoAtom,
+  retrospectTitleAtom,
+  selectedDateTimeAtom,
+  selectedEmojisAtom,
+} from '@/atoms';
+import { postWrite } from '@/api/postApi';
+import type { EmotionAnalysis } from '@/types/common';
 
 const RetrospectFlowPage = () => {
   const [step, setStep] = useState<RetrospectStep>('write');
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const [analysisResult, setAnalysisResult] = useState<'Signal' | 'Noise' | null>(null);
-  const [emotions, setEmotions] = useState<AnalyzeSuccessData['emotions']>([]);
+
+  const [emotions, setEmotions] = useState<EmotionAnalysis[]>([]);
   const navigate = useNavigate();
+
+  const [selectedDateTime, setSelectedDateTime] = useAtom(selectedDateTimeAtom);
+  const [selectedEmotions, setSelectedEmotions] = useAtom(selectedEmojisAtom);
+  const [title, setTitle] = useAtom(retrospectTitleAtom);
+  const [content, setContent] = useAtom(retrospectContentAtom);
+  const [photoFile, setPhotoFile] = useAtom(retrospectPhotoAtom);
+  const [postId, setPostId] = useState<number | null>(null);
+
+  const writeMutation = useMutation({
+    mutationFn: postWrite,
+    onSuccess: (data) => {
+      const createdPostId = data.success?.postId;
+
+      if (!createdPostId) {
+        alert('postId가 없습니다');
+        return;
+      }
+
+      setPostId(createdPostId);
+      setStep('confirm');
+    },
+    onError: () => {
+      console.error('글 저장 실패');
+      alert('저장에 실패했어요');
+    },
+  });
 
   const { mutate: mutateAnalyze, isLoading: isAnalyzing } = usePostAnalyze();
 
   const handleAnalyze = () => {
-    mutateAnalyze(126, {
-      //postId 값 목데이터
-      onSuccess: (data) => {
-        // 성공했을 때 처리
-        setAnalysisResult(data.success?.signalNoiseResult ?? null);
-        setEmotions(data.success?.emotions ?? []);
+    if (!postId) {
+      alert('postId가 없습니다. 먼저 저장해주세요.');
+      return;
+    }
+
+    mutateAnalyze(postId, {
+      onSuccess: (res) => {
+        if (res.error) {
+          alert(res.error.reason);
+          return;
+        }
+
+        setAnalysisResult(res.success.signalNoiseResult);
+        setEmotions(res.success.emotions);
         setStep('analysis');
       },
-      onError: (error: any) => {
-        console.error('분석 실패:', error);
-        alert(error.message ?? '분석 중 오류 발생');
+      onError: () => {
+        console.error('분석 실패');
+        alert('분석 중 오류 발생');
       },
     });
   };
+
   const handleBack = () => navigate(-1);
-  const handleSave = () => setStep('confirm');
-  const handleIsSignal = () => navigate('/');
+  const handleSave = () => {
+    if (!selectedDateTime) {
+      alert('날짜가 없습니다');
+      return;
+    }
+
+    console.log('Sending file:', photoFile);
+
+    writeMutation.mutate({
+      date: selectedDateTime,
+      title,
+      content,
+      emotions: selectedEmotions,
+      photo: photoFile ?? null,
+    });
+  };
+  const handleIsSignal = () => {
+    setSelectedDateTime(null);
+    setSelectedEmotions([]);
+    setTitle('');
+    setContent('');
+    setPhotoFile(null);
+    setPreviewImage(null);
+
+    navigate('/');
+  };
 
   return (
     <div className='min-h-screen flex justify-center items-center flex-col p-6 text-white'>

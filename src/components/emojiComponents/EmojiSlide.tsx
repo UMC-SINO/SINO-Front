@@ -30,28 +30,27 @@ const EmojiSlide = ({ onSavedChange }: EmojiSlideProps) => {
 
   const isCenterSaved = savedIds.includes(emojis[activeIndex].key);
 
+  useEffect(() => {
+    onSavedChange?.(savedIds);
+  }, [savedIds, onSavedChange]);
+
   const handleSaveClicked = () => {
     const key = emojis[activeIndex].key;
 
     setSavedIds((prev) => {
-      const exists = prev.includes(key);
-
-      let next = prev;
-
-      if (exists) {
-        next = prev.filter((id) => id !== key);
+      if (prev.includes(key)) {
         setSaveError(null);
-      } else if (prev.length < 5) {
-        next = [...prev, key];
-        setSaveError(null);
-      } else {
-        setSaveError('최대 5개까지 선택할 수 있어요!');
-        setShakeKey((k) => k + 1);
-        return prev;
+        return prev.filter((id) => id !== key);
       }
 
-      onSavedChange?.(next);
-      return next;
+      if (prev.length < 5) {
+        setSaveError(null);
+        return [...prev, key];
+      }
+
+      setSaveError('최대 5개까지 선택할 수 있어요!');
+      setShakeKey((k) => k + 1);
+      return prev;
     });
   };
 
@@ -61,7 +60,7 @@ const EmojiSlide = ({ onSavedChange }: EmojiSlideProps) => {
 
   return (
     <div>
-      <div className='relative flex justify-center items-center h-60 overflow-hidden w-200'>
+      <div className='relative flex justify-center items-center h-60 overflow-hidden w-200 cursor-pointer'>
         {emojis.map((emoji, index) => {
           const offset = getOffset(index, activeIndex, total);
           const Comp = emoji.Comp;
@@ -73,6 +72,7 @@ const EmojiSlide = ({ onSavedChange }: EmojiSlideProps) => {
           return (
             <motion.div
               key={emoji.key}
+              onClick={() => setActiveIndex(index)}
               animate={{
                 x: offset * 160,
                 scale: isCenter ? 1 : 0.65,

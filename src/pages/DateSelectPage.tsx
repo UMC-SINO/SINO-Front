@@ -3,8 +3,9 @@ import Button from '@/components/common/Button';
 import { useState } from 'react';
 import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
+import { useSetAtom } from 'jotai';
+import { selectedDateTimeAtom } from '@/atoms';
 
-const yearItems = ['Text', '2023', '2024', '2025', 'Unknown', ''];
 const monthItems = [
   'Text',
   '1',
@@ -24,39 +25,47 @@ const monthItems = [
 ];
 
 export default function DateSelectPage() {
-  const [selectedYear, setSelectedYear] = useState('Text');
   const [selectedMonth, setSelectedMonth] = useState('Text');
 
-  const isValid = (v: string) => v !== 'Text' && v !== '';
-  const isContinueEnabled = isValid(selectedYear) && isValid(selectedMonth);
-
+  const setSelectedDateTime = useSetAtom(selectedDateTimeAtom);
   const navigate = useNavigate();
 
+  const isValid = (v: string) => v !== 'Text' && v !== '' && v !== 'Unknown';
+  const isContinueEnabled = isValid(selectedMonth);
+
   const handleContinue = () => {
-    console.log('선택:', { year: selectedYear, month: selectedMonth });
-    // TODO: navigate(`/next?year=${selectedYear}&month=${selectedMonth}`);
+    const month = selectedMonth.padStart(2, '0'); // 12 → 12, 1 → 01
+
+    // YYYY-MM-DD HH:mm:ss
+    const formattedDateTime = `2025-${month}-01 00:00:00`;
+
+    // jotai 전역 저장
+    setSelectedDateTime(formattedDateTime);
+
+    console.log('저장된 날짜:', formattedDateTime);
+
     navigate('/emoji');
   };
 
   return (
-    // 화면 전체를 꽉 채우는 랚퍼 + absolute 기준점
     <div className='relative min-h-screen w-full flex items-center justify-center px-6'>
       <div className='flex flex-col items-center'>
-        {/* 드롭다운 2개 */}
         <div className='flex items-start gap-4'>
           {/* Year */}
           <div className='flex flex-col items-center gap-2'>
             <div className='text-lg font-semibold text-white/90'>
-              Choose the <span className='text-[#FF6F4B]'>Year</span>
+              <span className='text-[#FF6F4B]'>Year</span>
             </div>
 
-            <Dropdown
-              items={yearItems}
+            <div
               className={clsx(
-                'w-120 [&>button]:text-xl [&>button]:rounded-full [&>button>div]:p-1.5',
+                'w-120 bg-[#E1E0E0] py-2 rounded-full',
+                'text-xl font-semibold text-black',
+                'flex items-center justify-center',
               )}
-              onSelect={(value) => setSelectedYear(value)}
-            />
+            >
+              2025
+            </div>
           </div>
 
           {/* Month */}
@@ -72,7 +81,6 @@ export default function DateSelectPage() {
           </div>
         </div>
 
-        {/* Continue 버튼 */}
         <div className='mt-30'>
           <Button
             type='button'

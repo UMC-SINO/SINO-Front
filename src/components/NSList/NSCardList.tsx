@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { NSCardType } from '@/types/NSCard';
+import type { NSItem } from '@/types/NSList';
 import { NSCard } from './NSCard';
 import { SlidersHorizontal } from 'lucide-react';
 import NSCardDetailModal from '../Modal/NSCardDetailModal';
@@ -8,34 +8,26 @@ import EmotionSelectModal from '../Modal/EmotionSelectModal';
 import SuccessChangeToSignalModal from '../Modal/SuccessChangeToSignalModal';
 import DeleteConfirmModal from '../Modal/DeleteConfirmModal';
 import WriteReasonModal from '../Modal/WriteReasonModal';
-import { emojis } from '@/data/emoji';
 import { useNavigate } from 'react-router-dom';
 import { useModalStore } from '@/stores/modalStore';
+import { useNSDetail } from '@/hooks/useNSDetail';
 
 interface NSCardListProps {
-  cards: NSCardType[];
+  cards: NSItem[];
   title: string;
-  onCardUpdate?: (updated: NSCardType) => void;
 }
 
-export const NSCardList = ({ cards, title, onCardUpdate }: NSCardListProps) => {
+export const NSCardList = ({ cards, title }: NSCardListProps) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string | null>('Year');
-  const [selectedCard, setSelectedCard] = useState<NSCardType | null>(null);
+  const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
 
   const navigate = useNavigate();
   const { openModal } = useModalStore();
-  const EmojiComp = emojis[0].Comp;
 
-  const handleCardUpdate = (updated: NSCardType) => {
-    // 1) 부모 리스트 반영
-    onCardUpdate?.(updated);
+  const { data: detailCard, isLoading } = useNSDetail(selectedPostId);
 
-    // 2) 상세 모달 카드 반영
-    setSelectedCard((prev) => (prev && prev.id === updated.id ? updated : prev));
-  };
-
-  const openDeleteModal = (card: NSCardType) => {
+  const openDeleteModal = (card: NSItem) => {
     openModal('delete', { postId: card.id });
   };
 
@@ -44,9 +36,9 @@ export const NSCardList = ({ cards, title, onCardUpdate }: NSCardListProps) => {
 
     switch (activeFilter) {
       case 'Year':
-        return card.date.startsWith('2025');
+        return card.created_at.startsWith('2025');
       case 'Month':
-        return card.date.slice(5, 7) === '12';
+        return card.created_at.slice(5, 7) === '12';
       case 'Bookmark':
         return card.book_mark;
       default:
@@ -56,7 +48,7 @@ export const NSCardList = ({ cards, title, onCardUpdate }: NSCardListProps) => {
 
   return (
     <div className='flex flex-col'>
-      {/* 헤더 */}
+      {/* Header */}
       <div className='flex items-center justify-between mb-2'>
         <h1 className='text-white text-3xl font-medium'>{title}</h1>
 
@@ -85,33 +77,42 @@ export const NSCardList = ({ cards, title, onCardUpdate }: NSCardListProps) => {
         </div>
       </div>
 
+      {/* Card Grid */}
       <div className='grid grid-cols-4 grid-rows-4 w-108 h-108 border rounded-2xl border-white p-4 gap-4'>
-        {filteredCards.slice(0, 16).map((card) => (
-          <NSCard
-            key={card.id}
-            card={card}
-            onEdit={() => navigate('/retro')}
-            onDelete={() => openDeleteModal(card)}
-            onClick={() => {
-              setSelectedCard(card);
-              openModal('detail');
-            }}
-          />
-        ))}
+        {filteredCards.length === 0 ? (
+          <div className='col-span-4 row-span-4 flex flex-col items-center justify-center text-white/60'>
+            <p className='text-lg font-medium mb-2'>아직 작성된 {title}가 없어요</p>
+            <p className='text-sm'>왼쪽 아래 Add 버튼을 눌러 추가해보세요</p>
+          </div>
+        ) : (
+          filteredCards.slice(0, 16).map((card) => (
+            <NSCard
+              key={card.id}
+              card={card}
+              onEdit={() => navigate('/retro')}
+              onDelete={() => openDeleteModal(card)}
+              onClick={() => {
+                setSelectedPostId(card.id);
+                openModal('detail');
+              }}
+            />
+          ))
+        )}
       </div>
 
-      {selectedCard && (
+      {/* Detail Modal */}
+      {selectedPostId && (
         <NSCardDetailModal
           open
-          card={selectedCard}
-          onClose={() => setSelectedCard(null)}
-          onUpdated={handleCardUpdate}
+          card={detailCard}
+          isLoading={isLoading}
+          onClose={() => setSelectedPostId(null)}
         />
       )}
 
       <TurnToSignalModal />
       <EmotionSelectModal />
-      <WriteReasonModal onCloseDetail={() => setSelectedCard(null)} />
+      <WriteReasonModal />
       <SuccessChangeToSignalModal />
       <DeleteConfirmModal />
     </div>

@@ -3,6 +3,8 @@ import DotIndicator from '@/components/emojiComponents/DotIndicator';
 import EmojiSlide from '@/components/emojiComponents/EmojiSlide';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useSetAtom } from 'jotai';
+import { selectedEmojisAtom } from '@/atoms';
 
 const EmojiPage = () => {
   const { state } = useLocation();
@@ -10,6 +12,8 @@ const EmojiPage = () => {
   const { year = 2025, month = 12 } = state || {};
 
   const [savedIds, setSavedIds] = useState<string[]>([]);
+  const setSelectedEmojis = useSetAtom(selectedEmojisAtom);
+
   const canContinue = savedIds.length >= 1 && savedIds.length <= 5;
 
   const handleBack = () => {
@@ -18,7 +22,10 @@ const EmojiPage = () => {
 
   const handleContinue = () => {
     if (!canContinue) return;
-    navigate('/retro', { state: { savedIds } });
+
+    setSelectedEmojis(savedIds);
+    console.log('jotai로 저장할 이모지:', savedIds);
+    navigate('/retro');
   };
 
   return (
