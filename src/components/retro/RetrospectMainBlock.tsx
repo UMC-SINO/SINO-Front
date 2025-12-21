@@ -3,9 +3,10 @@
 import { motion } from 'framer-motion';
 import { EmotionChips } from '@/components/common/Emotionchips';
 import { MemoCard } from '@/components/common/MemoCard';
-import { WRITE_DATA } from '@/data/writeData';
 import { PhotoGrid } from '../common/PhotoGrid';
 import { useRef, useState, type ChangeEvent } from 'react';
+import { selectedDateTimeAtom, selectedEmojisAtom } from '@/atoms';
+import { useAtomValue } from 'jotai';
 
 type RetrospectMainBlockProps = {
   editable: boolean;
@@ -20,6 +21,17 @@ export const RetrospectMainBlock = ({
 }: RetrospectMainBlockProps) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+
+  const selectedDateTime = useAtomValue(selectedDateTimeAtom);
+  const emotions = useAtomValue(selectedEmojisAtom);
+
+  const dateString = selectedDateTime
+    ? (() => {
+        const [date] = selectedDateTime.split(' ');
+        const [year, month] = date.split('-');
+        return `${year}/${month}`;
+      })()
+    : '';
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -54,11 +66,11 @@ export const RetrospectMainBlock = ({
 
         <input ref={fileInputRef} type='file' accept='image/*' hidden onChange={handleFileChange} />
 
-        <EmotionChips emotions={WRITE_DATA.emotions} />
+        <EmotionChips emotions={emotions} />
       </div>
 
       <MemoCard
-        dateString={WRITE_DATA.dateString}
+        dateString={dateString}
         title={title}
         content={content}
         readOnly={!editable}
