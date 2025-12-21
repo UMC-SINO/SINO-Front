@@ -2,6 +2,7 @@ import { BurgerIcon, HomeIcon, ReportIcon } from '@/assets';
 import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 import userImage from '@/assets/userImage.png';
+import { useAuth } from '@/hooks/useAuth';
 
 interface SideBarProps {
   open: boolean;
@@ -11,6 +12,8 @@ interface SideBarProps {
 const SideBar = ({ open, onClose }: SideBarProps) => {
   const navigate = useNavigate();
 
+  const { setLoggedOut } = useAuth();
+
   const moveHome = () => {
     navigate('/');
     onClose();
@@ -19,6 +22,12 @@ const SideBar = ({ open, onClose }: SideBarProps) => {
   const moveReportPage = () => {
     navigate('/report-view');
     onClose();
+  };
+
+  const handleLogout = () => {
+    setLoggedOut();
+    onClose();
+    navigate('/login');
   };
 
   return (
@@ -77,7 +86,11 @@ const SideBar = ({ open, onClose }: SideBarProps) => {
           </nav>
 
           <div className='mt-auto mb-3 flex justify-center'>
-            <button className='px-4 py-1.5 bg-white text-[#969392] border-2 border-[#969392] rounded-full text-xl font-medium hover:opacity-80 transition cursor-pointer'>
+            <button
+              type='button'
+              onClick={handleLogout}
+              className='px-4 py-1.5 bg-white text-[#969392] border-2 border-[#969392] rounded-full text-xl font-medium hover:opacity-80 transition cursor-pointer'
+            >
               Log out
             </button>
           </div>

@@ -1,12 +1,21 @@
 import Button from '@/components/common/Button';
 import { NSCardList } from '@/components/NSList/NSCardList';
 import { NOISE_CARDS, SIGNAL_CARDS } from '@/data/nscard';
+import { useAuth } from '@/hooks/useAuth';
+import { useEffect } from 'react';
 import type { NSCardType } from '@/types/NSCard';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const { isLoggedIn } = useAuth();
+
+  useEffect(() => {
+    if (!isLoggedIn()) {
+      navigate('/onboarding', { replace: true });
+    }
+  }, [navigate, isLoggedIn]);
 
   const [signalCards, setSignalCards] = useState<NSCardType[]>(SIGNAL_CARDS);
   const [noiseCards, setNoiseCards] = useState<NSCardType[]>(NOISE_CARDS);

@@ -13,6 +13,7 @@ import { isFail } from '@/types/auth';
 
 const getReason = (err: unknown) => {
   if (!axios.isAxiosError(err)) return '알 수 없는 오류';
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const data = err.response?.data as any;
   return data?.error?.reason ?? '요청 처리 중 오류';
 };
@@ -31,6 +32,7 @@ const SignupPage = () => {
     trigger,
     watch,
     getValues,
+    setError,
     formState: { errors },
   } = useForm<SigninFormData>({
     resolver: zodResolver(signinSchema),
@@ -62,14 +64,21 @@ const SignupPage = () => {
       {
         onSuccess: (res) => {
           if (isFail(res)) {
-            alert(res.error.reason);
+            setError('name', {
+              type: 'manual',
+              message: res.error.reason,
+            });
             setIsNameAvailable(false);
             return;
           }
+
           setIsNameAvailable(true);
         },
         onError: (e) => {
-          alert(getReason(e));
+          setError('name', {
+            type: 'manual',
+            message: getReason(e),
+          });
           setIsNameAvailable(false);
         },
       },
@@ -85,13 +94,20 @@ const SignupPage = () => {
       {
         onSuccess: (res) => {
           if (isFail(res)) {
-            alert(res.error.reason);
+            setError('name', {
+              type: 'manual',
+              message: res.error.reason,
+            });
             return;
           }
-          // 가입하면 무조건 로그인으로 이동
           navigate('/login');
         },
-        onError: (e) => alert(getReason(e)),
+        onError: (e) => {
+          setError('name', {
+            type: 'manual',
+            message: getReason(e),
+          });
+        },
       },
     );
   };
@@ -113,7 +129,7 @@ const SignupPage = () => {
           register={register}
           onCheckName={handleCheckName}
           error={errors.name}
-          hasCheckedName={hasCheckedName}
+          isNameAvailable={isNameAvailable}
         />
 
         <Button
