@@ -11,4 +11,15 @@ export interface AnalyzeSuccessData {
   analyzedAt: string;
 }
 
+export type AnalyzedEmotion = {
+  emotion_name: string;
+  percentage: number;
+};
+
+export type GetAnalysisSuccess = {
+  signalNoiseResult: 'Signal' | 'Noise';
+  emotions: AnalyzedEmotion[];
+  analyzedAt: string;
+};
+
 export type AnalyzeApiResponse = ApiSuccessResponse<AnalyzeSuccessData>;
