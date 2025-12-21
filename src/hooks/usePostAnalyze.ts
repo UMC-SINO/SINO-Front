@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { postAnalyze } from '@/api/analyze';
 
+// eslint-disable-next-line no-unused-vars
 export const usePostAnalyze = (onSuccess?: (data: any) => void) => {
   const mutation = useMutation({
     mutationFn: (postId: number) => postAnalyze(postId),

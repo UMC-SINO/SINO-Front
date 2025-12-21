@@ -1,11 +1,9 @@
-import type { ApiResponse } from '@/types/common';
+import type { ApiResponse, PostAnalyzeResponse } from '@/types/common';
 import { axiosInstance } from './api';
-import type { AnalyzeSuccessData, GetAnalysisSuccess } from '@/types/analyze';
+import type { GetAnalysisSuccess } from '@/types/analyze';
 
-export const postAnalyze = async (postId: number): Promise<ApiResponse<AnalyzeSuccessData>> => {
-  const { data } = await axiosInstance.post<ApiResponse<AnalyzeSuccessData>>(
-    `/api/posts/${postId}/analyze`,
-  );
+export const postAnalyze = async (postId: number): Promise<PostAnalyzeResponse> => {
+  const { data } = await axiosInstance.post(`/api/posts/${postId}/analyze`);
   return data;
 };
 

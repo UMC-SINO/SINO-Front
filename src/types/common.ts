@@ -38,3 +38,16 @@ export type CommonResponse<T> = {
   };
   success: T;
 };
+
+export interface EmotionAnalysis {
+  emotion_name: string;
+  percentage: number;
+}
+
+export interface AnalyzeSuccessData {
+  signalNoiseResult: 'Signal' | 'Noise';
+  emotions: EmotionAnalysis[];
+  analyzedAt: string;
+}
+
+export type PostAnalyzeResponse = CommonResponse<AnalyzeSuccessData>;
